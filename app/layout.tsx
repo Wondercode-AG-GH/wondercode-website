@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import { MobileNavigation } from "./components/layout/MobileNavigation";
+import ConditionalLayout from "./components/ConditionalLayout";
 
 
 const geist = Geist({
@@ -22,11 +20,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geist.className} antialiased bg-white text-black`}>
-        <MobileNavigation />
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+      <body className={`${geist.className} antialiased bg-[#0A0A0A] text-white`}>
+        <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
   );

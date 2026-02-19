@@ -34,7 +34,7 @@ export default function Header() {
                 </div>
               </div>
               <div>
-                <div className="text-lg md:text-xl font-bold tracking-tight">wondercode</div>
+                <div className="text-lg md:text-xl font-bold tracking-tight text-white">wondercode</div>
                 <div className="text-[8px] md:text-[9px] text-gray-500 tracking-wider">.CH</div>
               </div>
             </motion.div>

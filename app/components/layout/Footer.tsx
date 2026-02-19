@@ -25,7 +25,7 @@ export default function Footer() {
                 </div>
               </div>
               <div>
-                <div className="text-2xl font-bold tracking-tight">wondercode</div>
+                <div className="text-2xl font-bold tracking-tight text-white">wondercode</div>
                 <div className="text-[10px] text-gray-500 tracking-wider">.CH</div>
               </div>
             </div>
