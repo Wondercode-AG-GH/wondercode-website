@@ -36,25 +36,25 @@ export default function CoreExpertise() {
       icon: Heart,
       title: 'Non Profit Cloud',
       description: 'Maximieren Sie Ihren Impact. Professionelles Spendenmanagement und Programm-Tracking für NGOs, die effizient skalieren wollen.',
-      link: '#'
+      link: '/services/non-profit-cloud'
     },
     {
       icon: Globe,
       title: 'Experience Cloud',
       description: 'Nahtlose digitale Portale für Kunden und Partner. Sichere Self-Service Zonen, die tief in Ihre Datenprozesse integriert sind.',
-      link: '#'
+      link: '/services/experience-cloud'
     },
     {
       icon: Radio,
       title: 'Marketing Cloud',
       description: '1:1 Kommunikation im großen Stil. Datengetriebene Customer Journeys, die den Kunden zur richtigen Zeit erreichen und konvertieren.',
-      link: '#'
+      link: '/services/marketing-cloud'
     },
     {
       icon: Sparkles,
       title: 'Agentforce',
       description: 'Die Zukunft der Arbeit. Wir konfigurieren autonome AI-Agenten, die Aufgaben in allen oben genannten Clouds selbstständig planen und ausführen.',
-      link: '#',
+      link: '/services/agentforce',
       isHighlighted: true // Green accent for newest innovation
     }
   ];
