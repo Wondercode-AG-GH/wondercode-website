@@ -1,4 +1,22 @@
-import { Headphones, Settings, Database, Zap, Users } from "lucide-react";
+import { 
+  Headphones, 
+  Settings, 
+  Database, 
+  Zap, 
+  Users,
+  AlertTriangle,
+  Trophy,
+  Cpu,
+  BarChart3,
+  Rocket,
+  Shield,
+  Lock,
+  Cloud,
+  Sparkles,
+  Heart,
+  User,
+  Factory
+} from "lucide-react";
 
 export const iconMap: Record<string, any> = {
   Headphones,
@@ -6,4 +24,16 @@ export const iconMap: Record<string, any> = {
   Database,
   Zap,
   Users,
+  AlertTriangle,
+  Trophy,
+  Cpu,
+  BarChart3,
+  Rocket,
+  Shield,
+  Lock,
+  Cloud,
+  Sparkles,
+  Heart,
+  User,
+  Factory
 };

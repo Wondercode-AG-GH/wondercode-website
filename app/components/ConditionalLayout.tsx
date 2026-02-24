@@ -15,11 +15,14 @@ export default function ConditionalLayout({
   // Hide header and footer on service detail pages
   const hideHeaderFooter = pathname?.startsWith("/services/");
   const studios = pathname?.startsWith("/studio/");
-
+  const industry = pathname?.startsWith("/industries/");
   if (hideHeaderFooter) {
     return <>{children}</>;
   }
   if (studios) {
+    return <>{children}</>;
+  }
+  if (industry) {
     return <>{children}</>;
   }
 
