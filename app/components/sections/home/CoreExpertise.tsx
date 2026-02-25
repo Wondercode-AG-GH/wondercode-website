@@ -1,63 +1,77 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { TrendingUp, Headphones, Shield, Receipt, Heart, Globe, Radio, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { iconMap } from '@/sanity/lib/iconMap';
+
+interface Service {
+  _id: string;
+  title: string;
+  titleDe: string;
+  slug: string;
+  icon?: string;
+  heroSubline: string;
+  heroSublineDe: string;
+}
+
+interface Capability {
+  icon: any;
+  title: string;
+  description: string;
+  link: string;
+  isHighlighted?: boolean;
+}
 
 export default function CoreExpertise() {
-  const capabilityMatrix = [
-    // Row 1
-    {
-      icon: TrendingUp,
-      title: 'Sales Cloud',
-      description: 'Von der Lead-Generierung bis zum Abschluss. Wir automatisieren komplexe Sales-Prozesse und Forecasts, damit Ihr Team verkauft, statt Daten zu pflegen.',
-      link: '/services/sales-cloud'
-    },
-    {
-      icon: Headphones,
-      title: 'Service Cloud',
-      description: 'Exzellenter Kundenservice auf allen Kanälen. Automatisierte Ticket-Verteilung und KI-Support verwandeln Ihren Service vom Kostenfaktor zum Kundenmagneten.',
-      link: '/services/service-cloud'
-    },
-    {
-      icon: Shield,
-      title: 'Financial Services',
-      description: 'Spezialisiert auf Banken und Versicherungen. Wir bilden komplexe Haushalts-Strukturen ab und sichern FINMA-konforme Beratungsprozesse.',
-      link: '/services/financial-services-cloud'
-    },
-    {
-      icon: Receipt,
-      title: 'Revenue Cloud',
-      description: 'Beherrschen Sie komplexe Preismodelle und Abos. Fehlerfreie Angebote (CPQ) und automatisierte Abrechnung (Billing) auf Knopfdruck.',
-      link: '/services/revenue-cloud'
-    },
-    // Row 2
-    {
-      icon: Heart,
-      title: 'Non Profit Cloud',
-      description: 'Maximieren Sie Ihren Impact. Professionelles Spendenmanagement und Programm-Tracking für NGOs, die effizient skalieren wollen.',
-      link: '/services/non-profit-cloud'
-    },
-    {
-      icon: Globe,
-      title: 'Experience Cloud',
-      description: 'Nahtlose digitale Portale für Kunden und Partner. Sichere Self-Service Zonen, die tief in Ihre Datenprozesse integriert sind.',
-      link: '/services/experience-cloud'
-    },
-    {
-      icon: Radio,
-      title: 'Marketing Cloud',
-      description: '1:1 Kommunikation im großen Stil. Datengetriebene Customer Journeys, die den Kunden zur richtigen Zeit erreichen und konvertieren.',
-      link: '/services/marketing-cloud'
-    },
-    {
-      icon: Sparkles,
-      title: 'Agentforce',
-      description: 'Die Zukunft der Arbeit. Wir konfigurieren autonome AI-Agenten, die Aufgaben in allen oben genannten Clouds selbstständig planen und ausführen.',
-      link: '/services/agentforce',
-      isHighlighted: true // Green accent for newest innovation
+  const [capabilities, setCapabilities] = useState<Capability[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadServices() {
+      try {
+        const response = await fetch('/api/services');
+        if (!response.ok) throw new Error('Failed to fetch services');
+        const services: Service[] = await response.json();
+
+        // Transform services to capability format
+        const transformed = services.map((service) => {
+          const IconComponent = service.icon 
+            ? (iconMap[service.icon] ?? Sparkles) 
+            : Sparkles;
+          
+          return {
+            icon: IconComponent,
+            title: service.title,
+            description: service.heroSubline,
+            link: `/services/${service.slug}`
+          };
+        });
+
+        // Add Agentforce as special highlighted item
+        // const agentforceIcon = iconMap['Sparkles'] ?? Sparkles;
+        const allCapabilities = [
+          ...transformed,
+          // {
+          //   icon: agentforceIcon,
+          //   title: 'Agentforce',
+          //   description: 'Die Zukunft der Arbeit. Wir konfigurieren autonome AI-Agenten, die Aufgaben in allen oben genannten Clouds selbstständig planen und ausführen.',
+          //   link: '/services/agentforce',
+          //   isHighlighted: true
+          // }
+        ];
+
+        setCapabilities(allCapabilities);
+      } catch (error) {
+        console.error('Failed to load services:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  ];
+
+    loadServices();
+  }, []);
 
   return (
     <section id="services" className="relative py-20 md:py-32 bg-[#0A0A0A] px-5 md:px-8" style={{ position: 'relative' }}>
@@ -102,7 +116,12 @@ export default function CoreExpertise() {
 
         {/* 8-Card Capability Matrix - Periodic Table Style */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" style={{ position: 'relative' }}>
-          {capabilityMatrix.map((capability, index) => {
+          {isLoading ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-gray-400">Laden der Services...</p>
+            </div>
+          ) : (
+            capabilities.map((capability, index) => {
             const CardContent = (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -204,7 +223,8 @@ export default function CoreExpertise() {
                 {CardContent}
               </Link>
             );
-          })}
+          })
+          )}
         </div>
 
         {/* Bottom Status Bar */}

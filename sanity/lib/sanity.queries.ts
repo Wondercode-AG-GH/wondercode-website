@@ -20,6 +20,18 @@ export const allServiceSlugsQuery = `
   }
 `;
 
+export const allServicesQuery = `
+  *[_type == "salesforceEcosystem"] | order(_createdAt asc) {
+    _id,
+    title,
+    titleDe,
+    "slug": slug.current,
+    icon,
+    heroSubline,
+    heroSublineDe
+  }
+`;
+
 export const industryBySlugQuery = `
   *[_type == "industry" && slug.current == $slug][0] {
     ...,
@@ -38,5 +50,49 @@ export const industryBySlugQuery = `
 export const allIndustrySlugsQuery = `
   *[_type == "industry"]{
     "slug": slug.current
+  }
+`;
+
+export const allIndustriesQuery = `
+  *[_type == "industry"] | order(_createdAt asc) {
+    _id,
+    title,
+    titleDe,
+    "slug": slug.current,
+    heroSubline,
+    heroSublineDe
+  }
+`;
+
+export const caseStudyBySlugQuery = `
+  *[_type == "caseStudy" && slug.current == $slug][0] {
+    ...
+  }
+`;
+
+export const allCaseStudySlugsQuery = `
+  *[_type == "caseStudy"]{
+    "slug": slug.current
+  }
+`;
+export const allCaseStudiesQuery = `
+  *[_type == "caseStudy"] | order(_createdAt asc) {
+    _id,
+    title,
+    titleDe,
+    "slug": slug.current,
+    industry,
+    challenge {
+      intro,
+      introDe
+    },
+    solution {
+      intro,
+      introDe
+    },
+    galleryMetric,
+    galleryMetricDe,
+    galleryMetricLabel,
+    galleryMetricLabelDe
   }
 `;

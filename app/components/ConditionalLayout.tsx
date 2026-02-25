@@ -16,6 +16,7 @@ export default function ConditionalLayout({
   const hideHeaderFooter = pathname?.startsWith("/services/");
   const studios = pathname?.startsWith("/studio/");
   const industry = pathname?.startsWith("/industries/");
+  const caseStudy = pathname?.startsWith("/case-studies/");
   if (hideHeaderFooter) {
     return <>{children}</>;
   }
@@ -23,6 +24,9 @@ export default function ConditionalLayout({
     return <>{children}</>;
   }
   if (industry) {
+    return <>{children}</>;
+  }
+  if (caseStudy) {
     return <>{children}</>;
   }
 
