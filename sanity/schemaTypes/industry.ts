@@ -44,7 +44,8 @@ export default defineType({
       name: "heroIcon",
       title: "Hero Icon Name",
       type: "string",
-      description: "Use icon name like: Shield, Cloud, Database, AlertTriangle, etc.",
+      description:
+        "Use icon name like: Shield, Cloud, Database, AlertTriangle, etc.",
     }),
 
     // Context Section
@@ -90,7 +91,8 @@ export default defineType({
       title: "Hero Section Image",
       type: "image",
       options: { hotspot: true },
-      description: "Blueprint/Architecture visualization image for the right side of hero section",
+      description:
+        "Blueprint/Architecture visualization image for the right side of hero section",
     }),
 
     // Challenges
@@ -102,7 +104,11 @@ export default defineType({
         {
           type: "object",
           fields: [
-            { name: "icon", type: "string", description: "Icon name like: Database, Lock, AlertTriangle" },
+            {
+              name: "icon",
+              type: "string",
+              description: "Icon name like: Database, Lock, AlertTriangle",
+            },
             { name: "title", type: "string" },
             { name: "titleDe", type: "string" },
             { name: "description", type: "text" },
@@ -126,7 +132,11 @@ export default defineType({
             { name: "description", type: "text" },
             { name: "descriptionDe", type: "text" },
             { name: "icon", type: "string", description: "Icon name" },
-            { name: "isAI", type: "boolean", description: "Mark if this is an AI capability" },
+            {
+              name: "isAI",
+              type: "boolean",
+              description: "Mark if this is an AI capability",
+            },
           ],
         },
       ],
@@ -155,7 +165,11 @@ export default defineType({
           fields: [
             { name: "label", type: "string" },
             { name: "labelDe", type: "string" },
-            { name: "isAI", type: "boolean", description: "Mark if this is an AI step" },
+            {
+              name: "isAI",
+              type: "boolean",
+              description: "Mark if this is an AI step",
+            },
           ],
         },
       ],

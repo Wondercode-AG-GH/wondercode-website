@@ -66,11 +66,9 @@ export default async function CaseStudyPage({ params }: Props) {
       timelineMetric={caseStudy.timelineMetric || ""}
       timelineLabel={caseStudy.timelineLabel || "Timeline"}
       timelineLabelDe={caseStudy.timelineLabelDe || "Zeitrahmen"}
-
       // Executive Summary
       executiveSummary={caseStudy.executiveSummary || []}
       executiveSummaryDe={caseStudy.executiveSummaryDe || []}
-
       // Customer
       customerName={caseStudy.customer?.name || ""}
       customerHeadline={caseStudy.customer?.headline || "The Customer"}
@@ -78,33 +76,32 @@ export default async function CaseStudyPage({ params }: Props) {
       customerDescription={caseStudy.customer?.description || ""}
       customerDescriptionDe={caseStudy.customer?.descriptionDe || ""}
       customerHighlights={caseStudy.customer?.highlights || []}
-
       // Challenge
       challengeHeadline={caseStudy.challenge?.headline || "The Challenge"}
-      challengeHeadlineDe={caseStudy.challenge?.headlineDe || "Die Herausforderung"}
+      challengeHeadlineDe={
+        caseStudy.challenge?.headlineDe || "Die Herausforderung"
+      }
       challengeIntro={caseStudy.challenge?.intro || ""}
       challengeIntroDe={caseStudy.challenge?.introDe || ""}
       challengeIssues={caseStudy.challenge?.issues || []}
-
       // Solution
       solutionHeadline={caseStudy.solution?.headline || "The Solution"}
       solutionHeadlineDe={caseStudy.solution?.headlineDe || "Die Lösung"}
       solutionIntro={caseStudy.solution?.intro || ""}
       solutionIntroDe={caseStudy.solution?.introDe || ""}
       techStacks={caseStudy.solution?.techStacks || []}
-
       // Results
       resultsHeadline={caseStudy.results?.headline || "Results & Value"}
-      resultsHeadlineDe={caseStudy.results?.headlineDe || "Ergebnisse & Mehrwert"}
+      resultsHeadlineDe={
+        caseStudy.results?.headlineDe || "Ergebnisse & Mehrwert"
+      }
       resultsPillars={caseStudy.results?.pillars || []}
-
       // Testimonial
       testimonialQuote={caseStudy.testimonial?.quote || ""}
       testimonialQuoteDe={caseStudy.testimonial?.quoteDe || ""}
       testimonialAuthor={caseStudy.testimonial?.author || ""}
       testimonialRole={caseStudy.testimonial?.role || ""}
       testimonialRoleDe={caseStudy.testimonial?.roleDe || ""}
-
       // CTA
       ctaHeadline={caseStudy.cta?.headline || ""}
       ctaHeadlineDe={caseStudy.cta?.headlineDe || ""}

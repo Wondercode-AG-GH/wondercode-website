@@ -307,7 +307,8 @@ export default defineType({
                   name: "category",
                   title: "Category",
                   type: "string",
-                  description: "e.g., Backend, Frontend, Auth/DB, Storage, Infrastructure",
+                  description:
+                    "e.g., Backend, Frontend, Auth/DB, Storage, Infrastructure",
                 },
                 {
                   name: "categoryDe",

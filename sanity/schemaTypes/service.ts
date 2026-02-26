@@ -31,7 +31,8 @@ export default defineType({
       name: "icon",
       title: "Icon Name",
       type: "string",
-      description: "Use icon name like: TrendingUp, Headphones, Shield, Receipt, Heart, Globe, Radio, Settings, Database, Zap, Users, Trophy, Cpu, BarChart3, Rocket, Lock, Code, Cloud, Activity, etc.",
+      description:
+        "Use icon name like: TrendingUp, Headphones, Shield, Receipt, Heart, Globe, Radio, Settings, Database, Zap, Users, Trophy, Cpu, BarChart3, Rocket, Lock, Code, Cloud, Activity, etc.",
       validation: (Rule) => Rule.required(),
     }),
 
@@ -123,7 +124,8 @@ export default defineType({
       title: "Hero Section Image",
       type: "image",
       options: { hotspot: true },
-      description: "Blueprint/Architecture visualization image for the right side of hero section",
+      description:
+        "Blueprint/Architecture visualization image for the right side of hero section",
     }),
 
     // Case Study Metrics

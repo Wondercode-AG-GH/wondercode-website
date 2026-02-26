@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { iconMap } from "@/sanity/lib/iconMap";
 
 interface ScopeCard {
@@ -122,8 +123,8 @@ export default function ServiceDetailPage({
   heroImage,
   caseStudyMetrics,
 }: ServiceDetailProps) {
+  const { t, i18n } = useTranslation("common");
   const accentColor = "#00CC66";
-  const [activeLanguage, setActiveLanguage] = useState<"en" | "de">("de");
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   // Resolve icon string to actual component (safe: only strings cross server/client boundary)
@@ -146,7 +147,7 @@ export default function ServiceDetailPage({
             }}
           >
             <ArrowRight className="w-4 h-4 rotate-180" />
-            <span>Zurück zur Startseite</span>
+            <span>{t("detailPages.backToHome")}</span>
           </motion.button>
         </Link>
       </div>
@@ -278,7 +279,7 @@ export default function ServiceDetailPage({
                     color: "#CCCCCC",
                   }}
                 >
-                  🇨🇭 Swiss Made Engineering
+                  {t("serviceDetail.swissMade")}
                 </div>
                 <div
                   className="px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase"
@@ -288,13 +289,13 @@ export default function ServiceDetailPage({
                     color: "#CCCCCC",
                   }}
                 >
-                  ☁️ Salesforce Certified Partner
+                  {t("serviceDetail.certifiedPartner")}
                 </div>
               </div>
 
               {/* Headline */}
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                {activeLanguage === "en" ? serviceName : serviceNameDe}
+                {i18n.language === "de" ? serviceNameDe : serviceName}
               </h1>
 
               {/* Subline */}
@@ -302,7 +303,7 @@ export default function ServiceDetailPage({
                 className="text-xl md:text-2xl leading-relaxed mb-8"
                 style={{ color: "#E5E5E5" }}
               >
-                {activeLanguage === "en" ? heroSubline : heroSublineDe}
+                {i18n.language === "en" ? heroSubline : heroSublineDe}
               </p>
 
               {/* Benefit List with Green Checkmarks */}
@@ -747,9 +748,9 @@ export default function ServiceDetailPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              {activeLanguage === "en" ? "Included in the " : "Im "}
+              {i18n.language === "en" ? "Included in the " : "Im "}
               <span style={{ color: accentColor }}>
-                {activeLanguage === "en" ? "Package" : "Paket enthalten"}
+                {i18n.language === "en" ? "Package" : "Paket enthalten"}
               </span>
             </h2>
           </motion.div>
@@ -808,7 +809,7 @@ export default function ServiceDetailPage({
 
                     {/* Title */}
                     <h3 className="text-xl font-bold mb-3 leading-tight">
-                      {activeLanguage === "en" ? card.title : card.titleDe}
+                      {i18n.language === "en" ? card.title : card.titleDe}
                     </h3>
 
                     {/* Description - 2 lines */}
@@ -816,7 +817,7 @@ export default function ServiceDetailPage({
                       className="text-sm leading-relaxed"
                       style={{ color: "#999999" }}
                     >
-                      {activeLanguage === "en"
+                      {i18n.language === "en"
                         ? card.description
                         : card.descriptionDe}
                     </p>
@@ -850,7 +851,7 @@ export default function ServiceDetailPage({
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               <span style={{ color: accentColor }}>4-Week</span>{" "}
-              {activeLanguage === "en"
+              {i18n.language === "en"
                 ? "Implementation Process"
                 : "Implementierungsprozess"}
             </h2>
@@ -912,7 +913,7 @@ export default function ServiceDetailPage({
                       className="text-sm font-medium mb-1"
                       style={{ color: "#999999" }}
                     >
-                      {activeLanguage === "en" ? "Week" : "Woche"}
+                      {i18n.language === "en" ? "Week" : "Woche"}
                     </div>
                     <div
                       className="text-4xl font-bold"
@@ -924,7 +925,7 @@ export default function ServiceDetailPage({
 
                   {/* Phase Label */}
                   <h3 className="text-xl font-bold">
-                    {activeLanguage === "en" ? item.title : item.titleDe}
+                    {i18n.language === "en" ? item.title : item.titleDe}
                   </h3>
                 </motion.div>
               ))}
@@ -1106,7 +1107,7 @@ export default function ServiceDetailPage({
                           className="text-sm font-semibold tracking-wide uppercase"
                           style={{ color: "#999999" }}
                         >
-                          {activeLanguage === "en"
+                          {i18n.language === "en"
                             ? "Time-to-Value"
                             : "Zeit-bis-Wert"}
                         </p>
@@ -1115,7 +1116,7 @@ export default function ServiceDetailPage({
                         className="text-7xl md:text-8xl font-black tracking-tight"
                         style={{ color: accentColor }}
                       >
-                        {activeLanguage === "en"
+                        {i18n.language === "en"
                           ? caseStudyMetrics?.timeToValue
                           : caseStudyMetrics?.timeToValueDe}
                       </div>
@@ -1123,7 +1124,7 @@ export default function ServiceDetailPage({
                         className="text-xl font-medium mt-2"
                         style={{ color: "#CCCCCC" }}
                       >
-                        {activeLanguage === "en"
+                        {i18n.language === "en"
                           ? caseStudyMetrics?.timeToValueLabel
                           : caseStudyMetrics?.timeToValueLabelDe}
                       </p>
@@ -1194,7 +1195,7 @@ export default function ServiceDetailPage({
                           className="text-xs font-semibold tracking-wide uppercase"
                           style={{ color: "#999999" }}
                         >
-                          {activeLanguage === "en"
+                          {i18n.language === "en"
                             ? "User Adoption"
                             : "Nutzer-Adoption"}
                         </p>
@@ -1209,7 +1210,7 @@ export default function ServiceDetailPage({
                         className="text-sm font-medium"
                         style={{ color: "#CCCCCC" }}
                       >
-                        {activeLanguage === "en"
+                        {i18n.language === "en"
                           ? caseStudyMetrics?.userAdoptionLabel
                           : caseStudyMetrics?.userAdoptionLabelDe}
                       </p>
@@ -1278,7 +1279,7 @@ export default function ServiceDetailPage({
                           className="text-xs font-semibold tracking-wide uppercase"
                           style={{ color: "#999999" }}
                         >
-                          {activeLanguage === "en" ? "Efficiency" : "Effizienz"}
+                          {i18n.language === "en" ? "Efficiency" : "Effizienz"}
                         </p>
                       </div>
                       <div
@@ -1291,7 +1292,7 @@ export default function ServiceDetailPage({
                         className="text-sm font-medium"
                         style={{ color: "#CCCCCC" }}
                       >
-                        {activeLanguage === "en"
+                        {i18n.language === "en"
                           ? caseStudyMetrics?.efficiencyLabel
                           : caseStudyMetrics?.efficiencyLabelDe}
                       </p>
@@ -1374,7 +1375,7 @@ export default function ServiceDetailPage({
               style={{ position: "relative" }}
             >
               <h3 className="text-3xl font-bold mb-8">
-                {activeLanguage === "en" ? "Ideal for..." : "Ideal für..."}
+                {i18n.language === "en" ? "Ideal for..." : "Ideal für..."}
               </h3>
 
               <div className="space-y-4">
@@ -1393,7 +1394,7 @@ export default function ServiceDetailPage({
                       style={{ color: accentColor }}
                     />
                     <p className="text-lg" style={{ color: "#CCCCCC" }}>
-                      {activeLanguage === "en" ? item.text : item.textDe}
+                      {i18n.language === "en" ? item.text : item.textDe}
                     </p>
                   </motion.div>
                 ))}
@@ -1408,7 +1409,7 @@ export default function ServiceDetailPage({
               style={{ position: "relative" }}
             >
               <h3 className="text-3xl font-bold mb-8">
-                {activeLanguage === "en"
+                {i18n.language === "en"
                   ? "Frequently Asked"
                   : "Häufig gestellte Fragen"}
               </h3>
@@ -1424,7 +1425,7 @@ export default function ServiceDetailPage({
                       whileHover={{ x: 4 }}
                     >
                       <span className="text-lg font-medium">
-                        {activeLanguage === "en"
+                        {i18n.language === "en"
                           ? item.question
                           : item.questionDe}
                       </span>
@@ -1456,7 +1457,7 @@ export default function ServiceDetailPage({
                             className="pb-5 pr-8 text-base leading-relaxed"
                             style={{ color: "#999999" }}
                           >
-                            {activeLanguage === "en"
+                            {i18n.language === "en"
                               ? item.answer
                               : item.answerDe}
                           </p>
@@ -1505,7 +1506,7 @@ export default function ServiceDetailPage({
             {/* Content */}
             <div className="relative z-10" style={{ position: "relative" }}>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                {activeLanguage === "en"
+                {i18n.language === "en"
                   ? "Ready to Start?"
                   : "Bereit zu starten?"}
               </h2>
@@ -1513,7 +1514,7 @@ export default function ServiceDetailPage({
                 className="text-lg mb-10 max-w-2xl mx-auto leading-relaxed"
                 style={{ color: "#CCCCCC" }}
               >
-                {activeLanguage === "en"
+                {i18n.language === "en"
                   ? "Let's discuss your requirements and create a tailored implementation plan."
                   : "Lassen Sie uns Ihre Anforderungen besprechen und einen maßgeschneiderten Implementierungsplan erstellen."}
               </p>
@@ -1531,7 +1532,7 @@ export default function ServiceDetailPage({
                   color: "#050505",
                 }}
               >
-                {activeLanguage === "en"
+                {i18n.language === "en"
                   ? "Book Strategy Call"
                   : "Strategie-Gespräch buchen"}
                 <ArrowRight className="w-6 h-6" />

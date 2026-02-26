@@ -96,3 +96,14 @@ export const allCaseStudiesQuery = `
     galleryMetricLabelDe
   }
 `;
+
+export const allFaqsQuery = `
+  *[_type == "faq"] | order(order asc, _createdAt asc) {
+    _id,
+    question,
+    questionDe,
+    answer,
+    answerDe,
+    order
+  }
+`;

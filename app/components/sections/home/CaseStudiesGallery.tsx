@@ -1,8 +1,9 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+"use client";
+import { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 interface CaseStudy {
   _id: string;
@@ -18,6 +19,7 @@ interface CaseStudy {
 }
 
 export default function CaseStudiesGallery() {
+  const { t, i18n } = useTranslation("common");
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCase, setActiveCase] = useState(0);
@@ -25,11 +27,11 @@ export default function CaseStudiesGallery() {
   useEffect(() => {
     const fetchCaseStudies = async () => {
       try {
-        const response = await fetch('/api/case-studies');
+        const response = await fetch("/api/case-studies");
         const data = await response.json();
         setCaseStudies(data);
       } catch (error) {
-        console.error('Failed to fetch case studies:', error);
+        console.error("Failed to fetch case studies:", error);
       } finally {
         setLoading(false);
       }
@@ -39,32 +41,47 @@ export default function CaseStudiesGallery() {
   }, []);
 
   return (
-    <section id="success-stories" className="relative py-20 md:py-32 bg-[#0A0A0A] overflow-hidden px-5 md:px-8" style={{ position: 'relative' }}>
-      <div className="max-w-[1800px] mx-auto" style={{ position: 'relative' }}>
+    <section
+      id="success-stories"
+      className="relative py-20 md:py-32 bg-[#0A0A0A] overflow-hidden px-5 md:px-8"
+      style={{ position: "relative" }}
+    >
+      <div className="max-w-[1800px] mx-auto" style={{ position: "relative" }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-20"
-          style={{ position: 'relative' }}
+          style={{ position: "relative" }}
         >
           <h2 className="text-6xl md:text-7xl font-bold mb-6 text-white">
-            Success <span className="text-[#00CC66]">Stories</span>
+            {t("caseStudiesSection.title")}{" "}
+            <span className="text-[#00CC66]">
+              {t("caseStudiesSection.titleHighlight")}
+            </span>
           </h2>
-          <p className="text-xl text-gray-400">Measurable impact, extraordinary results</p>
+          <p className="text-xl text-gray-400">
+            {t("caseStudiesSection.description")}
+          </p>
         </motion.div>
 
         {/* Loading State */}
         {loading && (
           <div className="text-center py-12">
-            <p className="text-gray-400">Laden der Fallstudien...</p>
+            <p className="text-gray-400">{t("common.loadingServices")}</p>
           </div>
         )}
 
         {/* Horizontal Scrolling Gallery - Desktop */}
         {!loading && (
-          <div className="relative hidden md:block" style={{ position: 'relative' }}>
-            <div className="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide" style={{ position: 'relative' }}>
+          <div
+            className="relative hidden md:block"
+            style={{ position: "relative" }}
+          >
+            <div
+              className="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide"
+              style={{ position: "relative" }}
+            >
               {caseStudies.map((study, index) => (
                 <Link key={study._id} href={`/case-studies/${study.slug}`}>
                   <motion.div
@@ -75,7 +92,7 @@ export default function CaseStudiesGallery() {
                     whileHover={{ scale: 1.02 }}
                     className="flex-shrink-0 w-[600px] snap-start group"
                     onViewportEnter={() => setActiveCase(index)}
-                    style={{ position: 'relative' }}
+                    style={{ position: "relative" }}
                   >
                     <div className="relative h-full p-10 rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border border-white/10 hover:border-[#00CC66]/50 transition-all duration-500 overflow-hidden">
                       {/* Impact meter at top */}
@@ -83,10 +100,10 @@ export default function CaseStudiesGallery() {
                         <motion.div
                           className="h-full bg-gradient-to-r from-[#00CC66] to-[#00ff88]"
                           initial={{ width: 0 }}
-                          whileInView={{ width: '100%' }}
+                          whileInView={{ width: "100%" }}
                           viewport={{ once: true }}
                           transition={{ duration: 1.5, delay: 0.5 }}
-                          style={{ position: 'relative' }}
+                          style={{ position: "relative" }}
                         />
                       </div>
 
@@ -99,17 +116,25 @@ export default function CaseStudiesGallery() {
                         </div>
 
                         <h3 className="text-3xl font-bold mb-6 leading-tight text-white">
-                          {study.title}
+                          {i18n.language === "de"
+                            ? study.titleDe || study.title
+                            : study.title}
                         </h3>
 
                         <div className="space-y-6 mb-8">
                           <div>
-                            <div className="text-sm text-[#00CC66] font-semibold mb-2">THE CHALLENGE</div>
-                            <p className="text-gray-300 text-lg">{study.problem}</p>
+                            <div className="text-sm text-[#00CC66] font-semibold mb-2">
+                              {t("caseStudiesSection.challenge")}
+                            </div>
+                            <p className="text-gray-300 text-lg">
+                              {study.problem}
+                            </p>
                           </div>
 
                           <div>
-                            <div className="text-sm text-[#00CC66] font-semibold mb-2">WONDERCODE SOLUTION</div>
+                            <div className="text-sm text-[#00CC66] font-semibold mb-2">
+                              {t("caseStudiesSection.solution")}
+                            </div>
                             <p className="text-gray-400">{study.solution}</p>
                           </div>
                         </div>
@@ -119,12 +144,12 @@ export default function CaseStudiesGallery() {
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00CC66]/10 to-transparent"
                             animate={{
-                              x: ['-100%', '100%'],
+                              x: ["-100%", "100%"],
                             }}
                             transition={{
                               duration: 3,
                               repeat: Infinity,
-                              ease: "linear"
+                              ease: "linear",
                             }}
                           />
                           <div className="relative z-10 text-center">
@@ -134,11 +159,13 @@ export default function CaseStudiesGallery() {
                               whileInView={{ scale: 1, opacity: 1 }}
                               viewport={{ once: true }}
                               transition={{ type: "spring", duration: 0.8 }}
-                              style={{ position: 'relative' }}
+                              style={{ position: "relative" }}
                             >
                               {study.metric}
                             </motion.div>
-                            <div className="text-xl text-gray-300 font-semibold">{study.metricLabel}</div>
+                            <div className="text-xl text-gray-300 font-semibold">
+                              {study.metricLabel}
+                            </div>
                           </div>
                         </div>
 
@@ -146,7 +173,7 @@ export default function CaseStudiesGallery() {
                           whileHover={{ x: 5 }}
                           className="text-[#00CC66] font-semibold flex items-center gap-2 group/btn"
                         >
-                          <span>Full Case Study</span>
+                          <span>{t("caseStudiesSection.fullCaseStudy")}</span>
                           <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                         </motion.button>
                       </div>
@@ -163,7 +190,7 @@ export default function CaseStudiesGallery() {
                   key={i}
                   onClick={() => setActiveCase(i)}
                   className={`h-2 rounded-full transition-all ${
-                    activeCase === i ? 'w-12 bg-[#00CC66]' : 'w-2 bg-white/20'
+                    activeCase === i ? "w-12 bg-[#00CC66]" : "w-2 bg-white/20"
                   }`}
                 />
               ))}
@@ -173,7 +200,7 @@ export default function CaseStudiesGallery() {
 
         {/* Mobile: Vertical Stack - Show best case (first one) */}
         {!loading && (
-          <div className="md:hidden space-y-6" style={{ position: 'relative' }}>
+          <div className="md:hidden space-y-6" style={{ position: "relative" }}>
             {caseStudies.slice(0, 1).map((study) => (
               <Link key={study._id} href={`/case-studies/${study.slug}`}>
                 <motion.div
@@ -182,7 +209,7 @@ export default function CaseStudiesGallery() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
                   className="w-full"
-                  style={{ position: 'relative' }}
+                  style={{ position: "relative" }}
                 >
                   <div className="relative p-6 rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border border-white/10 overflow-hidden">
                     {/* Impact meter at top */}
@@ -190,10 +217,10 @@ export default function CaseStudiesGallery() {
                       <motion.div
                         className="h-full bg-gradient-to-r from-[#00CC66] to-[#00ff88]"
                         initial={{ width: 0 }}
-                        whileInView={{ width: '100%' }}
+                        whileInView={{ width: "100%" }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.5, delay: 0.3 }}
-                        style={{ position: 'relative' }}
+                        style={{ position: "relative" }}
                       />
                     </div>
 
@@ -206,18 +233,28 @@ export default function CaseStudiesGallery() {
                       </div>
 
                       <h3 className="text-2xl font-bold mb-6 leading-tight text-white">
-                        {study.title}
+                        {i18n.language === "de"
+                          ? study.titleDe || study.title
+                          : study.title}
                       </h3>
 
                       <div className="space-y-4 mb-6">
                         <div>
-                          <div className="text-xs text-[#00CC66] font-semibold mb-1.5">THE CHALLENGE</div>
-                          <p className="text-gray-300 text-base leading-relaxed">{study.problem}</p>
+                          <div className="text-xs text-[#00CC66] font-semibold mb-1.5">
+                            {t("caseStudiesSection.challenge")}
+                          </div>
+                          <p className="text-gray-300 text-base leading-relaxed">
+                            {study.problem}
+                          </p>
                         </div>
 
                         <div>
-                          <div className="text-xs text-[#00CC66] font-semibold mb-1.5">WONDERCODE SOLUTION</div>
-                          <p className="text-gray-400 text-sm leading-relaxed">{study.solution}</p>
+                          <div className="text-xs text-[#00CC66] font-semibold mb-1.5">
+                            {t("caseStudiesSection.solution")}
+                          </div>
+                          <p className="text-gray-400 text-sm leading-relaxed">
+                            {study.solution}
+                          </p>
                         </div>
                       </div>
 
@@ -226,12 +263,12 @@ export default function CaseStudiesGallery() {
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00CC66]/10 to-transparent"
                           animate={{
-                            x: ['-100%', '100%'],
+                            x: ["-100%", "100%"],
                           }}
                           transition={{
                             duration: 3,
                             repeat: Infinity,
-                            ease: "linear"
+                            ease: "linear",
                           }}
                         />
                         <div className="relative z-10 text-center">
@@ -244,7 +281,9 @@ export default function CaseStudiesGallery() {
                           >
                             {study.metric}
                           </motion.div>
-                          <div className="text-lg text-gray-300 font-semibold">{study.metricLabel}</div>
+                          <div className="text-lg text-gray-300 font-semibold">
+                            {study.metricLabel}
+                          </div>
                         </div>
                       </div>
 
@@ -252,7 +291,7 @@ export default function CaseStudiesGallery() {
                         whileTap={{ scale: 0.98 }}
                         className="w-full py-4 bg-[#00CC66]/10 border border-[#00CC66]/30 text-[#00CC66] rounded-xl font-semibold flex items-center justify-center gap-2"
                       >
-                        <span>Full Case Study</span>
+                        <span>{t("caseStudiesSection.fullCaseStudy")}</span>
                         <ArrowRight className="w-5 h-5" />
                       </motion.button>
                     </div>
@@ -260,7 +299,7 @@ export default function CaseStudiesGallery() {
                 </motion.div>
               </Link>
             ))}
-            
+
             {/* Indicator that there are more stories */}
             <div className="text-center py-4">
               <p className="text-sm text-gray-500">

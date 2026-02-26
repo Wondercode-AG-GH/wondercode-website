@@ -1,31 +1,43 @@
 "use client";
-import { motion } from 'motion/react';
-import { Code, Database, Cloud, Layers, ArrowRight } from 'lucide-react';
+import { motion } from "motion/react";
+import { Code, Database, Cloud, Layers, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function CustomEngineering() {
-  const techStack = ['React', 'Node.js', 'Heroku', 'GraphQL'];
+  const { t } = useTranslation("common");
+  const techStack = ["React", "Node.js", "Heroku", "GraphQL"];
 
   return (
-    <section 
+    <section
       id="custom-engineering"
-      className="relative py-20 md:py-32 overflow-hidden px-5 md:px-8" 
-      style={{ 
-        position: 'relative',
-        backgroundColor: '#050505'
+      className="relative py-20 md:py-32 overflow-hidden px-5 md:px-8"
+      style={{
+        position: "relative",
+        backgroundColor: "#050505",
       }}
     >
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-5" style={{ position: 'absolute' }}>
-        <div className="absolute inset-0" style={{
-          position: 'absolute',
-          backgroundImage: 'linear-gradient(rgba(0, 204, 102, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 204, 102, 0.1) 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
-        }} />
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{ position: "absolute" }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            position: "absolute",
+            backgroundImage:
+              "linear-gradient(rgba(0, 204, 102, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 204, 102, 0.1) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
       </div>
 
-      <div className="max-w-[1400px] mx-auto" style={{ position: 'relative' }}>
+      <div className="max-w-[1400px] mx-auto" style={{ position: "relative" }}>
         {/* Desktop: Asymmetrical Split Screen */}
-        <div className="hidden md:grid md:grid-cols-2 gap-20 items-center" style={{ position: 'relative' }}>
+        <div
+          className="hidden md:grid md:grid-cols-2 gap-20 items-center"
+          style={{ position: "relative" }}
+        >
           {/* Left Side - The Pitch */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -33,35 +45,48 @@ export default function CustomEngineering() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="space-y-8"
-            style={{ position: 'relative' }}
+            style={{ position: "relative" }}
           >
             {/* Developer Tag */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border"
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border"
               style={{
-                backgroundColor: 'rgba(0, 204, 102, 0.05)',
-                borderColor: 'rgba(0, 204, 102, 0.15)'
+                backgroundColor: "rgba(0, 204, 102, 0.05)",
+                borderColor: "rgba(0, 204, 102, 0.15)",
               }}
             >
-              <Code className="w-3.5 h-3.5" style={{ color: '#00CC66' }} />
-              <span className="text-xs font-mono tracking-wider" style={{ color: '#00CC66' }}>
-                CUSTOM ENGINEERING
+              <Code className="w-3.5 h-3.5" style={{ color: "#00CC66" }} />
+              <span
+                className="text-xs font-mono tracking-wider"
+                style={{ color: "#00CC66" }}
+              >
+                {t("customEngineeringSection.badge")}
               </span>
             </div>
 
             {/* Headline */}
             <div>
-              <h2 className="text-6xl font-bold mb-4" style={{ color: '#FFFFFF' }}>
-                Wenn der Standard Sie ausbremst.
+              <h2
+                className="text-6xl font-bold mb-4"
+                style={{ color: "#FFFFFF" }}
+              >
+                {t("customEngineeringSection.headline")}
               </h2>
-              <p className="text-xl leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
-                Lassen Sie sich nicht von "Out-of-the-Box" Grenzen diktieren. Wenn Standard-Komponenten nicht reichen, engineeren wir maßgeschneiderte Headless-Applikationen. Hochperformant, intuitiv wie Consumer-Apps und nahtlos mit Ihren Salesforce-Daten verbunden. Keine Workarounds. Echter Code.
+              <p
+                className="text-xl leading-relaxed"
+                style={{ color: "rgba(255, 255, 255, 0.6)" }}
+              >
+                {t("customEngineeringSection.description")}
               </p>
             </div>
 
             {/* Tech Stack Pills */}
             <div>
-              <div className="text-xs font-mono mb-4" style={{ color: 'rgba(0, 204, 102, 0.6)' }}>
-                // TECH STACK
+              <div
+                className="text-xs font-mono mb-4"
+                style={{ color: "rgba(0, 204, 102, 0.6)" }}
+              >
+                {t("customEngineeringSection.techStackLabel")}
               </div>
               <div className="flex flex-wrap gap-3">
                 {techStack.map((tech, index) => (
@@ -73,10 +98,10 @@ export default function CustomEngineering() {
                     transition={{ delay: index * 0.1 }}
                     className="px-5 py-2.5 rounded-full border font-mono text-sm"
                     style={{
-                      position: 'relative',
-                      backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                      borderColor: 'rgba(255, 255, 255, 0.1)',
-                      color: '#FFFFFF'
+                      position: "relative",
+                      backgroundColor: "rgba(255, 255, 255, 0.03)",
+                      borderColor: "rgba(255, 255, 255, 0.1)",
+                      color: "#FFFFFF",
                     }}
                   >
                     {tech}
@@ -86,8 +111,13 @@ export default function CustomEngineering() {
             </div>
 
             {/* CTA Hint */}
-            <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(0, 204, 102, 0.8)' }}>
-              <span className="font-mono">Expert developers ready</span>
+            <div
+              className="flex items-center gap-2 text-sm"
+              style={{ color: "rgba(0, 204, 102, 0.8)" }}
+            >
+              <span className="font-mono">
+                {t("customEngineeringSection.expertsReady")}
+              </span>
               <ArrowRight className="w-4 h-4" />
             </div>
           </motion.div>
@@ -99,27 +129,43 @@ export default function CustomEngineering() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative h-[600px]"
-            style={{ position: 'relative' }}
+            style={{ position: "relative" }}
           >
             {/* Blueprint Container */}
-            <div className="absolute inset-0 rounded-2xl border p-8"
+            <div
+              className="absolute inset-0 rounded-2xl border p-8"
               style={{
-                position: 'absolute',
-                backgroundColor: 'rgba(10, 10, 10, 0.5)',
-                borderColor: 'rgba(0, 204, 102, 0.2)',
-                backdropFilter: 'blur(20px)'
+                position: "absolute",
+                backgroundColor: "rgba(10, 10, 10, 0.5)",
+                borderColor: "rgba(0, 204, 102, 0.2)",
+                backdropFilter: "blur(20px)",
               }}
             >
               {/* Technical Markers - Top Corners */}
-              <div className="absolute top-4 left-4 text-xs font-mono" style={{ position: 'absolute', color: 'rgba(0, 204, 102, 0.5)' }}>
+              <div
+                className="absolute top-4 left-4 text-xs font-mono"
+                style={{
+                  position: "absolute",
+                  color: "rgba(0, 204, 102, 0.5)",
+                }}
+              >
                 &lt;ARCHITECTURE&gt;
               </div>
-              <div className="absolute top-4 right-4 text-xs font-mono" style={{ position: 'absolute', color: 'rgba(0, 204, 102, 0.5)' }}>
+              <div
+                className="absolute top-4 right-4 text-xs font-mono"
+                style={{
+                  position: "absolute",
+                  color: "rgba(0, 204, 102, 0.5)",
+                }}
+              >
                 v2.0
               </div>
 
               {/* Main Architecture Diagram */}
-              <div className="relative h-full flex items-center justify-center" style={{ position: 'relative' }}>
+              <div
+                className="relative h-full flex items-center justify-center"
+                style={{ position: "relative" }}
+              >
                 {/* Custom App Node (Left) */}
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -127,29 +173,42 @@ export default function CustomEngineering() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 }}
                   className="absolute left-8 top-1/2 -translate-y-1/2"
-                  style={{ position: 'absolute' }}
+                  style={{ position: "absolute" }}
                 >
-                  <div className="relative" style={{ position: 'relative' }}>
+                  <div className="relative" style={{ position: "relative" }}>
                     {/* Glow Effect */}
-                    <div className="absolute inset-0 rounded-xl blur-xl" 
-                      style={{ 
-                        position: 'absolute',
-                        backgroundColor: 'rgba(0, 204, 102, 0.2)' 
-                      }} 
-                    />
-                    
-                    {/* Node Card */}
-                    <div className="relative w-36 h-36 rounded-xl border flex flex-col items-center justify-center gap-3"
+                    <div
+                      className="absolute inset-0 rounded-xl blur-xl"
                       style={{
-                        position: 'relative',
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        borderColor: 'rgba(0, 204, 102, 0.4)'
+                        position: "absolute",
+                        backgroundColor: "rgba(0, 204, 102, 0.2)",
+                      }}
+                    />
+
+                    {/* Node Card */}
+                    <div
+                      className="relative w-36 h-36 rounded-xl border flex flex-col items-center justify-center gap-3"
+                      style={{
+                        position: "relative",
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        borderColor: "rgba(0, 204, 102, 0.4)",
                       }}
                     >
-                      <Layers className="w-10 h-10" style={{ color: '#00CC66' }} />
+                      <Layers
+                        className="w-10 h-10"
+                        style={{ color: "#00CC66" }}
+                      />
                       <div className="text-center">
-                        <div className="text-sm font-bold" style={{ color: '#FFFFFF' }}>Custom App</div>
-                        <div className="text-xs font-mono mt-1" style={{ color: 'rgba(0, 204, 102, 0.6)' }}>
+                        <div
+                          className="text-sm font-bold"
+                          style={{ color: "#FFFFFF" }}
+                        >
+                          Custom App
+                        </div>
+                        <div
+                          className="text-xs font-mono mt-1"
+                          style={{ color: "rgba(0, 204, 102, 0.6)" }}
+                        >
                           Web Interface
                         </div>
                       </div>
@@ -164,21 +223,26 @@ export default function CustomEngineering() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.6, duration: 1 }}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-0.5 w-64"
-                  style={{ 
-                    position: 'absolute',
-                    backgroundColor: 'rgba(0, 204, 102, 0.4)',
-                    transformOrigin: 'left'
+                  style={{
+                    position: "absolute",
+                    backgroundColor: "rgba(0, 204, 102, 0.4)",
+                    transformOrigin: "left",
                   }}
                 >
                   {/* Animated Data Flow */}
                   <motion.div
                     className="absolute inset-y-0 w-8 rounded-full"
-                    style={{ 
-                      position: 'absolute',
-                      background: 'linear-gradient(90deg, rgba(0, 204, 102, 0), rgba(0, 204, 102, 0.8), rgba(0, 204, 102, 0))'
+                    style={{
+                      position: "absolute",
+                      background:
+                        "linear-gradient(90deg, rgba(0, 204, 102, 0), rgba(0, 204, 102, 0.8), rgba(0, 204, 102, 0))",
                     }}
                     animate={{ x: [0, 250] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
                   />
                 </motion.div>
 
@@ -189,29 +253,42 @@ export default function CustomEngineering() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.5 }}
                   className="absolute right-8 top-1/2 -translate-y-1/2"
-                  style={{ position: 'absolute' }}
+                  style={{ position: "absolute" }}
                 >
-                  <div className="relative" style={{ position: 'relative' }}>
+                  <div className="relative" style={{ position: "relative" }}>
                     {/* Glow Effect */}
-                    <div className="absolute inset-0 rounded-xl blur-xl" 
-                      style={{ 
-                        position: 'absolute',
-                        backgroundColor: 'rgba(0, 204, 102, 0.2)' 
-                      }} 
-                    />
-                    
-                    {/* Node Card */}
-                    <div className="relative w-36 h-36 rounded-xl border flex flex-col items-center justify-center gap-3"
+                    <div
+                      className="absolute inset-0 rounded-xl blur-xl"
                       style={{
-                        position: 'relative',
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        borderColor: 'rgba(0, 204, 102, 0.4)'
+                        position: "absolute",
+                        backgroundColor: "rgba(0, 204, 102, 0.2)",
+                      }}
+                    />
+
+                    {/* Node Card */}
+                    <div
+                      className="relative w-36 h-36 rounded-xl border flex flex-col items-center justify-center gap-3"
+                      style={{
+                        position: "relative",
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        borderColor: "rgba(0, 204, 102, 0.4)",
                       }}
                     >
-                      <Database className="w-10 h-10" style={{ color: '#00CC66' }} />
+                      <Database
+                        className="w-10 h-10"
+                        style={{ color: "#00CC66" }}
+                      />
                       <div className="text-center">
-                        <div className="text-sm font-bold" style={{ color: '#FFFFFF' }}>Salesforce</div>
-                        <div className="text-xs font-mono mt-1" style={{ color: 'rgba(0, 204, 102, 0.6)' }}>
+                        <div
+                          className="text-sm font-bold"
+                          style={{ color: "#FFFFFF" }}
+                        >
+                          Salesforce
+                        </div>
+                        <div
+                          className="text-xs font-mono mt-1"
+                          style={{ color: "rgba(0, 204, 102, 0.6)" }}
+                        >
                           Core Data
                         </div>
                       </div>
@@ -227,12 +304,17 @@ export default function CustomEngineering() {
                   transition={{ delay: 0.8 }}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-12 px-3 py-1.5 rounded border"
                   style={{
-                    position: 'absolute',
-                    backgroundColor: 'rgba(0, 204, 102, 0.1)',
-                    borderColor: 'rgba(0, 204, 102, 0.3)'
+                    position: "absolute",
+                    backgroundColor: "rgba(0, 204, 102, 0.1)",
+                    borderColor: "rgba(0, 204, 102, 0.3)",
                   }}
                 >
-                  <span className="text-xs font-mono" style={{ color: '#00CC66' }}>REST / GraphQL</span>
+                  <span
+                    className="text-xs font-mono"
+                    style={{ color: "#00CC66" }}
+                  >
+                    REST / GraphQL
+                  </span>
                 </motion.div>
               </div>
 
@@ -244,43 +326,67 @@ export default function CustomEngineering() {
                 transition={{ delay: 1 }}
                 className="absolute bottom-8 right-8 w-72 rounded-lg border p-4 shadow-2xl"
                 style={{
-                  position: 'absolute',
-                  backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                  borderColor: 'rgba(0, 204, 102, 0.2)'
+                  position: "absolute",
+                  backgroundColor: "rgba(0, 0, 0, 0.95)",
+                  borderColor: "rgba(0, 204, 102, 0.2)",
                 }}
               >
                 {/* Window Header */}
-                <div className="flex items-center gap-2 mb-3 pb-2 border-b" style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}>
-                  <Code className="w-3 h-3" style={{ color: '#00CC66' }} />
-                  <span className="text-xs font-mono" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                <div
+                  className="flex items-center gap-2 mb-3 pb-2 border-b"
+                  style={{ borderColor: "rgba(255, 255, 255, 0.1)" }}
+                >
+                  <Code className="w-3 h-3" style={{ color: "#00CC66" }} />
+                  <span
+                    className="text-xs font-mono"
+                    style={{ color: "rgba(255, 255, 255, 0.6)" }}
+                  >
                     api/salesforce.ts
                   </span>
                 </div>
 
                 {/* Code Lines */}
                 <div className="space-y-1 font-mono text-xs">
-                  <div style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
-                    <span style={{ color: 'rgba(0, 204, 102, 0.8)' }}>const</span> query = <span style={{ color: 'rgba(0, 204, 102, 0.6)' }}>`</span>
+                  <div style={{ color: "rgba(255, 255, 255, 0.4)" }}>
+                    <span style={{ color: "rgba(0, 204, 102, 0.8)" }}>
+                      const
+                    </span>{" "}
+                    query ={" "}
+                    <span style={{ color: "rgba(0, 204, 102, 0.6)" }}>`</span>
                   </div>
-                  <div className="pl-4" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
-                    <span style={{ color: 'rgba(0, 204, 102, 0.8)' }}>SELECT</span> Id, Name
+                  <div
+                    className="pl-4"
+                    style={{ color: "rgba(255, 255, 255, 0.4)" }}
+                  >
+                    <span style={{ color: "rgba(0, 204, 102, 0.8)" }}>
+                      SELECT
+                    </span>{" "}
+                    Id, Name
                   </div>
-                  <div className="pl-4" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
-                    <span style={{ color: 'rgba(0, 204, 102, 0.8)' }}>FROM</span> Account
+                  <div
+                    className="pl-4"
+                    style={{ color: "rgba(255, 255, 255, 0.4)" }}
+                  >
+                    <span style={{ color: "rgba(0, 204, 102, 0.8)" }}>
+                      FROM
+                    </span>{" "}
+                    Account
                   </div>
-                  <div style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
-                    <span style={{ color: 'rgba(0, 204, 102, 0.6)' }}>`</span>;
+                  <div style={{ color: "rgba(255, 255, 255, 0.4)" }}>
+                    <span style={{ color: "rgba(0, 204, 102, 0.6)" }}>`</span>;
                   </div>
                 </div>
               </motion.div>
 
               {/* Technical Grid Overlay */}
-              <div className="absolute inset-0 pointer-events-none rounded-2xl" 
+              <div
+                className="absolute inset-0 pointer-events-none rounded-2xl"
                 style={{
-                  position: 'absolute',
-                  backgroundImage: 'linear-gradient(rgba(0, 204, 102, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 204, 102, 0.03) 1px, transparent 1px)',
-                  backgroundSize: '30px 30px'
-                }} 
+                  position: "absolute",
+                  backgroundImage:
+                    "linear-gradient(rgba(0, 204, 102, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 204, 102, 0.03) 1px, transparent 1px)",
+                  backgroundSize: "30px 30px",
+                }}
               />
             </div>
           </motion.div>
@@ -294,34 +400,51 @@ export default function CustomEngineering() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="space-y-6"
-            style={{ position: 'relative' }}
+            style={{ position: "relative" }}
           >
             {/* Developer Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs"
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs"
               style={{
-                backgroundColor: 'rgba(0, 204, 102, 0.05)',
-                borderColor: 'rgba(0, 204, 102, 0.15)'
+                backgroundColor: "rgba(0, 204, 102, 0.05)",
+                borderColor: "rgba(0, 204, 102, 0.15)",
               }}
             >
-              <Code className="w-3 h-3" style={{ color: '#00CC66' }} />
-              <span className="font-mono tracking-wider" style={{ color: '#00CC66' }}>
+              <Code className="w-3 h-3" style={{ color: "#00CC66" }} />
+              <span
+                className="font-mono tracking-wider"
+                style={{ color: "#00CC66" }}
+              >
                 CUSTOM ENGINEERING
               </span>
             </div>
 
             {/* Headline */}
             <div>
-              <h2 className="text-4xl font-bold mb-3" style={{ color: '#FFFFFF' }}>
+              <h2
+                className="text-4xl font-bold mb-3"
+                style={{ color: "#FFFFFF" }}
+              >
                 Wenn der Standard Sie ausbremst.
               </h2>
-              <p className="text-base leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
-                Lassen Sie sich nicht von "Out-of-the-Box" Grenzen diktieren. Wenn Standard-Komponenten nicht reichen, engineeren wir maßgeschneiderte Headless-Applikationen. Hochperformant, intuitiv wie Consumer-Apps und nahtlos mit Ihren Salesforce-Daten verbunden. Keine Workarounds. Echter Code.
+              <p
+                className="text-base leading-relaxed"
+                style={{ color: "rgba(255, 255, 255, 0.6)" }}
+              >
+                Lassen Sie sich nicht von "Out-of-the-Box" Grenzen diktieren.
+                Wenn Standard-Komponenten nicht reichen, engineeren wir
+                maßgeschneiderte Headless-Applikationen. Hochperformant,
+                intuitiv wie Consumer-Apps und nahtlos mit Ihren
+                Salesforce-Daten verbunden. Keine Workarounds. Echter Code.
               </p>
             </div>
 
             {/* Tech Stack Pills */}
             <div>
-              <div className="text-xs font-mono mb-3" style={{ color: 'rgba(0, 204, 102, 0.6)' }}>
+              <div
+                className="text-xs font-mono mb-3"
+                style={{ color: "rgba(0, 204, 102, 0.6)" }}
+              >
                 // TECH STACK
               </div>
               <div className="flex flex-wrap gap-2">
@@ -330,9 +453,9 @@ export default function CustomEngineering() {
                     key={tech}
                     className="px-4 py-2 rounded-full border font-mono text-sm"
                     style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                      borderColor: 'rgba(255, 255, 255, 0.1)',
-                      color: '#FFFFFF'
+                      backgroundColor: "rgba(255, 255, 255, 0.03)",
+                      borderColor: "rgba(255, 255, 255, 0.1)",
+                      color: "#FFFFFF",
                     }}
                   >
                     {tech}
@@ -349,36 +472,52 @@ export default function CustomEngineering() {
             viewport={{ once: true }}
             className="relative h-96 rounded-xl border p-6"
             style={{
-              position: 'relative',
-              backgroundColor: 'rgba(10, 10, 10, 0.5)',
-              borderColor: 'rgba(0, 204, 102, 0.2)'
+              position: "relative",
+              backgroundColor: "rgba(10, 10, 10, 0.5)",
+              borderColor: "rgba(0, 204, 102, 0.2)",
             }}
           >
             {/* Vertical Connection */}
-            <div className="flex flex-col items-center justify-between h-full" style={{ position: 'relative' }}>
+            <div
+              className="flex flex-col items-center justify-between h-full"
+              style={{ position: "relative" }}
+            >
               {/* Custom App */}
-              <div className="relative" style={{ position: 'relative' }}>
-                <div className="w-28 h-28 rounded-xl border flex flex-col items-center justify-center gap-2"
+              <div className="relative" style={{ position: "relative" }}>
+                <div
+                  className="w-28 h-28 rounded-xl border flex flex-col items-center justify-center gap-2"
                   style={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                    borderColor: 'rgba(0, 204, 102, 0.4)'
+                    backgroundColor: "rgba(0, 0, 0, 0.8)",
+                    borderColor: "rgba(0, 204, 102, 0.4)",
                   }}
                 >
-                  <Layers className="w-8 h-8" style={{ color: '#00CC66' }} />
+                  <Layers className="w-8 h-8" style={{ color: "#00CC66" }} />
                   <div className="text-center">
-                    <div className="text-xs font-bold" style={{ color: '#FFFFFF' }}>Custom App</div>
+                    <div
+                      className="text-xs font-bold"
+                      style={{ color: "#FFFFFF" }}
+                    >
+                      Custom App
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Connection Line */}
-              <div className="flex-1 w-0.5 relative" style={{ position: 'relative', backgroundColor: 'rgba(0, 204, 102, 0.4)' }}>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded text-xs font-mono whitespace-nowrap"
+              <div
+                className="flex-1 w-0.5 relative"
+                style={{
+                  position: "relative",
+                  backgroundColor: "rgba(0, 204, 102, 0.4)",
+                }}
+              >
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded text-xs font-mono whitespace-nowrap"
                   style={{
-                    position: 'absolute',
-                    backgroundColor: 'rgba(0, 204, 102, 0.1)',
-                    color: '#00CC66',
-                    borderColor: 'rgba(0, 204, 102, 0.3)'
+                    position: "absolute",
+                    backgroundColor: "rgba(0, 204, 102, 0.1)",
+                    color: "#00CC66",
+                    borderColor: "rgba(0, 204, 102, 0.3)",
                   }}
                 >
                   API
@@ -386,37 +525,51 @@ export default function CustomEngineering() {
               </div>
 
               {/* Salesforce Core */}
-              <div className="relative" style={{ position: 'relative' }}>
-                <div className="w-28 h-28 rounded-xl border flex flex-col items-center justify-center gap-2"
+              <div className="relative" style={{ position: "relative" }}>
+                <div
+                  className="w-28 h-28 rounded-xl border flex flex-col items-center justify-center gap-2"
                   style={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                    borderColor: 'rgba(0, 204, 102, 0.4)'
+                    backgroundColor: "rgba(0, 0, 0, 0.8)",
+                    borderColor: "rgba(0, 204, 102, 0.4)",
                   }}
                 >
-                  <Database className="w-8 h-8" style={{ color: '#00CC66' }} />
+                  <Database className="w-8 h-8" style={{ color: "#00CC66" }} />
                   <div className="text-center">
-                    <div className="text-xs font-bold" style={{ color: '#FFFFFF' }}>Salesforce</div>
+                    <div
+                      className="text-xs font-bold"
+                      style={{ color: "#FFFFFF" }}
+                    >
+                      Salesforce
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Code Snippet - Mobile */}
-            <div className="absolute bottom-4 left-4 right-4 rounded-lg border p-3"
+            <div
+              className="absolute bottom-4 left-4 right-4 rounded-lg border p-3"
               style={{
-                position: 'absolute',
-                backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                borderColor: 'rgba(0, 204, 102, 0.2)'
+                position: "absolute",
+                backgroundColor: "rgba(0, 0, 0, 0.95)",
+                borderColor: "rgba(0, 204, 102, 0.2)",
               }}
             >
               <div className="flex items-center gap-2 mb-2">
-                <Code className="w-3 h-3" style={{ color: '#00CC66' }} />
-                <span className="text-xs font-mono" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                <Code className="w-3 h-3" style={{ color: "#00CC66" }} />
+                <span
+                  className="text-xs font-mono"
+                  style={{ color: "rgba(255, 255, 255, 0.6)" }}
+                >
                   salesforce.ts
                 </span>
               </div>
-              <div className="font-mono text-xs" style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
-                <span style={{ color: 'rgba(0, 204, 102, 0.8)' }}>const</span> query = ...
+              <div
+                className="font-mono text-xs"
+                style={{ color: "rgba(255, 255, 255, 0.4)" }}
+              >
+                <span style={{ color: "rgba(0, 204, 102, 0.8)" }}>const</span>{" "}
+                query = ...
               </div>
             </div>
           </motion.div>
