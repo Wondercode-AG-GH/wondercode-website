@@ -2,26 +2,48 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
+import { useRouter, usePathname } from "next/navigation";
 
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const [activeLanguage, setActiveLanguage] = useState<"DE" | "EN">("EN");
+  const router = useRouter();
+  const pathname = usePathname();
+  const [activeLanguage, setActiveLanguage] = useState<"DE" | "EN">("DE");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const lang = (
-      localStorage.getItem("preferredLanguage") ||
-      i18n.language ||
-      "de"
-    ).toUpperCase();
-    setActiveLanguage(lang as "DE" | "EN");
-  }, [i18n.language]);
+    // Derive active language from URL pathname first, then fallback to stored
+    const pathLocale = pathname.split("/")[1]?.toUpperCase();
+    if (pathLocale === "EN" || pathLocale === "DE") {
+      setActiveLanguage(pathLocale as "DE" | "EN");
+    } else {
+      const lang = (
+        localStorage.getItem("preferredLanguage") ||
+        i18n.language ||
+        "de"
+      ).toUpperCase();
+      setActiveLanguage(lang as "DE" | "EN");
+    }
+  }, [pathname, i18n.language]);
 
   const handleLanguageChange = (lang: "DE" | "EN") => {
+    const newLocale = lang.toLowerCase();
     setActiveLanguage(lang);
-    i18n.changeLanguage(lang.toLowerCase());
-    localStorage.setItem("preferredLanguage", lang.toLowerCase());
+
+    // Save to localStorage and cookie (cookie used by middleware)
+    localStorage.setItem("preferredLanguage", newLocale);
+    document.cookie = `preferredLanguage=${newLocale}; path=/; max-age=31536000`;
+
+    // Change i18n language
+    i18n.changeLanguage(newLocale);
+
+    // Swap the locale segment in the current URL
+    // e.g. /de/about → /en/about  or  /de → /en
+    const segments = pathname.split("/");
+    segments[1] = newLocale; // index 1 is always the [locale] segment
+    const newPath = segments.join("/") || `/${newLocale}`;
+    router.push(newPath);
   };
 
   if (!mounted) return null;

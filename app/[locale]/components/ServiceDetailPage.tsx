@@ -127,6 +127,7 @@ export default function ServiceDetailPage({
   const accentColor = "#00CC66";
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
+  const lang = i18n.language?.split("-")[0] ?? "en";
   // Resolve icon string to actual component (safe: only strings cross server/client boundary)
   const Icon = (iconMap[iconName] ?? Settings) as LucideIcon;
 
@@ -137,7 +138,7 @@ export default function ServiceDetailPage({
     >
       {/* Back Navigation */}
       <div className="fixed top-24 left-8 z-50">
-        <Link href="/">
+        <Link href={`/${lang}`}>
           <motion.button
             whileHover={{ x: -4 }}
             className="flex items-center gap-2 px-4 py-2 rounded-xl border transition-all text-sm"

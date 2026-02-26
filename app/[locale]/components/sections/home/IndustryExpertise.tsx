@@ -21,6 +21,7 @@ export default function IndustryExpertise() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [expandedIndex, setExpandedIndex] = useState<number>(0); // First item expanded on mobile
 
+  const lang = i18n.language?.split("-")[0] ?? "en";
   useEffect(() => {
     const fetchIndustries = async () => {
       try {
@@ -82,7 +83,7 @@ export default function IndustryExpertise() {
           >
             {industries.map((industry, index) => (
               <div key={industry._id}>
-                <Link href={`/industries/${industry.slug}`}>
+                <Link href={`/${lang}/industries/${industry.slug}`}>
                   <motion.div
                     className="relative py-8 cursor-pointer group"
                     style={{ position: "relative" }}
@@ -191,7 +192,10 @@ export default function IndustryExpertise() {
               const isExpanded = expandedIndex === index;
 
               return (
-                <Link key={industry._id} href={`/industries/${industry.slug}`}>
+                <Link
+                  key={industry._id}
+                  href={`/${lang}/industries/${industry.slug}`}
+                >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

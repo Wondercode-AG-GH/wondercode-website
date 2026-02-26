@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import ConditionalLayout from "./components/ConditionalLayout";
+import ConditionalLayout from "./[locale]/components/ConditionalLayout";
 import I18nProvider from "./providers";
 
 const geist = Geist({

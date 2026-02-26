@@ -4,7 +4,7 @@ import {
   industryBySlugQuery,
   allIndustrySlugsQuery,
 } from "@/sanity/lib/sanity.queries";
-import IndustrySolutionPage from "@/app/components/IndustrySolutionPage";
+import IndustrySolutionPage from "@/app/[locale]/components/IndustrySolutionPage";
 import { notFound } from "next/navigation";
 
 type Props = {

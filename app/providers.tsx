@@ -5,19 +5,26 @@ import i18n from "@/lib/i18n";
 
 interface I18nProviderProps {
   children: ReactNode;
+  locale?: string;
 }
 
-export default function I18nProvider({ children }: I18nProviderProps) {
+export default function I18nProvider({ children, locale }: I18nProviderProps) {
   useEffect(() => {
-    // Get preferred language from localStorage or browser language
+    // Priority: URL locale (from [locale] segment) → localStorage → browser language
     const storedLanguage = localStorage.getItem("preferredLanguage");
     const browserLanguage = navigator.language.split("-")[0];
-    const language = storedLanguage || (browserLanguage === "de" ? "de" : "en");
+    const language =
+      locale || storedLanguage || (browserLanguage === "de" ? "de" : "en");
 
     if (i18n.isInitialized) {
       i18n.changeLanguage(language);
     }
-  }, []);
+
+    // Keep localStorage in sync with the URL locale
+    if (locale) {
+      localStorage.setItem("preferredLanguage", locale);
+    }
+  }, [locale]);
 
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }

@@ -4,7 +4,7 @@ import {
   caseStudyBySlugQuery,
   allCaseStudySlugsQuery,
 } from "@/sanity/lib/sanity.queries";
-import CaseStudySolutionPage from "@/app/components/CaseStudySolutionPage";
+import CaseStudySolutionPage from "@/app/[locale]/components/CaseStudySolutionPage";
 import { notFound } from "next/navigation";
 
 type Props = {

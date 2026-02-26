@@ -5,7 +5,7 @@ import {
   allServiceSlugsQuery,
 } from "@/sanity/lib/sanity.queries";
 import { Service } from "@/sanity/lib/types";
-import ServiceDetailPage from "@/app/components/ServiceDetailPage";
+import ServiceDetailPage from "@/app/[locale]/components/ServiceDetailPage";
 import { notFound } from "next/navigation";
 
 type Props = {

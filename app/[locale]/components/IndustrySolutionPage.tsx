@@ -94,6 +94,8 @@ export default function IndustrySolutionPage({
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
+  const lang = i18n.language?.split("-")[0] ?? "en";
+
   // Resolve hero icon (string or component)
   const HeroIcon =
     typeof heroIconProp === "string"
@@ -120,7 +122,7 @@ export default function IndustrySolutionPage({
     >
       {/* Back Navigation */}
       <div className="fixed top-24 left-8 z-50">
-        <Link href="/">
+        <Link href={`/${lang}`}>
           <motion.button
             whileHover={{ x: -4 }}
             className="flex items-center gap-2 px-4 py-2 rounded-xl border transition-all text-sm"

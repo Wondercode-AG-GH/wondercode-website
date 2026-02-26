@@ -12,11 +12,15 @@ export default function ConditionalLayout({
 }) {
   const pathname = usePathname();
 
+  const normalizedPath = pathname
+    ? pathname.replace(/^\/[^\/]+/, "")
+    : pathname;
+
   // Hide header and footer on service detail pages
-  const hideHeaderFooter = pathname?.startsWith("/services/");
+  const hideHeaderFooter = normalizedPath?.startsWith("/services/");
   const studios = pathname?.startsWith("/studio/");
-  const industry = pathname?.startsWith("/industries/");
-  const caseStudy = pathname?.startsWith("/case-studies/");
+  const industry = normalizedPath?.startsWith("/industries/");
+  const caseStudy = normalizedPath?.startsWith("/case-studies/");
   if (hideHeaderFooter) {
     return <>{children}</>;
   }

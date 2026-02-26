@@ -24,6 +24,7 @@ export default function CaseStudiesGallery() {
   const [loading, setLoading] = useState(true);
   const [activeCase, setActiveCase] = useState(0);
 
+  const lang = i18n.language?.split("-")[0] ?? "en";
   useEffect(() => {
     const fetchCaseStudies = async () => {
       try {
@@ -83,7 +84,10 @@ export default function CaseStudiesGallery() {
               style={{ position: "relative" }}
             >
               {caseStudies.map((study, index) => (
-                <Link key={study._id} href={`/case-studies/${study.slug}`}>
+                <Link
+                  key={study._id}
+                  href={`/${lang}/case-studies/${study.slug}`}
+                >
                   <motion.div
                     initial={{ opacity: 0, x: 100 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -202,7 +206,10 @@ export default function CaseStudiesGallery() {
         {!loading && (
           <div className="md:hidden space-y-6" style={{ position: "relative" }}>
             {caseStudies.slice(0, 1).map((study) => (
-              <Link key={study._id} href={`/case-studies/${study.slug}`}>
+              <Link
+                key={study._id}
+                href={`/${lang}/case-studies/${study.slug}`}
+              >
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}

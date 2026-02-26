@@ -52,11 +52,13 @@ export default function CoreExpertise() {
             ? service.heroSublineDe || service.heroSubline
             : service.heroSubline;
 
+          const lang = i18n.language?.split("-")[0] ?? "en";
+
           return {
             icon: IconComponent,
             title,
             description,
-            link: `/services/${service.slug}`,
+            link: `/${lang}/services/${service.slug}`,
           };
         });
 
