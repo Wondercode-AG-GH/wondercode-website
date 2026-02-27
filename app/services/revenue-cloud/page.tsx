@@ -1,3 +1,4 @@
+"use client";
 import ServiceDetailPage from '@/app/components/ServiceDetailPage';
 import { DollarSign, Settings, Database, Zap, Users } from 'lucide-react';
 

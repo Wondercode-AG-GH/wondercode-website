@@ -2,7 +2,7 @@
 import ServiceDetailPage from '@/app/components/ServiceDetailPage';
 import { Shield, Settings, Database, Zap, Users } from 'lucide-react';
 
-export function FSCPage() {
+export default function FSCPage() {
   return (
     <ServiceDetailPage
       icon={Shield}
