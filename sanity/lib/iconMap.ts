@@ -1,8 +1,8 @@
-import { 
-  Headphones, 
-  Settings, 
-  Database, 
-  Zap, 
+import {
+  Headphones,
+  Settings,
+  Database,
+  Zap,
   Users,
   AlertTriangle,
   Trophy,
@@ -15,7 +15,7 @@ import {
   Sparkles,
   Heart,
   User,
-  Factory
+  Factory,
 } from "lucide-react";
 
 export const iconMap: Record<string, any> = {
@@ -35,5 +35,5 @@ export const iconMap: Record<string, any> = {
   Sparkles,
   Heart,
   User,
-  Factory
+  Factory,
 };

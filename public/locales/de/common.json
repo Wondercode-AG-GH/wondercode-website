@@ -1,0 +1,272 @@
+{
+  "hero": {
+    "badge": "Schweizer Präzision × Silicon Valley Innovation",
+    "headline": "Machen Sie Technologie zu Ihrem Wettbewerbsvorteil",
+    "headlineMultiline": [
+      "Machen Sie",
+      "Technologie",
+      "zu Ihrem",
+      "Wettbewerbsvorteil."
+    ],
+    "tagline": "Wir bauen intelligente Systeme, die Prozesse automatisieren und Ihr Geschäft skalieren",
+    "subtagline": "Wachstum erzeugt Chaos, wenn Systeme fehlen. Wir implementieren das digitale Rückgrat, das Ihre gesamte Customer Journey automatisiert – vom ersten Klick bis zum Service-Ticket.",
+    "subtaglineHighlight": "In 4 Wochen startklar.",
+    "cta": "Zum System-Check",
+    "ctaSecondary": "Case Studies ansehen"
+  },
+  "navigation": {
+    "home": "Startseite",
+    "services": "Dienstleistungen",
+    "industries": "Branchen",
+    "aboutUs": "Über uns",
+    "contact": "Kontakt",
+    "caseStudies": "Fallstudien",
+    "expertise": "Expertise"
+  },
+  "coreExpertise": {
+    "badge": "UNSERE EXPERTISE",
+    "title": "Kernkompetenz",
+    "description": "Spezialisierte Lösungen, die messbare Ergebnisse liefern",
+    "salesforceEcosystem": {
+      "badge": "SALESFORCE-ÖKOSYSTEM",
+      "title": "Das gesamte",
+      "titleHighlight": "Salesforce-Ökosystem.",
+      "description": "Wir beherrschen die Klaviatur der komplexesten Clouds. Ob hochregulierte Bankprozesse, komplexe Abo-Modelle oder Non-Profit-Management: Wir integrieren spezialisierte Module zu einer nahtlosen Gesamtarchitektur."
+    }
+  },
+  "industriesSection": {
+    "badge": "BRANCHEN-EXPERTISE",
+    "title": "Industrie",
+    "titleHighlight": "Expertise",
+    "description": "Tiefes Branchenwissen kombiniert mit technischer Exzellenz"
+  },
+  "caseStudiesSection": {
+    "title": "Erfolgs-",
+    "titleHighlight": "Geschichten",
+    "description": "Messbare Auswirkungen, außergewöhnliche Ergebnisse",
+    "challenge": "DIE HERAUSFORDERUNG",
+    "solution": "WONDERCODE LÖSUNG",
+    "fullCaseStudy": "Vollständige Fallstudie",
+    "moreQuestions": "Weitere Fragen? Unsere Experten helfen gerne weiter."
+  },
+  "detailPages": {
+    "backToHome": "Zurück zur Startseite",
+    "backToServices": "Zurück zu den Dienstleistungen",
+    "backToIndustries": "Zurück zu den Branchen",
+    "backToCaseStudies": "Zurück zu den Fallstudien"
+  },
+  "serviceDetail": {
+    "swissMade": "🇨🇭 Schweizer Engineering",
+    "certifiedPartner": "☁️ Salesforce-zertifizierter Partner",
+    "definition": "Definition",
+    "scope": "Umfang",
+    "timeline": "Implementierungs-Zeitrahmen",
+    "targetAudience": "Zielgruppe",
+    "faqs": "Häufig gestellte Fragen",
+    "relatedServices": "Verwandte Dienstleistungen",
+    "readyToStart": "Bereit zu starten?",
+    "readyToStartDesc": "Lassen Sie uns besprechen, wie wir Ihr Unternehmen mit Salesforce transformieren können.",
+    "contactUs": "Kontaktieren Sie uns"
+  },
+  "industryDetail": {
+    "architecture": "Architektur",
+    "exploreArchitecture": "Architektur erkunden",
+    "challenges": "Herausforderungen",
+    "capabilities": "Unsere Möglichkeiten",
+    "useCase": "Praxis-Anwendungsfall",
+    "workflow": "Arbeitsablauf",
+    "faqs": "Häufig gestellte Fragen",
+    "ready": "Bereit, Ihre Branche zu transformieren?",
+    "readyDesc": "Lassen Sie uns besprechen, wie unsere Lösungen Innovation in Ihrem Sektor fördern können.",
+    "getInTouch": "Kontaktieren Sie uns"
+  },
+  "caseStudyDetail": {
+    "customer": "Der Kunde",
+    "executive": "Kurzfassung für Führungskräfte",
+    "challenge": "Die Herausforderung",
+    "solution": "Die Lösung",
+    "results": "Ergebnisse & Mehrwert",
+    "testimonial": "Das haben sie gesagt",
+    "cta": "Ready for Similar Results?",
+    "ctaDesc": "Lassen Sie uns erkunden, wie wir diesen Erfolg für Ihre Organisation replizieren können.",
+    "ready": "Heute starten"
+  },
+  "agentforce": {
+    "badge": "KI-GESTEUERTE AUTOMATISIERUNG",
+    "title": "Agentforce & Autonome Agenten",
+    "subtitle": "Die Zukunft ist automatisiert. Wir bauen sie für Sie.",
+    "sections": {
+      "whatIs": "Was ist Agentforce?",
+      "whatIsDesc": "Autonome Agenten, die Kundeninteraktionen abwickeln, Prozesse automatisieren und intelligente Entscheidungen ohne menschliches Zutun treffen.",
+      "whyNeeded": "Warum Ihr Unternehmen es braucht",
+      "whyNeededDesc": "Reduzieren Sie Betriebskosten um 60%, beschleunigen Sie Kundenreaktionen um das 10-fache und skalieren Sie ohne proportionales Teamwachstum.",
+      "howWeDo": "Wie wir es umsetzen",
+      "howWeDoDesc": "Wir entwerfen Ihr Datenmodell, trainieren intelligente Agenten und gewährleisten Compliance mit Schweizer Datenschutzstandards (nDSG)."
+    }
+  },
+  "agentforceExpertise": {
+    "badge": "AGENTIC ENTERPRISE",
+    "title": "Der Schritt zum",
+    "titleHighlight": "Agentic Enterprise.",
+    "description": "Die Ära der rein manuellen Arbeit endet hier. Warten ist keine Strategie mehr. Wandeln Sie starre Abteilungen jetzt in agile, autonome Einheiten um. Der Wettbewerbsvorteil gehört denjenigen, die diesen Schritt heute machen.",
+    "roadmapTitle": "Die Roadmap",
+    "processSteps": [
+      {
+        "title": "Potenzial-Analyse",
+        "description": "Wir identifizieren nicht nur Lücken, wir finden die 'High-Impact'-Prozesse, wo Autonomie sofortige, messbare ROI liefert. Wir zeigen Ihnen, was möglich ist."
+      },
+      {
+        "title": "Agenten-Design",
+        "description": "Wir bauen keine Chatbots, wir entwerfen digitale Mitarbeiter. Wir übersetzen Ihre Best Practices in Algorithmen, die 24/7 für Sie skalieren."
+      },
+      {
+        "title": "Skalierung & Go-Live",
+        "description": "Starten Sie nicht mit einem Big Bang, starten Sie mit einem präzisen Pilotprojekt. Sehen Sie Ergebnisse in Wochen und rollen Sie dann die Autonomie im gesamten Unternehmen aus."
+      }
+    ],
+    "features": {
+      "decisionPower": "Entscheidungskraft",
+      "decisionPowerTitle": "Reasoning Engine",
+      "decisionPowerDesc": "Das ist keine Science Fiction mehr. Diese Agenten verstehen den Kontext, wiegen Optionen ab und treffen Entscheidungen autonom – oft präziser und schneller als Menschen.",
+      "security": "Sicherheit",
+      "securityTitle": "Einstein Trust Layer",
+      "securityDesc": "Das größte Hindernis ist beseitigt: Ihre Daten bleiben sicher. Der Trust Layer garantiert, dass keine sensiblen Informationen Unternehmensgrenzen verlassen.",
+      "learningCurve": "Lernkurve",
+      "learningCurveTitle": "Lernende Systeme",
+      "learningCurveDesc": "Ein menschlicher Mitarbeiter braucht Monate zum Einarbeiten. Ihr Agentic Enterprise lernt über Nacht. Jede Interaktion macht das System intelligenter.",
+      "speed": "Geschwindigkeit",
+      "speedTitle": "Geschwindigkeit als Waffe",
+      "speedDesc": "Während Konkurrenten noch E-Mails sortieren, hat Ihr Agent das Problem bereits gelöst. Reaktionszeiten in Millisekunden sind der neue Standard."
+    }
+  },
+  "customEngineeringSection": {
+    "badge": "CUSTOM ENGINEERING",
+    "headline": "Wenn der Standard Sie ausbremst",
+    "description": "Lassen Sie sich von 'Out-of-the-Box'-Grenzen nicht von Ihrer Strategie abbringen. Wenn Standard-Komponenten nicht ausreichen, engineeren wir maßgeschneiderte Headless-Applikationen. Hochperformant, intuitiv wie Consumer-Apps und nahtlos mit Ihren Salesforce-Daten verbunden. Keine Workarounds. Echter Code.",
+    "techStackLabel": "// TECH STACK",
+    "expertsReady": "Expert developers ready"
+  },
+  "aboutUsSection": {
+    "badge": "ÜBER UNS",
+    "title": "Menschliche Strategie,",
+    "titleHighlight": "Intelligenter Code",
+    "description": "Wir verbinden die Präzision und Zuverlässigkeit von Schweizer Engineering mit der transformativen Kraft von künstlicher Intelligenz. Unser Team aus Strategisten, Ingenieuren und KI-Spezialisten implementiert nicht nur Technologie – wir architekturieren Lösungen, die Ihre gesamte Organisation höherstufen.",
+    "stats": {
+      "experience": "15+",
+      "experienceLabel": "Jahre Erfahrung",
+      "projects": "50+",
+      "projectsLabel": "Projekte Umgesetzt",
+      "satisfaction": "100%",
+      "satisfactionLabel": "Kundenzufriedenheit"
+    },
+    "coreValues": {
+      "trustTitle": "Vertrauen",
+      "trustDesc": "Schweizer Genauigkeit und Zuverlässigkeit in jedem Projekt",
+      "innovationTitle": "Innovation",
+      "innovationDesc": "Zukunftsweisende Lösungen, die Ergebnisse liefern",
+      "partnershipTitle": "Partnerschaft",
+      "partnershipDesc": "Langfristige Beziehungen, die auf Erfolg basieren"
+    }
+  },
+  "customEngineering": {
+    "badge": "BENUTZERDEFINIERTE LÖSUNGEN",
+    "title": "Benutzerdefinierte Entwicklung",
+    "description": "Wenn Standardlösungen nicht ausreichen",
+    "items": [
+      {
+        "title": "Legacy-Systemintegration",
+        "description": "Verbinden Sie Ihre bestehenden Systeme nahtlos mit modernen Plattformen"
+      },
+      {
+        "title": "Datenarchitektur",
+        "description": "Bauen Sie skalierbare Grundlagen, die Wachstum unterstützen"
+      },
+      {
+        "title": "API-Entwicklung",
+        "description": "Benutzerdefinierte APIs, die nahtlose Integrationen ermöglichen"
+      },
+      {
+        "title": "Sicherheit & Compliance",
+        "description": "Enterprise-Sicherheit im Einklang mit Schweizer Vorschriften"
+      }
+    ]
+  },
+  "about": {
+    "badge": "WER WIR SIND",
+    "title": "Über uns",
+    "subtitle": "Schweizer Präzision trifft transformative Technologie"
+  },
+  "footer": {
+    "description": "Wir befähigen Schweizer Unternehmen mit intelligenten Salesforce-Architekturen, modernsten KI-Strategien und massgeschneiderten Web-Lösungen.",
+    "region": "Schweiz",
+    "country": "Schweiz",
+    "languageLabel": "Language / Sprache",
+    "allRightsReserved": "Alle Rechte vorbehalten.",
+    "madeIn": "Hergestellt in",
+    "headings": {
+      "services": "Dienstleistungen",
+      "company": "Unternehmen",
+      "contact": "Kontakt"
+    },
+    "services": {
+      "salesforceConsulting": "Salesforce-Beratung",
+      "aiStrategy": "KI-Strategie",
+      "customWebApps": "Individuelle Web-Apps",
+      "agentforceImplementation": "Agentforce-Implementierung"
+    },
+    "company": {
+      "aboutUs": "Über uns",
+      "careers": "Karriere",
+      "blog": "Blog",
+      "contact": "Kontakt"
+    },
+    "legal": {
+      "privacyPolicy": "Datenschutzrichtlinie",
+      "termsOfService": "Nutzungsbedingungen",
+      "cookiePolicy": "Cookie-Richtlinie",
+      "imprint": "Impressum"
+    }
+  },
+  "buttons": {
+    "scheduleConsultation": "Beratungsgespräch vereinbaren",
+    "learnMore": "Mehr erfahren",
+    "getStarted": "Erste Schritte",
+    "contactUs": "Kontaktieren Sie uns",
+    "viewDetails": "Details anzeigen",
+    "exploreMore": "Mehr erkunden",
+    "systemCheck": "Zum System-Check",
+    "fullCaseStudy": "Vollständige Fallstudie"
+  },
+  "common": {
+    "loading": "Wird geladen...",
+    "loadingServices": "Dienstleistungen werden geladen...",
+    "loadingIndustries": "Branchen werden geladen...",
+    "loadingFaqs": "FAQs werden geladen...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "readMore": "Mehr lesen",
+    "learnMore": "Mehr erfahren"
+  },
+  "badges": {
+    "expertise": "UNSERE EXPERTISE",
+    "aiAutomation": "KI-GESTEUERTE AUTOMATISIERUNG",
+    "custom": "BENUTZERDEFINIERTE LÖSUNGEN",
+    "whoWeAre": "WER WIR SIND",
+    "industryExpertise": "BRANCHEN-EXPERTISE",
+    "successStories": "ERFOLGSGESCHICHTEN",
+    "faq": "FAQ"
+  },
+  "header": {
+    "nav": {
+      "services": "Dienstleistungen",
+      "agentforce": "Agentforce",
+      "customEngineering": "Custom Engineering",
+      "industryExpertise": "Branchen-Expertise",
+      "successStories": "Erfolgsgeschichten",
+      "about": "Über uns"
+    },
+    "cta": "Strategiegespräch"
+  }
+}

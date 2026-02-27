@@ -5,6 +5,7 @@
 You now have a complete, dynamic case study module that mirrors your service implementation. Here's what was created:
 
 ### 1. **Sanity Schema** (`sanity/schemaTypes/caseStudy.ts`)
+
 - Complete case study document type with bilingual support (EN/DE)
 - Sections include:
   - Hero headline & subline
@@ -18,12 +19,14 @@ You now have a complete, dynamic case study module that mirrors your service imp
   - SEO metadata
 
 ### 2. **Dynamic Route** (`app/caseStudies/[slug]/page.tsx`)
+
 - Automatically generates static pages from Sanity data
 - Supports static generation via `generateStaticParams()`
 - SEO-friendly with automatic `generateMetadata()`
 - Returns 404 if case study not found
 
 ### 3. **Refactored Component** (`app/components/CaseStudySolutionPage.tsx`)
+
 - Now accepts dynamic props from Sanity
 - Maintains 100% original design and styling
 - Supports bilingual content (EN/DE)
@@ -31,10 +34,12 @@ You now have a complete, dynamic case study module that mirrors your service imp
 - Icon resolution from `iconMap` with fallbacks
 
 ### 4. **Sanity Queries** (`sanity/lib/sanity.queries.ts`)
+
 - `caseStudyBySlugQuery` - Fetch single case study by slug
 - `allCaseStudySlugsQuery` - Fetch all case study slugs for static generation
 
 ### 5. **Schema Registration** (`sanity/schemaTypes/index.ts`)
+
 - Case study type automatically exported and available in Sanity Studio
 
 ---
@@ -98,9 +103,11 @@ You now have a complete, dynamic case study module that mirrors your service imp
 The following icon names are available from Lucide React:
 
 ### Default Icons (Already in iconMap):
+
 - `Headphones`, `Settings`, `Database`, `Zap`, `Users`, `Trophy`, `Cpu`, `BarChart3`, `Rocket`, `Shield`
 
 ### Good for Case Studies:
+
 - For Challenges: `Lock`, `Database`, `Zap`
 - For Tech Stack: `Cloud`, `Code`, `Database`, `Lock`, `Activity`
 - For Results: `Zap`, `Code`, `Lock`, `TrendingDown`, `TrendingUp`
@@ -121,6 +128,7 @@ export const iconMap = {
 ## 📝 Example: Creating a Case Study like SAH Zürich
 
 ### Hero Section:
+
 ```
 Title (EN): "From Legacy to Cloud-Native in 4 Months"
 Title (DE): "Von Legacy zu Cloud-Native in 4 Monaten"
@@ -130,13 +138,15 @@ TimelineMetric: "4 MONTHS"
 ```
 
 ### Challenge Issues (3):
+
 ```
 1. Security Risks | Icon: Lock
-2. Data Control | Icon: Database  
+2. Data Control | Icon: Database
 3. Time Pressure | Icon: Zap
 ```
 
 ### Tech Stack (5):
+
 ```
 1. Salesforce Nonprofit Cloud | Backend | Icon: Cloud
 2. Next.js on Vercel | Frontend | Icon: Code
@@ -146,6 +156,7 @@ TimelineMetric: "4 MONTHS"
 ```
 
 ### Results (3 Pillars):
+
 ```
 1. Massive Relief | Icon: Zap
 2. UX Modernization | Icon: Code
@@ -163,6 +174,7 @@ https://yoursite.com/caseStudies/[slug]
 ```
 
 For example:
+
 ```
 https://wondercode.com/caseStudies/sah-zurich
 https://wondercode.com/caseStudies/acme-corp-migration
@@ -173,17 +185,20 @@ https://wondercode.com/caseStudies/acme-corp-migration
 ## 🛠️ Technical Details
 
 ### Dynamic Generation Flow:
+
 1. Author creates case study in Sanity Studio
 2. On deployment, Next.js calls `generateStaticParams()` to fetch all slugs
 3. Static pages are pre-generated for each case study
 4. Metadata is automatically generated for SEO
 
 ### Language Switching:
+
 - Component includes built-in EN/DE toggle in UI
 - All content is shown/hidden based on selected language
 - No page reload needed
 
 ### Icon Fallback:
+
 - If an icon name doesn't exist in `iconMap`, component uses `AlertTriangle`
 - Check browser console for debug logs (in development)
 
@@ -212,16 +227,19 @@ https://wondercode.com/caseStudies/acme-corp-migration
 ## 🐛 Troubleshooting
 
 **Case study not appearing?**
+
 - Check slug is published (not just a draft)
 - Verify all required fields are filled in
 - Rebuild/redeploy the site
 
 **Icons not showing?**
+
 - Check icon name spelling (case-sensitive)
 - Verify icon name exists in `iconMap.ts`
 - Check browser console for debug messages
 
 **Language not switching?**
+
 - Ensure both EN and DE fields are filled in Sanity
 - Check for empty string values
 
@@ -230,6 +248,7 @@ https://wondercode.com/caseStudies/acme-corp-migration
 ## 📞 Support
 
 For questions or to add more icons:
+
 - Check the icon list at [lucide.dev](https://lucide.dev)
 - Add new icons to `sanity/lib/iconMap.ts`
 - Update this guide with common use cases

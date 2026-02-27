@@ -1,0 +1,272 @@
+{
+  "hero": {
+    "badge": "Swiss Precision × Silicon Valley Innovation",
+    "headline": "Make Technology Your Competitive Advantage",
+    "headlineMultiline": [
+      "Make",
+      "Technology",
+      "Your",
+      "Competitive Advantage."
+    ],
+    "tagline": "We build intelligent systems that automate processes and scale your business",
+    "subtagline": "Growth creates chaos without systems. We implement the digital backbone that automates your entire customer journey – from first click to service ticket.",
+    "subtaglineHighlight": "Ready to go in 4 weeks.",
+    "cta": "Start Your Audit",
+    "ctaSecondary": "View Case Studies"
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "industries": "Industries",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "caseStudies": "Case Studies",
+    "expertise": "Expertise"
+  },
+  "coreExpertise": {
+    "badge": "OUR EXPERTISE",
+    "title": "Core Expertise",
+    "description": "Specialized solutions that drive measurable results",
+    "salesforceEcosystem": {
+      "badge": "SALESFORCE ECOSYSTEM",
+      "title": "The entire",
+      "titleHighlight": "Salesforce Ecosystem.",
+      "description": "We master the complexities of the most sophisticated clouds. Whether highly regulated banking processes, complex subscription models, or non-profit management: we integrate specialized modules into a seamless overall architecture."
+    }
+  },
+  "industriesSection": {
+    "badge": "INDUSTRY EXPERTISE",
+    "title": "Industry",
+    "titleHighlight": "Expertise",
+    "description": "Deep industry knowledge combined with technical excellence"
+  },
+  "caseStudiesSection": {
+    "title": "Success",
+    "titleHighlight": "Stories",
+    "description": "Measurable impact, extraordinary results",
+    "challenge": "THE CHALLENGE",
+    "solution": "WONDERCODE SOLUTION",
+    "fullCaseStudy": "Full Case Study",
+    "moreQuestions": "Have more questions? Our experts are ready to help."
+  },
+  "detailPages": {
+    "backToHome": "Back to Home",
+    "backToServices": "Back to Services",
+    "backToIndustries": "Back to Industries",
+    "backToCaseStudies": "Back to Case Studies"
+  },
+  "serviceDetail": {
+    "swissMade": "🇨🇭 Swiss Made Engineering",
+    "certifiedPartner": "☁️ Salesforce Certified Partner",
+    "definition": "Definition",
+    "scope": "Scope",
+    "timeline": "Implementation Timeline",
+    "targetAudience": "Target Audience",
+    "faqs": "Frequently Asked Questions",
+    "relatedServices": "Related Services",
+    "readyToStart": "Ready to Get Started?",
+    "readyToStartDesc": "Let's discuss how we can transform your business with Salesforce.",
+    "contactUs": "Contact Us"
+  },
+  "industryDetail": {
+    "architecture": "Architecture",
+    "exploreArchitecture": "Explore Architecture",
+    "challenges": "Challenges",
+    "capabilities": "Our Capabilities",
+    "useCase": "Real-World Use Case",
+    "workflow": "Workflow",
+    "faqs": "Frequently Asked Questions",
+    "ready": "Ready to Transform Your Industry?",
+    "readyDesc": "Let's discuss how our solutions can drive innovation in your sector.",
+    "getInTouch": "Get In Touch"
+  },
+  "caseStudyDetail": {
+    "customer": "The Customer",
+    "executive": "Executive Summary",
+    "challenge": "The Challenge",
+    "solution": "The Solution",
+    "results": "Results & Value",
+    "testimonial": "What They Said",
+    "cta": "Ready for Similar Results?",
+    "ctaDesc": "Let's explore how we can replicate this success for your organization.",
+    "ready": "Get Started Today"
+  },
+  "agentforce": {
+    "badge": "AI-POWERED AUTOMATION",
+    "title": "Agentforce & Autonomous Agents",
+    "subtitle": "The future is automated. We build it for you.",
+    "sections": {
+      "whatIs": "What is Agentforce?",
+      "whatIsDesc": "Autonomous agents that handle customer interactions, process automation, and intelligent decision-making without human intervention.",
+      "whyNeeded": "Why Your Business Needs It",
+      "whyNeededDesc": "Reduce operational costs by 60%, accelerate customer response by 10x, and scale without proportional team growth.",
+      "howWeDo": "How We Implement It",
+      "howWeDoDesc": "We architect your data model, train intelligent agents, and ensure compliance with Swiss data protection standards (nDSG)."
+    }
+  },
+  "agentforceExpertise": {
+    "badge": "AGENTIC ENTERPRISE",
+    "title": "The Step to",
+    "titleHighlight": "Agentic Enterprise.",
+    "description": "The era of purely manual work ends here. Waiting is no longer a strategy. Transform rigid departments now into agile, autonomous units. The competitive advantage belongs to those who take the step today.",
+    "roadmapTitle": "The Roadmap",
+    "processSteps": [
+      {
+        "title": "Potential Analysis",
+        "description": "We identify not just gaps, we find the 'High-Impact' processes where autonomy delivers immediate, measurable ROI. We show you what's possible."
+      },
+      {
+        "title": "Agent Design",
+        "description": "We don't build chatbots, we design digital employees. We translate your best practices into algorithms that scale 24/7 for you."
+      },
+      {
+        "title": "Scaling & Go-Live",
+        "description": "Don't start with a Big Bang, start with a precise pilot project. See results in weeks and then roll out autonomy across the entire enterprise."
+      }
+    ],
+    "features": {
+      "decisionPower": "Decision Power",
+      "decisionPowerTitle": "Reasoning Engine",
+      "decisionPowerDesc": "It's no longer science fiction. These agents understand context, weigh options, and make decisions autonomously—often more precisely and faster than humans.",
+      "security": "Security",
+      "securityTitle": "Einstein Trust Layer",
+      "securityDesc": "The biggest obstacle is eliminated: your data stays safe. The Trust Layer guarantees that no sensitive information leaves company boundaries.",
+      "learningCurve": "Learning Curve",
+      "learningCurveTitle": "Learning Systems",
+      "learningCurveDesc": "A human employee needs months of onboarding. Your Agentic Enterprise learns overnight. Every interaction makes the system smarter.",
+      "speed": "Speed",
+      "speedTitle": "Speed as a Weapon",
+      "speedDesc": "While competitors still sort emails, your agent has already solved the problem. Response times in milliseconds are the new standard."
+    }
+  },
+  "customEngineeringSection": {
+    "badge": "CUSTOM ENGINEERING",
+    "headline": "When the Standard Slows You Down",
+    "description": "Don't let 'Out-of-the-Box' limits dictate your strategy. When standard components aren't enough, we engineer custom headless applications. High-performance, intuitive like consumer apps, and seamlessly connected to your Salesforce data. No workarounds. Real code.",
+    "techStackLabel": "// TECH STACK",
+    "expertsReady": "Expert developers ready"
+  },
+  "aboutUsSection": {
+    "badge": "ABOUT US",
+    "title": "Human Strategy,",
+    "titleHighlight": "Intelligent Code",
+    "description": "We merge the precision and reliability of Swiss engineering with the transformative power of artificial intelligence. Our team of strategists, engineers, and AI specialists doesn't just implement technology—we architect solutions that elevate your entire organization.",
+    "stats": {
+      "experience": "15+",
+      "experienceLabel": "Years Combined",
+      "projects": "50+",
+      "projectsLabel": "Projects Delivered",
+      "satisfaction": "100%",
+      "satisfactionLabel": "Client Satisfaction"
+    },
+    "coreValues": {
+      "trustTitle": "Trust",
+      "trustDesc": "Swiss precision and reliability in every project",
+      "innovationTitle": "Innovation",
+      "innovationDesc": "Cutting-edge solutions that drive results",
+      "partnershipTitle": "Partnership",
+      "partnershipDesc": "Long-term relationships built on success"
+    }
+  },
+  "customEngineering": {
+    "badge": "CUSTOM SOLUTIONS",
+    "title": "Custom Engineering",
+    "description": "When off-the-shelf doesn't cut it",
+    "items": [
+      {
+        "title": "Legacy System Integration",
+        "description": "Connect your existing systems seamlessly to modern platforms"
+      },
+      {
+        "title": "Data Architecture",
+        "description": "Build scalable foundations that support growth"
+      },
+      {
+        "title": "API Development",
+        "description": "Custom APIs that power seamless integrations"
+      },
+      {
+        "title": "Security & Compliance",
+        "description": "Enterprise-grade security aligned with Swiss regulations"
+      }
+    ]
+  },
+  "about": {
+    "badge": "WHO WE ARE",
+    "title": "About Us",
+    "subtitle": "Swiss precision meets transformative technology"
+  },
+  "footer": {
+    "description": "Empowering Swiss businesses with intelligent Salesforce architectures, cutting-edge AI strategies, and bespoke web solutions.",
+    "region": "Switzerland",
+    "country": "Switzerland",
+    "languageLabel": "Language / Sprache",
+    "allRightsReserved": "All rights reserved.",
+    "madeIn": "Made in",
+    "headings": {
+      "services": "Services",
+      "company": "Company",
+      "contact": "Contact"
+    },
+    "services": {
+      "salesforceConsulting": "Salesforce Consulting",
+      "aiStrategy": "AI Strategy",
+      "customWebApps": "Custom Web Apps",
+      "agentforceImplementation": "Agentforce Implementation"
+    },
+    "company": {
+      "aboutUs": "About Us",
+      "careers": "Careers",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "legal": {
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "cookiePolicy": "Cookie Policy",
+      "imprint": "Imprint"
+    }
+  },
+  "buttons": {
+    "scheduleConsultation": "Schedule a Consultation",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "viewDetails": "View Details",
+    "exploreMore": "Explore More",
+    "systemCheck": "Start Your Audit",
+    "fullCaseStudy": "Full Case Study"
+  },
+  "common": {
+    "loading": "Loading...",
+    "loadingServices": "Loading services...",
+    "loadingIndustries": "Loading industries...",
+    "loadingFaqs": "Loading FAQs...",
+    "error": "An error occurred",
+    "success": "Success",
+    "cancel": "Cancel",
+    "close": "Close",
+    "readMore": "Read More",
+    "learnMore": "Learn More"
+  },
+  "badges": {
+    "expertise": "OUR EXPERTISE",
+    "aiAutomation": "AI-POWERED AUTOMATION",
+    "custom": "CUSTOM SOLUTIONS",
+    "whoWeAre": "WHO WE ARE",
+    "industryExpertise": "INDUSTRY EXPERTISE",
+    "successStories": "SUCCESS STORIES",
+    "faq": "FAQ"
+  },
+  "header": {
+    "nav": {
+      "services": "Services",
+      "agentforce": "Agentforce",
+      "customEngineering": "Custom Engineering",
+      "industryExpertise": "Industry Expertise",
+      "successStories": "Success Stories",
+      "about": "About"
+    },
+    "cta": "Book Strategy Call"
+  }
+}
