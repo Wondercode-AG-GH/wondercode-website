@@ -36,7 +36,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/static") ||
-    pathname.includes(".") // files like favicon.ico, images, etc.
+    /\.(.*)$/.test(pathname) // FIX: regex instead of includes(".") so bare "/" is never skipped
   ) {
     return NextResponse.next();
   }
@@ -61,7 +61,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except static files and internals
-    "/((?!_next/static|_next/image|favicon.ico|icons|images|locales).*)",
+    // FIX: added .*\\.* to skip files with extensions, ensures bare "/" is always matched
+    "/((?!_next/static|_next/image|favicon.ico|icons|images|locales|.*\\..*).*)",
   ],
 };
