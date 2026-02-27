@@ -79,8 +79,8 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className={`font-bold mb-4 md:mb-6 leading-[0.95] tracking-tight text-white ${
               isEn
-                ? "text-4xl md:text-6xl lg:text-8xl"
-                : "text-4xl md:text-6xl lg:text-8xl"
+                ? "text-3xl md:text-5xl lg:text-7xl"
+                : "text-3xl md:text-5xl lg:text-7xl"
             }`}
           >
             {headlineLines[0]}
