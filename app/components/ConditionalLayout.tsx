@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import Header from './layout/Header';
-import Footer from './layout/Footer';
-import { MobileNavigation } from './layout/MobileNavigation';
+import { usePathname } from "next/navigation";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import { MobileNavigation } from "./layout/MobileNavigation";
 
 export default function ConditionalLayout({
   children,
@@ -11,11 +11,15 @@ export default function ConditionalLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  
+
   // Hide header and footer on service detail pages
-  const hideHeaderFooter = pathname?.startsWith('/services/');
+  const hideHeaderFooter = pathname?.startsWith("/services/");
+  const studios = pathname?.startsWith("/studio/");
 
   if (hideHeaderFooter) {
+    return <>{children}</>;
+  }
+  if (studios) {
     return <>{children}</>;
   }
 
