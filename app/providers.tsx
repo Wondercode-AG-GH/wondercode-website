@@ -10,17 +10,15 @@ interface I18nProviderProps {
 
 export default function I18nProvider({ children, locale }: I18nProviderProps) {
   useEffect(() => {
-    // Priority: URL locale (from [locale] segment) → localStorage → browser language
     const storedLanguage = localStorage.getItem("preferredLanguage");
-    const browserLanguage = navigator.language.split("-")[0];
-    const language =
-      locale || storedLanguage || (browserLanguage === "de" ? "de" : "en");
+    // Priority: URL locale → localStorage → default "de"
+    const language = locale || storedLanguage || "de";
 
     if (i18n.isInitialized) {
       i18n.changeLanguage(language);
     }
 
-    // Keep localStorage in sync with the URL locale
+    // Keep localStorage in sync with URL locale
     if (locale) {
       localStorage.setItem("preferredLanguage", locale);
     }
