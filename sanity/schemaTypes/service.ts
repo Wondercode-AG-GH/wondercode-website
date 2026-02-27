@@ -28,6 +28,14 @@ export default defineType({
     }),
 
     defineField({
+      name: "icon",
+      title: "Icon Name",
+      type: "string",
+      description: "Use icon name like: TrendingUp, Headphones, Shield, Receipt, Heart, Globe, Radio, Settings, Database, Zap, Users, Trophy, Cpu, BarChart3, Rocket, Lock, Code, Cloud, Activity, etc.",
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
       name: "heroSubline",
       title: "Hero Subline (EN)",
       type: "text",
