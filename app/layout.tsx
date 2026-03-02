@@ -8,11 +8,6 @@ const geist = Geist({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "My Company",
-  description: "Professional business website",
-};
-
 export default function RootLayout({
   children,
 }: {
