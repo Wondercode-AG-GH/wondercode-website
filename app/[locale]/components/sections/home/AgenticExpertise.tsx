@@ -205,7 +205,7 @@ export default function AgentforceSplitScreen() {
 
           {/* Right Column: The Tech Specs (Tab Switcher) */}
 
-          {/* Desktop: Split-View Feature Switcher */}
+          {/* Desktop (lg+): Split-View Feature Switcher */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -393,7 +393,7 @@ export default function AgentforceSplitScreen() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Mobile: Horizontal Swipe Cards */}
+          {/* Mobile & Tablet (below lg): Vertical Stacked Cards — NO horizontal scroll */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -402,7 +402,7 @@ export default function AgentforceSplitScreen() {
             className="lg:hidden"
             style={{ position: "relative" }}
           >
-            {/* Section Label for Mobile */}
+            {/* Section Label */}
             <div className="mb-6 text-center">
               <p
                 className="text-sm font-medium uppercase tracking-wider"
@@ -415,167 +415,152 @@ export default function AgentforceSplitScreen() {
               </p>
             </div>
 
-            {/* Swipeable Card Container */}
-            <div
-              className="relative overflow-x-auto scrollbar-hide -mx-5 px-5"
-              style={{ position: "relative" }}
-            >
-              <div
-                className="flex gap-4 pb-6"
-                style={{ width: `${features.length * 100}%` }}
-              >
-                {features.map((feature, index) => {
-                  const FeatureIcon = feature.icon;
-
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      onClick={() => setActiveFeature(index)}
-                      className="flex-shrink-0 rounded-2xl p-6 flex flex-col items-center justify-center text-center"
-                      style={{
-                        position: "relative",
-                        width: "calc(100vw - 60px)",
-                        minHeight: "420px",
-                        backgroundColor:
-                          activeFeature === index
-                            ? "rgba(21, 23, 27, 0.6)"
-                            : "rgba(21, 23, 27, 0.3)",
-                        backdropFilter: "blur(20px)",
-                        border:
-                          activeFeature === index
-                            ? "1px solid rgba(0, 204, 102, 0.3)"
-                            : "1px solid rgba(255, 255, 255, 0.05)",
-                      }}
-                    >
-                      {/* Tab Label */}
-                      <div
-                        className="text-xs font-medium uppercase tracking-wider mb-6"
-                        style={{ color: "#666666" }}
-                      >
-                        {feature.label}
-                      </div>
-
-                      {/* Icon with Glow Effect */}
-                      <motion.div
-                        className="relative mb-6"
-                        style={{ position: "relative" }}
-                        animate={{
-                          scale: activeFeature === index ? 1 : 0.9,
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {/* Glow Background */}
-                        {activeFeature === index && (
-                          <motion.div
-                            className="absolute inset-0 rounded-full blur-2xl"
-                            style={{
-                              position: "absolute",
-                              width: "120px",
-                              height: "120px",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                            }}
-                            animate={{
-                              scale: [1, 1.2, 1],
-                              backgroundColor: [
-                                "rgba(0, 204, 102, 0.3)",
-                                "rgba(0, 204, 102, 0.5)",
-                                "rgba(0, 204, 102, 0.3)",
-                              ],
-                            }}
-                            transition={{
-                              duration: 3,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                            }}
-                          />
-                        )}
-
-                        {/* Icon Container */}
-                        <motion.div
-                          className="relative w-24 h-24 rounded-xl flex items-center justify-center"
-                          style={{
-                            position: "relative",
-                            backgroundColor:
-                              activeFeature === index
-                                ? "rgba(0, 204, 102, 0.15)"
-                                : "rgba(0, 204, 102, 0.05)",
-                            border:
-                              activeFeature === index
-                                ? "2px solid rgba(0, 204, 102, 0.4)"
-                                : "1px solid rgba(0, 204, 102, 0.2)",
-                          }}
-                        >
-                          <FeatureIcon
-                            className="w-12 h-12"
-                            style={{
-                              color:
-                                activeFeature === index ? "#00CC66" : "#669977",
-                            }}
-                          />
-                        </motion.div>
-                      </motion.div>
-
-                      {/* Feature Title */}
-                      <h4
-                        className="text-xl font-bold mb-3"
-                        style={{
-                          color:
-                            activeFeature === index ? "#FFFFFF" : "#999999",
-                        }}
-                      >
-                        {feature.title}
-                      </h4>
-
-                      {/* Feature Description */}
-                      <p
-                        className="text-sm leading-relaxed px-4"
-                        style={{
-                          color:
-                            activeFeature === index
-                              ? "rgba(156, 163, 175, 1)"
-                              : "rgba(156, 163, 175, 0.6)",
-                        }}
-                      >
-                        {feature.description}
-                      </p>
-
-                      {/* Status Badge - Only on active card */}
-                      {activeFeature === index && (
-                        <motion.div
-                          className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
-                          style={{
-                            backgroundColor: "rgba(0, 204, 102, 0.1)",
-                            border: "1px solid rgba(0, 204, 102, 0.3)",
-                          }}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.2 }}
-                        >
-                          <motion.div
-                            className="w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: "#00CC66" }}
-                            animate={{ opacity: [1, 0.5, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          />
-                          <span
-                            className="text-xs font-medium uppercase tracking-wide"
-                            style={{ color: "#00CC66" }}
-                          >
-                            {feature.badge}
-                          </span>
-                        </motion.div>
-                      )}
-                    </motion.div>
-                  );
-                })}
-              </div>
+            {/* Tab Pill Selector */}
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              {features.map((feature, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveFeature(index)}
+                  className="px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wide transition-all duration-300"
+                  style={{
+                    backgroundColor:
+                      activeFeature === index
+                        ? "rgba(0, 204, 102, 0.15)"
+                        : "rgba(255, 255, 255, 0.05)",
+                    border:
+                      activeFeature === index
+                        ? "1px solid rgba(0, 204, 102, 0.4)"
+                        : "1px solid rgba(255, 255, 255, 0.08)",
+                    color: activeFeature === index ? "#00CC66" : "#666666",
+                  }}
+                >
+                  {feature.label}
+                </button>
+              ))}
             </div>
+
+            {/* Single Active Card — full width, no scroll */}
+            <AnimatePresence mode="wait">
+              {features.map((feature, index) => {
+                if (index !== activeFeature) return null;
+                const FeatureIcon = feature.icon;
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.35 }}
+                    className="w-full rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center text-center"
+                    style={{
+                      position: "relative",
+                      minHeight: "360px",
+                      backgroundColor: "rgba(21, 23, 27, 0.6)",
+                      backdropFilter: "blur(20px)",
+                      border: "1px solid rgba(0, 204, 102, 0.3)",
+                    }}
+                  >
+                    {/* Icon with Glow */}
+                    <motion.div
+                      className="relative mb-6"
+                      style={{ position: "relative" }}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.1, duration: 0.4 }}
+                    >
+                      {/* Glow Background */}
+                      <motion.div
+                        className="absolute rounded-full blur-2xl"
+                        style={{
+                          position: "absolute",
+                          width: "120px",
+                          height: "120px",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          backgroundColor: [
+                            "rgba(0, 204, 102, 0.3)",
+                            "rgba(0, 204, 102, 0.5)",
+                            "rgba(0, 204, 102, 0.3)",
+                          ],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+
+                      {/* Icon Container */}
+                      <div
+                        className="relative w-24 h-24 rounded-xl flex items-center justify-center"
+                        style={{
+                          position: "relative",
+                          backgroundColor: "rgba(0, 204, 102, 0.15)",
+                          border: "2px solid rgba(0, 204, 102, 0.4)",
+                        }}
+                      >
+                        <FeatureIcon
+                          className="w-12 h-12"
+                          style={{ color: "#00CC66" }}
+                        />
+                      </div>
+                    </motion.div>
+
+                    {/* Feature Title */}
+                    <motion.h4
+                      className="text-xl sm:text-2xl font-bold mb-3"
+                      style={{ color: "#FFFFFF" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {feature.title}
+                    </motion.h4>
+
+                    {/* Feature Description */}
+                    <motion.p
+                      className="text-sm sm:text-base leading-relaxed max-w-md"
+                      style={{ color: "rgba(156, 163, 175, 1)" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      {feature.description}
+                    </motion.p>
+
+                    {/* Status Badge */}
+                    <motion.div
+                      className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
+                      style={{
+                        backgroundColor: "rgba(0, 204, 102, 0.1)",
+                        border: "1px solid rgba(0, 204, 102, 0.3)",
+                      }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <motion.div
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: "#00CC66" }}
+                        animate={{ opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                      <span
+                        className="text-xs font-medium uppercase tracking-wide"
+                        style={{ color: "#00CC66" }}
+                      >
+                        {feature.badge}
+                      </span>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
 
             {/* Pagination Dots */}
             <div className="flex items-center justify-center gap-2 mt-6">

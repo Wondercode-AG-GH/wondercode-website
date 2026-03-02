@@ -8,7 +8,6 @@ import { LogoMarquee } from "../../LogoMarquee";
 
 export function HeroSection() {
   const { t, i18n } = useTranslation("common");
-  const isEn = i18n.language === "en";
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -30,14 +29,16 @@ export function HeroSection() {
         opacity: heroOpacity,
         scale: heroScale,
       }}
-      className="h-screen flex flex-col pt-20 overflow-hidden relative"
+      // FIX 1: Changed h-screen → min-h-screen so taller German text never
+      // clips the layout. The section grows to fit content if needed.
+      className="min-h-screen flex flex-col pt-20 overflow-hidden relative"
     >
-      {/* Aurora Mesh Gradient Background - Extends to Bottom */}
+      {/* Aurora Mesh Gradient Background */}
       <div className="absolute inset-0" style={{ position: "absolute" }}>
         <AuroraBackground />
       </div>
 
-      {/* Subtle Text Shadow Overlay - for improved readability in center/top */}
+      {/* Subtle Text Shadow Overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -47,22 +48,23 @@ export function HeroSection() {
         }}
       />
 
-      {/* Hero Content - Vertical Stack */}
+      {/* Hero Content */}
       <div className="relative z-10 flex-1 flex flex-col">
-        {/* Headline & Subline - Center-Top */}
-        <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-8 text-center">
+        {/* Center content — overflow-hidden + py padding keeps it from
+            pushing LogoMarquee off screen */}
+        <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-8 text-center py-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full border backdrop-blur-xl mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full border backdrop-blur-xl mb-5 md:mb-7 shrink-0"
             style={{
               backgroundColor: "rgba(0, 204, 102, 0.1)",
               borderColor: "rgba(0, 204, 102, 0.3)",
             }}
           >
             <div
-              className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full"
+              className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full shrink-0"
               style={{ backgroundColor: "#00CC66" }}
             />
             <span
@@ -73,29 +75,28 @@ export function HeroSection() {
             </span>
           </motion.div>
 
+          {/* FIX 2: Removed isEn conditional font sizes — both EN and DE now
+              share the same responsive scale. German longer words wrap
+              naturally via break-words instead of needing a smaller font.
+              This prevents the jarring size difference between languages. */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className={`font-bold mb-4 md:mb-6 leading-[0.95] tracking-tight text-white ${
-              isEn
-                ? "text-4xl md:text-6xl lg:text-8xl"
-                : "text-4xl md:text-6xl lg:text-8xl"
-            }`}
+            className="font-bold mb-4 md:mb-6 leading-[0.95] tracking-tight text-white text-3xl md:text-5xl lg:text-6xl xl:text-7xl break-words max-w-5xl mx-auto shrink-0"
           >
             {headlineLines[0]}
             <br />
+            {/* FIX 3: Replaced motion.span glow (caused hover blink) with
+                plain span + CSS animation */}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
                 {headlineLines[1]}
               </span>
-              <motion.span
-                className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66]"
-                style={{ opacity: 0.3, position: "absolute" }}
-                animate={{
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] pointer-events-none glow-pulse"
+                style={{ position: "absolute", opacity: 0.3 }}
               />
             </span>
             <br />
@@ -105,26 +106,20 @@ export function HeroSection() {
               <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
                 {headlineLines[3]}
               </span>
-              <motion.span
-                className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66]"
-                style={{ opacity: 0.3, position: "absolute" }}
-                animate={{
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] pointer-events-none glow-pulse-delayed"
+                style={{ position: "absolute", opacity: 0.3 }}
               />
             </span>
           </motion.h1>
 
+          {/* FIX 4: Subheading also uses unified font size — no isEn branching */}
           <motion.p
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className={`mb-8 md:mb-12 max-w-5xl mx-auto leading-relaxed ${
-              isEn
-                ? "text-sm md:text-lg lg:text-xl"
-                : "text-base md:text-xl lg:text-2xl"
-            }`}
+            className="mb-7 md:mb-10 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0"
             style={{ color: "#999999" }}
           >
             {t("hero.subtagline")}{" "}
@@ -133,36 +128,32 @@ export function HeroSection() {
             </span>
           </motion.p>
 
-          {/* CTA Buttons - Center */}
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 shrink-0"
             style={{ position: "relative" }}
           >
+            {/* FIX 5: Removed nested motion.div whileHover (caused blink).
+                Using CSS group-hover instead. Removed conflicting boxShadow
+                default "0 0 0px" style. */}
             <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 50px rgba(0, 204, 102, 0.6)",
-              }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="group w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 transition-all relative overflow-hidden"
+              className="group w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_50px_rgba(0,204,102,0.6)]"
               style={{
                 backgroundColor: "#00CC66",
                 color: "#0A0A0A",
                 position: "relative",
-                boxShadow: "0 0 0px rgba(0, 204, 102, 0)",
               }}
             >
               <span className="relative z-10">{t("hero.cta")}</span>
-              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#00ff88] to-[#00CC66]"
-                style={{ position: "absolute" }}
-                initial={{ x: "-100%" }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-r from-[#00ff88] to-[#00CC66] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"
               />
             </motion.button>
 
@@ -182,19 +173,33 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Spacer - Breathing Room */}
-        <div className={isEn ? "h-6 md:h-10" : "h-12 md:h-20"} />
-
-        {/* Integrated Logo Marquee - Bottom Anchor */}
+        {/* FIX 6: shrink-0 on the marquee wrapper means flex will NEVER
+            collapse this row regardless of how tall the content above is.
+            This guarantees LogoMarquee is always visible in both languages. */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="relative z-10 pb-8 md:pb-12"
+          className="relative z-10 shrink-0 pb-8 md:pb-12 pt-4"
         >
           <LogoMarquee />
         </motion.div>
       </div>
+
+      {/* CSS keyframes for glow pulse — pure CSS avoids Framer hover conflicts */}
+      <style>{`
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.3; }
+          50%       { opacity: 0.5; }
+        }
+        .glow-pulse {
+          animation: glowPulse 3s ease-in-out infinite;
+        }
+        .glow-pulse-delayed {
+          animation: glowPulse 3s ease-in-out infinite;
+          animation-delay: 1.5s;
+        }
+      `}</style>
     </motion.section>
   );
 }
