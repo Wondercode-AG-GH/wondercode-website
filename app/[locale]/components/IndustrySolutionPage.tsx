@@ -94,7 +94,7 @@ export default function IndustrySolutionPage({
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
-  const lang = i18n.language?.split("-")[0] ?? "en";
+  // const lang = i18n.language?.split("-")[0] ?? "en";
 
   // Resolve hero icon (string or component)
   const HeroIcon =
@@ -121,7 +121,7 @@ export default function IndustrySolutionPage({
       }}
     >
       {/* Back Navigation */}
-      <div className="fixed top-24 left-8 z-50">
+      {/* <div className="fixed top-24 left-8 z-50">
         <Link href={`/${lang}`}>
           <motion.button
             whileHover={{ x: -4 }}
@@ -135,10 +135,10 @@ export default function IndustrySolutionPage({
             <span>{t("detailPages.backToHome")}</span>
           </motion.button>
         </Link>
-      </div>
+      </div> */}
 
       {/* Language Switcher */}
-      <div className="fixed top-24 right-8 z-50 flex gap-2">
+      {/* <div className="fixed top-24 right-8 z-50 flex gap-2">
         <motion.button
           onClick={() => i18n.changeLanguage("en")}
           className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
@@ -161,7 +161,7 @@ export default function IndustrySolutionPage({
         >
           DE
         </motion.button>
-      </div>
+      </div> */}
 
       {/* 1. CINEMATIC HERO */}
       <section
