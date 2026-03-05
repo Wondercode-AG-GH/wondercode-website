@@ -76,8 +76,8 @@ export function LanguageSwitcher() {
         }}
         initial={false}
         animate={{
-          left: activeLanguage === "DE" ? "3px" : "calc(50% - 0.25px)",
-          width: "30px",
+          left: activeLanguage === "DE" ? "4px" : "calc(50% + 4px)",
+          width: "33px",
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       />

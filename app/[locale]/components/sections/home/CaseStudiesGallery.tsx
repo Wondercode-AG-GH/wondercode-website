@@ -80,7 +80,9 @@ export default function CaseStudiesGallery() {
             style={{ position: "relative" }}
           >
             <div
-              className="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide"
+              className={`flex gap-8 pb-12 snap-x snap-mandatory scrollbar-hide ${
+                caseStudies.length === 1 ? "justify-center" : "overflow-x-auto"
+              }`}
               style={{ position: "relative" }}
             >
               {caseStudies.map((study, index) => (
@@ -94,7 +96,9 @@ export default function CaseStudiesGallery() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.02 }}
-                    className="flex-shrink-0 w-[600px] snap-start group"
+                    className={`flex-shrink-0 w-[600px] snap-start group ${
+                      caseStudies.length === 1 ? "max-w-full" : ""
+                    }`}
                     onViewportEnter={() => setActiveCase(index)}
                     style={{ position: "relative" }}
                   >
@@ -187,18 +191,20 @@ export default function CaseStudiesGallery() {
               ))}
             </div>
 
-            {/* Scroll hint dots */}
-            <div className="flex justify-center gap-2 mt-8">
-              {caseStudies.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveCase(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    activeCase === i ? "w-12 bg-[#00CC66]" : "w-2 bg-white/20"
-                  }`}
-                />
-              ))}
-            </div>
+            {/* Scroll hint dots — only show when more than 1 */}
+            {caseStudies.length > 1 && (
+              <div className="flex justify-center gap-2 mt-8">
+                {caseStudies.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveCase(i)}
+                    className={`h-2 rounded-full transition-all ${
+                      activeCase === i ? "w-12 bg-[#00CC66]" : "w-2 bg-white/20"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         )}
 
@@ -308,11 +314,13 @@ export default function CaseStudiesGallery() {
             ))}
 
             {/* Indicator that there are more stories */}
-            <div className="text-center py-4">
-              <p className="text-sm text-gray-500">
-                + {caseStudies.length - 1} more success stories
-              </p>
-            </div>
+            {caseStudies.length > 1 && (
+              <div className="text-center py-4">
+                <p className="text-sm text-gray-500">
+                  + {caseStudies.length - 1} more success stories
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>

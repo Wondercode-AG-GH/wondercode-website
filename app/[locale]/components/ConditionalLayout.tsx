@@ -17,22 +17,22 @@ export default function ConditionalLayout({
     : pathname;
 
   // Hide header and footer on service detail pages
-  const hideHeaderFooter = normalizedPath?.startsWith("/services/");
+  // const hideHeaderFooter = normalizedPath?.startsWith("/services/");
   const studios = pathname?.startsWith("/studio/");
-  const industry = normalizedPath?.startsWith("/industries/");
-  const caseStudy = normalizedPath?.startsWith("/case-studies/");
-  if (hideHeaderFooter) {
-    return <>{children}</>;
-  }
+  // const industry = normalizedPath?.startsWith("/industries/");
+  // const caseStudy = normalizedPath?.startsWith("/case-studies/");
+  // if (hideHeaderFooter) {
+  //   return <>{children}</>;
+  // }
   if (studios) {
     return <>{children}</>;
   }
-  if (industry) {
-    return <>{children}</>;
-  }
-  if (caseStudy) {
-    return <>{children}</>;
-  }
+  // if (industry) {
+  //   return <>{children}</>;
+  // }
+  // if (caseStudy) {
+  //   return <>{children}</>;
+  // }
 
   return (
     <>

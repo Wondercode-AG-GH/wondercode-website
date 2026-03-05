@@ -127,7 +127,7 @@ export default function ServiceDetailPage({
   const accentColor = "#00CC66";
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
-  const lang = i18n.language?.split("-")[0] ?? "en";
+  // const lang = i18n.language?.split("-")[0] ?? "en";
   // Resolve icon string to actual component (safe: only strings cross server/client boundary)
   const Icon = (iconMap[iconName] ?? Settings) as LucideIcon;
 
@@ -137,7 +137,7 @@ export default function ServiceDetailPage({
       style={{ backgroundColor: "#050505" }}
     >
       {/* Back Navigation */}
-      <div className="fixed top-24 left-8 z-50">
+      {/* <div className="fixed top-24 left-8 z-50">
         <Link href={`/${lang}`}>
           <motion.button
             whileHover={{ x: -4 }}
@@ -151,7 +151,7 @@ export default function ServiceDetailPage({
             <span>{t("detailPages.backToHome")}</span>
           </motion.button>
         </Link>
-      </div>
+      </div> */}
 
       {/* 1. COMPACT HERO - Left/Right Split */}
       <section

@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import { Sparkles, Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../languageSwitcher";
-
 export default function Footer() {
   const { t } = useTranslation("common");
 
@@ -39,21 +38,26 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 mb-12 md:mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="relative w-12 h-12">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00CC66] to-[#00aa55] rounded-xl" />
-                <div className="absolute inset-[2px] bg-[#0A0A0A] rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-[#00CC66]" />
-                </div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold tracking-tight text-white">
+            <div className="mb-6">
+              <svg
+                width="200"
+                height="36"
+                viewBox="0 0 200 36"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-label="Wondercode"
+              >
+                <text
+                  x="0"
+                  y="28"
+                  fill="#00CC66"
+                  fontFamily="'Nunito', 'Poppins', 'Inter', sans-serif"
+                  fontWeight="800"
+                  fontSize="30"
+                  letterSpacing="-0.5"
+                >
                   wondercode
-                </div>
-                <div className="text-[10px] text-gray-500 tracking-wider">
-                  .CH
-                </div>
-              </div>
+                </text>
+              </svg>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed max-w-sm">
               {t("footer.description")}
