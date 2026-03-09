@@ -53,7 +53,7 @@ export function HeroSection() {
         {/* Center content — overflow-hidden + py padding keeps it from
             pushing LogoMarquee off screen */}
         <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-8 text-center py-8">
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -73,7 +73,7 @@ export function HeroSection() {
             >
               {t("hero.badge")}
             </span>
-          </motion.div>
+          </motion.div> */}
 
           {/* FIX 2: Removed isEn conditional font sizes — both EN and DE now
               share the same responsive scale. German longer words wrap
@@ -122,7 +122,9 @@ export function HeroSection() {
             className="mb-7 md:mb-10 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0"
             style={{ color: "#999999" }}
           >
-            {t("hero.subtagline")}{" "}
+            {t("hero.subtagline")} <br />
+            <br />
+            <div>{t("hero.tagline")} </div>
             <span style={{ color: "#00CC66" }}>
               {t("hero.subtaglineHighlight")}
             </span>

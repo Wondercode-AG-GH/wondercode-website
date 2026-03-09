@@ -48,7 +48,7 @@ export default function CustomEngineering() {
             style={{ position: "relative" }}
           >
             {/* Developer Tag */}
-            <div
+            {/* <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border"
               style={{
                 backgroundColor: "rgba(0, 204, 102, 0.05)",
@@ -62,7 +62,7 @@ export default function CustomEngineering() {
               >
                 {t("customEngineeringSection.badge")}
               </span>
-            </div>
+            </div> */}
 
             {/* Headline */}
             <div>
@@ -77,6 +77,20 @@ export default function CustomEngineering() {
                 style={{ color: "rgba(255, 255, 255, 0.6)" }}
               >
                 {t("customEngineeringSection.description")}
+              </p>
+              <br />
+              <p
+                className="text-xl leading-relaxed"
+                style={{ color: "rgba(255, 255, 255, 0.6)" }}
+              >
+                {t("customEngineeringSection.description2")}
+              </p>
+              <br />
+              <p
+                className="text-xl leading-relaxed"
+                style={{ color: "rgba(255, 255, 255, 0.6)" }}
+              >
+                {t("customEngineeringSection.description3")}
               </p>
             </div>
 

@@ -83,7 +83,7 @@ export default function AgentforceSplitScreen() {
           className="text-center mb-12 md:mb-20"
           style={{ position: "relative" }}
         >
-          <div
+          {/* <div
             className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border mb-6 md:mb-8"
             style={{
               backgroundColor: "rgba(0, 204, 102, 0.05)",
@@ -102,7 +102,7 @@ export default function AgentforceSplitScreen() {
             >
               {t("agentforceExpertise.badge")}
             </span>
-          </div>
+          </div> */}
 
           <h2
             className="text-3xl md:text-6xl font-bold mb-3 md:mb-4"
@@ -118,6 +118,13 @@ export default function AgentforceSplitScreen() {
             style={{ color: "rgba(156, 163, 175, 1)" }}
           >
             {t("agentforceExpertise.description")}
+          </p>
+          <br />
+          <p
+            className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed"
+            style={{ color: "rgba(156, 163, 175, 1)" }}
+          >
+            {t("agentforceExpertise.description2")}
           </p>
         </motion.div>
 
