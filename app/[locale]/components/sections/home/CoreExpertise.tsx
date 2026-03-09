@@ -122,7 +122,7 @@ export default function CoreExpertise() {
           className="text-center mb-12 md:mb-16"
           style={{ position: "relative" }}
         >
-          <div
+          {/* <div
             className="inline-flex items-center gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full border backdrop-blur-xl mb-6 md:mb-8"
             style={{
               backgroundColor: "rgba(0, 204, 102, 0.1)",
@@ -137,7 +137,7 @@ export default function CoreExpertise() {
             <span className="text-sm font-medium text-[#00CC66]">
               {t("coreExpertise.salesforceEcosystem.badge")}
             </span>
-          </div>
+          </div> */}
 
           <h2 className="text-6xl md:text-7xl font-bold mb-6 text-white">
             {t("coreExpertise.salesforceEcosystem.title")}{" "}
@@ -147,6 +147,10 @@ export default function CoreExpertise() {
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             {t("coreExpertise.salesforceEcosystem.description")}
+          </p>
+          <br />
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            {t("coreExpertise.salesforceEcosystem.description2")}
           </p>
         </motion.div>
 
@@ -273,7 +277,7 @@ export default function CoreExpertise() {
         </div>
 
         {/* Bottom Status Bar */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -290,7 +294,7 @@ export default function CoreExpertise() {
               </span>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
