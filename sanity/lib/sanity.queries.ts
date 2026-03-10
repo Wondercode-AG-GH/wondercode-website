@@ -21,10 +21,15 @@ export const allServiceSlugsQuery = `
 `;
 
 export const allServicesQuery = `
-  *[_type == "salesforceEcosystem"] | order(_createdAt asc) {
+  *[_type == "salesforceEcosystem"] | order(order asc, _createdAt asc) {
     _id,
+    order,
     title,
     titleDe,
+    listTitle,
+    listTitleDe,
+    listDescription,
+    listDescriptionDe,
     "slug": slug.current,
     icon,
     heroSubline,

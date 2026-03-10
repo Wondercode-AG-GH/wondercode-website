@@ -48,6 +48,18 @@ export default defineType({
         "Use icon name like: Shield, Cloud, Database, AlertTriangle, etc.",
     }),
 
+    defineField({
+      name: "exploreArchitecture",
+      title: "Explore Architecture Button (EN)",
+      type: "string",
+    }),
+
+    defineField({
+      name: "exploreArchitectureDe",
+      title: "Explore Architecture Button (DE)",
+      type: "string",
+    }),
+
     // Context Section
     defineField({
       name: "contextHeadline",
@@ -97,6 +109,27 @@ export default defineType({
 
     // Challenges
     defineField({
+      name: "challengesHeadlineWhite",
+      title: "Challenges Headline - White Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "challengesHeadlineAccent",
+      title: "Challenges Headline - Green Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "challengesHeadlineWhiteDe",
+      title: "Challenges Headline - White Part (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "challengesHeadlineAccentDe",
+      title: "Challenges Headline - Green Part (DE)",
+      type: "string",
+    }),
+
+    defineField({
       name: "challenges",
       title: "Core Challenges",
       type: "array",
@@ -119,6 +152,27 @@ export default defineType({
     }),
 
     // Capability Cards
+    defineField({
+      name: "capabilityHeadlineWhite",
+      title: "Capability Headline - White Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "capabilityHeadlineAccent",
+      title: "Capability Headline - Green Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "capabilityHeadlineWhiteDe",
+      title: "Capability Headline - White Part (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "capabilityHeadlineAccentDe",
+      title: "Capability Headline - Green Part (DE)",
+      type: "string",
+    }),
+
     defineField({
       name: "capabilityCards",
       title: "Capability Cards",
@@ -143,6 +197,27 @@ export default defineType({
     }),
 
     // Use Case / Workflow
+    defineField({
+      name: "applicationHeadlineWhite",
+      title: "Application Headline - White Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "applicationHeadlineAccent",
+      title: "Application Headline - Green Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "applicationHeadlineWhiteDe",
+      title: "Application Headline - White Part (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "applicationHeadlineAccentDe",
+      title: "Application Headline - Green Part (DE)",
+      type: "string",
+    }),
+
     defineField({
       name: "useCaseTitle",
       title: "Use Case Title (EN)",
@@ -177,6 +252,27 @@ export default defineType({
 
     // FAQ
     defineField({
+      name: "faqHeadlineWhite",
+      title: "FAQ Headline - White Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "faqHeadlineAccent",
+      title: "FAQ Headline - Green Part (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "faqHeadlineWhiteDe",
+      title: "FAQ Headline - White Part (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "faqHeadlineAccentDe",
+      title: "FAQ Headline - Green Part (DE)",
+      type: "string",
+    }),
+
+    defineField({
       name: "faqItems",
       title: "FAQ Items",
       type: "array",
@@ -191,6 +287,38 @@ export default defineType({
           ],
         },
       ],
+    }),
+
+    // Ready to Transform CTA
+    defineField({
+      name: "ctaHeadline",
+      title: "CTA Headline (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "ctaHeadlineDe",
+      title: "CTA Headline (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "ctaSubtext",
+      title: "CTA Subtext (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "ctaSubtextDe",
+      title: "CTA Subtext (DE)",
+      type: "text",
+    }),
+    defineField({
+      name: "ctaButtonText",
+      title: "CTA Button Text (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "ctaButtonTextDe",
+      title: "CTA Button Text (DE)",
+      type: "string",
     }),
 
     // SEO

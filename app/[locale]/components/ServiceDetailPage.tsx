@@ -47,11 +47,18 @@ interface ServiceDetailProps {
   definitionHeadlineDe?: string;
   definitionText: string;
   definitionTextDe: string;
-  scopeHeadline?: string;
-  scopeHeadlineDe?: string;
+  scopeHeadlineWhite?: string;
+  scopeHeadlineAccent?: string;
+  scopeHeadlineWhiteDe?: string;
+  scopeHeadlineAccentDe?: string;
+  benefitList?: { text: string; textDe?: string }[];
+  heroCta?: string;
+  heroCtaDe?: string;
   scopeCards: ScopeCard[];
-  timelineHeadline?: string;
-  timelineHeadlineDe?: string;
+  timelineHeadlineWhite?: string;
+  timelineHeadlineAccent?: string;
+  timelineHeadlineWhiteDe?: string;
+  timelineHeadlineAccentDe?: string;
   timelineSubline?: string;
   timelineSublineDe?: string;
   timelineSteps?: TimelineStep[];
@@ -88,6 +95,22 @@ interface ServiceDetailProps {
     efficiencyLabel?: string;
     efficiencyLabelDe?: string;
   };
+  caseStudyEyebrow?: string;
+  caseStudyEyebrowDe?: string;
+  caseStudyHeadline?: string;
+  caseStudyHeadlineDe?: string;
+  caseStudySubline?: string;
+  caseStudySublineDe?: string;
+  caseStudyProblem?: string;
+  caseStudyProblemDe?: string;
+  caseStudySolution?: string;
+  caseStudySolutionDe?: string;
+  caseStudyResult?: string;
+  caseStudyResultDe?: string;
+  caseStudyQuoteText?: string;
+  caseStudyQuoteTextDe?: string;
+  caseStudyQuoteAuthor?: string;
+  caseStudyQuoteAuthorDe?: string;
 }
 
 export default function ServiceDetailPage({
@@ -102,11 +125,18 @@ export default function ServiceDetailPage({
   definitionHeadlineDe,
   definitionText,
   definitionTextDe,
-  scopeHeadline,
-  scopeHeadlineDe,
+  benefitList,
+  heroCta,
+  heroCtaDe,
+  scopeHeadlineWhite,
+  scopeHeadlineAccent,
+  scopeHeadlineWhiteDe,
+  scopeHeadlineAccentDe,
   scopeCards,
-  timelineHeadline,
-  timelineHeadlineDe,
+  timelineHeadlineWhite,
+  timelineHeadlineAccent,
+  timelineHeadlineWhiteDe,
+  timelineHeadlineAccentDe,
   timelineSubline,
   timelineSublineDe,
   timelineSteps,
@@ -122,6 +152,22 @@ export default function ServiceDetailPage({
   ctaButtonSecondaryDe,
   heroImage,
   caseStudyMetrics,
+  caseStudyEyebrow,
+  caseStudyEyebrowDe,
+  caseStudyHeadline,
+  caseStudyHeadlineDe,
+  caseStudySubline,
+  caseStudySublineDe,
+  caseStudyProblem,
+  caseStudyProblemDe,
+  caseStudySolution,
+  caseStudySolutionDe,
+  caseStudyResult,
+  caseStudyResultDe,
+  caseStudyQuoteText,
+  caseStudyQuoteTextDe,
+  caseStudyQuoteAuthor,
+  caseStudyQuoteAuthorDe,
 }: ServiceDetailProps) {
   const { t, i18n } = useTranslation("common");
   const accentColor = "#00CC66";
@@ -309,72 +355,51 @@ export default function ServiceDetailPage({
 
               {/* Benefit List with Green Checkmarks */}
               <div className="space-y-4 mb-10">
-                <div className="flex items-start gap-3">
-                  <div
-                    className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
-                    style={{ backgroundColor: `${accentColor}20` }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path
-                        d="M11.6667 3.5L5.25 9.91667L2.33334 7"
-                        stroke={accentColor}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                {(benefitList && benefitList.length > 0
+                  ? benefitList
+                  : [
+                      {
+                        text: "Default Benefit 1",
+                        textDe: "Strikter Bauplan statt 'agilem' Chaos",
+                      },
+                      {
+                        text: "Default Benefit 2",
+                        textDe: "Skalierbare Datenmodelle ab Tag 1",
+                      },
+                      {
+                        text: "Default Benefit 3",
+                        textDe: "Keine technischen Schulden",
+                      },
+                    ]
+                ).map((benefit, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div
+                      className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
+                      style={{ backgroundColor: `${accentColor}20` }}
+                    >
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                      >
+                        <path
+                          d="M11.6667 3.5L5.25 9.91667L2.33334 7"
+                          stroke={accentColor}
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <p
+                      className="text-base leading-relaxed"
+                      style={{ color: "#CCCCCC" }}
+                    >
+                      {i18n.language === "de" ? benefit.textDe : benefit.text}
+                    </p>
                   </div>
-                  <p
-                    className="text-base leading-relaxed"
-                    style={{ color: "#CCCCCC" }}
-                  >
-                    Strikter Bauplan statt "agilem" Chaos
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div
-                    className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
-                    style={{ backgroundColor: `${accentColor}20` }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path
-                        d="M11.6667 3.5L5.25 9.91667L2.33334 7"
-                        stroke={accentColor}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <p
-                    className="text-base leading-relaxed"
-                    style={{ color: "#CCCCCC" }}
-                  >
-                    Skalierbare Datenmodelle ab Tag 1
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div
-                    className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
-                    style={{ backgroundColor: `${accentColor}20` }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path
-                        d="M11.6667 3.5L5.25 9.91667L2.33334 7"
-                        stroke={accentColor}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <p
-                    className="text-base leading-relaxed"
-                    style={{ color: "#CCCCCC" }}
-                  >
-                    Keine technischen Schulden
-                  </p>
-                </div>
+                ))}
               </div>
 
               {/* CTA Buttons */}
@@ -391,7 +416,9 @@ export default function ServiceDetailPage({
                     color: "#050505",
                   }}
                 >
-                  Strategie-Gespräch buchen
+                  {i18n.language === "de"
+                    ? heroCtaDe || "Strategie-Gespräch buchen"
+                    : heroCta || "Book Strategy Session"}
                   <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </div>
@@ -749,10 +776,21 @@ export default function ServiceDetailPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              {i18n.language === "en" ? "Included in the " : "Im "}
-              <span style={{ color: accentColor }}>
-                {i18n.language === "en" ? "Package" : "Paket enthalten"}
-              </span>
+              {i18n.language === "de" ? (
+                <>
+                  {scopeHeadlineWhiteDe || "Im "}{" "}
+                  <span style={{ color: accentColor }}>
+                    {scopeHeadlineAccentDe || "Paket enthalten"}
+                  </span>
+                </>
+              ) : (
+                <>
+                  {scopeHeadlineWhite || "Included in the "}{" "}
+                  <span style={{ color: accentColor }}>
+                    {scopeHeadlineAccent || "Package"}
+                  </span>
+                </>
+              )}
             </h2>
           </motion.div>
 
@@ -851,10 +889,21 @@ export default function ServiceDetailPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span style={{ color: accentColor }}>4-Week</span>{" "}
-              {i18n.language === "en"
-                ? "Implementation Process"
-                : "Implementierungsprozess"}
+              {i18n.language === "de" ? (
+                <>
+                  <span style={{ color: accentColor }}>
+                    {timelineHeadlineAccentDe || "4-Week"}
+                  </span>{" "}
+                  {timelineHeadlineWhiteDe || "Implementierungsprozess"}
+                </>
+              ) : (
+                <>
+                  <span style={{ color: accentColor }}>
+                    {timelineHeadlineAccent || "4-Week"}
+                  </span>{" "}
+                  {timelineHeadlineWhite || "Implementation Process"}
+                </>
+              )}
             </h2>
           </motion.div>
 
@@ -967,12 +1016,16 @@ export default function ServiceDetailPage({
                   color: accentColor,
                 }}
               >
-                CASE STUDY
+                {i18n.language === "de"
+                  ? caseStudyEyebrowDe || "CASE STUDY"
+                  : caseStudyEyebrow || "CASE STUDY"}
               </div>
 
               {/* Headline */}
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Proof of Execution.
+                {i18n.language === "de"
+                  ? caseStudyHeadlineDe || "Proof of Execution."
+                  : caseStudyHeadline || "Proof of Execution."}
               </h2>
 
               {/* Subline */}
@@ -980,7 +1033,11 @@ export default function ServiceDetailPage({
                 className="text-2xl mb-8 leading-relaxed"
                 style={{ color: "#CCCCCC" }}
               >
-                Wie SwissMedTech Solutions in 28 Tagen skalierte.
+                {i18n.language === "de"
+                  ? caseStudySublineDe ||
+                    "Wie Case Study Solutions in 28 Tagen skalierte."
+                  : caseStudySubline ||
+                    "How Case Study Solutions scaled in 28 days."}
               </p>
 
               {/* Story Content Block */}
@@ -989,30 +1046,32 @@ export default function ServiceDetailPage({
                   className="text-base leading-relaxed"
                   style={{ color: "#999999" }}
                 >
-                  <strong style={{ color: "#E5E5E5" }}>Das Problem:</strong> Ein
-                  schnell wachsendes Schweizer MedTech-Unternehmen verlor die
-                  Übersicht über Leads und Opportunities. Excel-Sheets wurden
-                  zum Flaschenhals, Sales-Daten waren inkonsistent, und Reports
-                  dauerten Tage statt Minuten.
+                  <strong style={{ color: "#E5E5E5" }}>
+                    {i18n.language === "de" ? "Das Problem:" : "The Problem:"}
+                  </strong>{" "}
+                  {i18n.language === "de"
+                    ? caseStudyProblemDe
+                    : caseStudyProblem}
                 </p>
                 <p
                   className="text-base leading-relaxed"
                   style={{ color: "#999999" }}
                 >
-                  <strong style={{ color: "#E5E5E5" }}>Die Lösung:</strong> Mit
-                  dem Sales Cloud Quick Start Package implementierten wir in
-                  genau 4 Wochen ein vollständig funktionales Salesforce-System
-                  – inklusive Custom Objects, Automatisierungen, Reports und
-                  User-Training.
+                  <strong style={{ color: "#E5E5E5" }}>
+                    {i18n.language === "de" ? "Die Lösung:" : "The Solution:"}
+                  </strong>{" "}
+                  {i18n.language === "de"
+                    ? caseStudySolutionDe
+                    : caseStudySolution}
                 </p>
                 <p
                   className="text-base leading-relaxed"
                   style={{ color: "#999999" }}
                 >
-                  <strong style={{ color: "#E5E5E5" }}>Das Ergebnis:</strong>{" "}
-                  Innerhalb eines Monats konnte das gesamte Sales-Team nahtlos
-                  arbeiten. Keine Datensilos mehr, keine manuellen Workarounds –
-                  nur ein skalierbares System, das mit dem Unternehmen wächst.
+                  <strong style={{ color: "#E5E5E5" }}>
+                    {i18n.language === "de" ? "Das Ergebnis:" : "The Result:"}
+                  </strong>{" "}
+                  {i18n.language === "de" ? caseStudyResultDe : caseStudyResult}
                 </p>
               </div>
 
@@ -1028,14 +1087,20 @@ export default function ServiceDetailPage({
                   className="text-lg italic mb-3 leading-relaxed"
                   style={{ color: "#FFFFFF" }}
                 >
-                  "Wondercode hat uns gezeigt, dass es nur eine Frage der
-                  Architektur ist. Wir waren pünktlich und im Budget live."
+                  "
+                  {i18n.language === "de"
+                    ? caseStudyQuoteTextDe
+                    : caseStudyQuoteText}
+                  "
                 </p>
                 <p
                   className="text-sm font-semibold"
                   style={{ color: "#999999" }}
                 >
-                  — COO, SwissMedTech Solutions
+                  —{" "}
+                  {i18n.language === "de"
+                    ? caseStudyQuoteAuthorDe
+                    : caseStudyQuoteAuthor}
                 </p>
               </div>
             </motion.div>

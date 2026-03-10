@@ -74,10 +74,37 @@ export default async function ServicePage({ params }: Props) {
       definitionText={service.definitionText}
       definitionTextDe={service.definitionTextDe}
       scopeCards={scopeCardsWithIcons}
+      scopeHeadlineWhite={service.scopeHeadlineWhite}
+      scopeHeadlineAccent={service.scopeHeadlineAccent}
+      scopeHeadlineWhiteDe={service.scopeHeadlineWhiteDe}
+      scopeHeadlineAccentDe={service.scopeHeadlineAccentDe}
+      timelineHeadlineWhite={service.timelineHeadlineWhite}
+      timelineHeadlineAccent={service.timelineHeadlineAccent}
+      timelineHeadlineWhiteDe={service.timelineHeadlineWhiteDe}
+      timelineHeadlineAccentDe={service.timelineHeadlineAccentDe}
+      benefitList={service.benefitList || []}
+      heroCta={service.heroCta}
+      heroCtaDe={service.heroCtaDe}
       targetAudience={service.targetAudience || []}
       faqItems={service.faqItems || []}
       heroImage={service.heroImage}
       caseStudyMetrics={service.caseStudyMetrics || {}}
+      caseStudyEyebrow={service.caseStudyEyebrow}
+      caseStudyEyebrowDe={service.caseStudyEyebrowDe}
+      caseStudyHeadline={service.caseStudyHeadline}
+      caseStudyHeadlineDe={service.caseStudyHeadlineDe}
+      caseStudySubline={service.caseStudySubline}
+      caseStudySublineDe={service.caseStudySublineDe}
+      caseStudyProblem={service.caseStudyProblem}
+      caseStudyProblemDe={service.caseStudyProblemDe}
+      caseStudySolution={service.caseStudySolution}
+      caseStudySolutionDe={service.caseStudySolutionDe}
+      caseStudyResult={service.caseStudyResult}
+      caseStudyResultDe={service.caseStudyResultDe}
+      caseStudyQuoteText={service.caseStudyQuoteText}
+      caseStudyQuoteTextDe={service.caseStudyQuoteTextDe}
+      caseStudyQuoteAuthor={service.caseStudyQuoteAuthor}
+      caseStudyQuoteAuthorDe={service.caseStudyQuoteAuthorDe}
     />
   );
 }
