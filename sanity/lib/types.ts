@@ -19,8 +19,13 @@ export interface FAQItem {
 }
 
 export interface Service {
+  order?: number;
   title: string;
   titleDe?: string;
+  listTitle?: string;
+  listTitleDe?: string;
+  listDescription?: string;
+  listDescriptionDe?: string;
   slug: { current: string };
   heroSubline?: string;
   heroSublineDe?: string;

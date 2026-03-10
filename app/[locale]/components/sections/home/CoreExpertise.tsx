@@ -11,6 +11,10 @@ interface Service {
   _id: string;
   title: string;
   titleDe: string;
+  listTitle?: string;
+  listTitleDe?: string;
+  listDescription?: string;
+  listDescriptionDe?: string;
   slug: string;
   icon?: string;
   heroSubline: string;
@@ -46,11 +50,13 @@ export default function CoreExpertise() {
           // Select title and description based on current language
           const isGerman = i18n.language === "de";
           const title = isGerman
-            ? service.titleDe || service.title
-            : service.title;
+            ? service.listTitleDe || service.titleDe || service.title
+            : service.listTitle || service.title;
           const description = isGerman
-            ? service.heroSublineDe || service.heroSubline
-            : service.heroSubline;
+            ? service.listDescriptionDe ||
+              service.heroSublineDe ||
+              service.heroSubline
+            : service.listDescription || service.heroSubline;
 
           const lang = i18n.language?.split("-")[0] ?? "en";
 

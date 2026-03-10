@@ -7,6 +7,14 @@ export default defineType({
   fields: [
     // Basic Info
     defineField({
+      name: "order",
+      title: "Display Order",
+      type: "number",
+      description:
+        "Order in which services appear (lower numbers appear first)",
+    }),
+
+    defineField({
       name: "title",
       title: "Service Name (EN)",
       type: "string",
@@ -17,6 +25,32 @@ export default defineType({
       name: "titleDe",
       title: "Service Name (DE)",
       type: "string",
+    }),
+
+    // Listing Page Info (Landing Page)
+    defineField({
+      name: "listTitle",
+      title: "Listing Title (EN)",
+      type: "string",
+      description: "Title shown on the services listing/landing page",
+    }),
+    defineField({
+      name: "listTitleDe",
+      title: "Listing Title (DE)",
+      type: "string",
+      description: "Titel auf der Service-Übersichtsseite",
+    }),
+    defineField({
+      name: "listDescription",
+      title: "Listing Description (EN)",
+      type: "text",
+      description: "Description shown on the services listing/landing page",
+    }),
+    defineField({
+      name: "listDescriptionDe",
+      title: "Listing Description (DE)",
+      type: "text",
+      description: "Beschreibung auf der Service-Übersichtsseite",
     }),
 
     defineField({

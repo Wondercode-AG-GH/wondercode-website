@@ -61,11 +61,35 @@ interface IndustrySolutionProps {
     crop?: any;
   };
   challenges: Challenge[];
+  challengesHeadlineWhite?: string;
+  challengesHeadlineAccent?: string;
+  challengesHeadlineWhiteDe?: string;
+  challengesHeadlineAccentDe?: string;
   capabilityCards: CapabilityCard[];
+  capabilityHeadlineWhite?: string;
+  capabilityHeadlineAccent?: string;
+  capabilityHeadlineWhiteDe?: string;
+  capabilityHeadlineAccentDe?: string;
   useCaseTitle: string;
   useCaseTitleDe: string;
+  applicationHeadlineWhite?: string;
+  applicationHeadlineAccent?: string;
+  applicationHeadlineWhiteDe?: string;
+  applicationHeadlineAccentDe?: string;
   workflowSteps: WorkflowStep[];
   faqItems: FAQItem[];
+  faqHeadlineWhite?: string;
+  faqHeadlineAccent?: string;
+  faqHeadlineWhiteDe?: string;
+  faqHeadlineAccentDe?: string;
+  exploreArchitecture?: string;
+  exploreArchitectureDe?: string;
+  ctaHeadline?: string;
+  ctaHeadlineDe?: string;
+  ctaSubtext?: string;
+  ctaSubtextDe?: string;
+  ctaButtonText?: string;
+  ctaButtonTextDe?: string;
   accentColor?: string;
 }
 
@@ -83,11 +107,35 @@ export default function IndustrySolutionPage({
   contextParagraph2De,
   heroImage,
   challenges,
+  challengesHeadlineWhite,
+  challengesHeadlineAccent,
+  challengesHeadlineWhiteDe,
+  challengesHeadlineAccentDe,
   capabilityCards,
+  capabilityHeadlineWhite,
+  capabilityHeadlineAccent,
+  capabilityHeadlineWhiteDe,
+  capabilityHeadlineAccentDe,
   useCaseTitle,
   useCaseTitleDe,
+  applicationHeadlineWhite,
+  applicationHeadlineAccent,
+  applicationHeadlineWhiteDe,
+  applicationHeadlineAccentDe,
   workflowSteps,
   faqItems,
+  faqHeadlineWhite,
+  faqHeadlineAccent,
+  faqHeadlineWhiteDe,
+  faqHeadlineAccentDe,
+  exploreArchitecture,
+  exploreArchitectureDe,
+  ctaHeadline,
+  ctaHeadlineDe,
+  ctaSubtext,
+  ctaSubtextDe,
+  ctaButtonText,
+  ctaButtonTextDe,
   accentColor = "#00CC66",
 }: IndustrySolutionProps) {
   const { t, i18n } = useTranslation("common");
@@ -226,7 +274,11 @@ export default function IndustrySolutionPage({
                   color: "#050505",
                 }}
               >
-                {t("industryDetail.exploreArchitecture")}
+                {i18n.language === "de"
+                  ? exploreArchitectureDe ||
+                    t("industryDetail.exploreArchitecture")
+                  : exploreArchitecture ||
+                    t("industryDetail.exploreArchitecture")}
                 <ArrowRight className="w-6 h-6" />
               </motion.button>
             </motion.div>
@@ -420,10 +472,21 @@ export default function IndustrySolutionPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-5xl md:text-6xl font-bold">
-              {i18n.language === "en" ? "Core " : "Kern-"}
-              <span style={{ color: accentColor }}>
-                {i18n.language === "en" ? "Challenges" : "Herausforderungen"}
-              </span>
+              {i18n.language === "de" ? (
+                <>
+                  {challengesHeadlineWhiteDe || "Kern-"}
+                  <span style={{ color: accentColor }}>
+                    {challengesHeadlineAccentDe || "Herausforderungen"}
+                  </span>
+                </>
+              ) : (
+                <>
+                  {challengesHeadlineWhite || "Core "}
+                  <span style={{ color: accentColor }}>
+                    {challengesHeadlineAccent || "Challenges"}
+                  </span>
+                </>
+              )}
             </h2>
           </motion.div>
 
@@ -495,10 +558,21 @@ export default function IndustrySolutionPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-5xl md:text-6xl font-bold">
-              {i18n.language === "en" ? "Engineered for " : "Entwickelt für "}
-              <span style={{ color: accentColor }}>
-                {i18n.language === "en" ? industryName : industryNameDe}
-              </span>
+              {i18n.language === "de" ? (
+                <>
+                  {capabilityHeadlineWhiteDe || "Entwickelt für "}
+                  <span style={{ color: accentColor }}>
+                    {capabilityHeadlineAccentDe || industryNameDe}
+                  </span>
+                </>
+              ) : (
+                <>
+                  {capabilityHeadlineWhite || "Engineered for "}
+                  <span style={{ color: accentColor }}>
+                    {capabilityHeadlineAccent || industryName}
+                  </span>
+                </>
+              )}
             </h2>
           </motion.div>
 
@@ -580,10 +654,21 @@ export default function IndustrySolutionPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-5xl md:text-6xl font-bold mb-4">
-              {i18n.language === "en" ? "Real-World " : "Reale "}
-              <span style={{ color: accentColor }}>
-                {i18n.language === "en" ? "Application" : "Anwendung"}
-              </span>
+              {i18n.language === "de" ? (
+                <>
+                  {applicationHeadlineWhiteDe || "Reale "}
+                  <span style={{ color: accentColor }}>
+                    {applicationHeadlineAccentDe || "Anwendung"}
+                  </span>
+                </>
+              ) : (
+                <>
+                  {applicationHeadlineWhite || "Real-World "}
+                  <span style={{ color: accentColor }}>
+                    {applicationHeadlineAccent || "Application"}
+                  </span>
+                </>
+              )}
             </h2>
             <p className="text-xl" style={{ color: "#BBBBBB" }}>
               {i18n.language === "en" ? useCaseTitle : useCaseTitleDe}
@@ -717,10 +802,21 @@ export default function IndustrySolutionPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-5xl md:text-6xl font-bold">
-              {i18n.language === "en" ? "Common " : "Häufige "}
-              <span style={{ color: accentColor }}>
-                {i18n.language === "en" ? "Questions" : "Fragen"}
-              </span>
+              {i18n.language === "de" ? (
+                <>
+                  {faqHeadlineWhiteDe || "Häufige "}
+                  <span style={{ color: accentColor }}>
+                    {faqHeadlineAccentDe || "Fragen"}
+                  </span>
+                </>
+              ) : (
+                <>
+                  {faqHeadlineWhite || "Common "}
+                  <span style={{ color: accentColor }}>
+                    {faqHeadlineAccent || "Questions"}
+                  </span>
+                </>
+              )}
             </h2>
           </motion.div>
 
@@ -803,14 +899,16 @@ export default function IndustrySolutionPage({
             style={{ position: "relative" }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              {i18n.language === "en"
-                ? "Ready to Transform?"
-                : "Bereit zu transformieren?"}
+              {i18n.language === "de"
+                ? ctaHeadlineDe || "Bereit zu transformieren?"
+                : ctaHeadline || "Ready to Transform?"}
             </h2>
             <p className="text-xl mb-12" style={{ color: "#BBBBBB" }}>
-              {i18n.language === "en"
-                ? `Let's architect your ${industryName.toLowerCase()} solution.`
-                : `Lassen Sie uns Ihre ${industryNameDe}-Lösung konzipieren.`}
+              {i18n.language === "de"
+                ? ctaSubtextDe ||
+                  `Lassen Sie uns Ihre ${industryNameDe}-Lösung konzipieren.`
+                : ctaSubtext ||
+                  `Let's architect your ${industryName.toLowerCase()} solution.`}
             </p>
 
             <motion.button
@@ -825,9 +923,9 @@ export default function IndustrySolutionPage({
                 color: "#050505",
               }}
             >
-              {i18n.language === "en"
-                ? "Schedule Architecture Review"
-                : "Architektur-Review vereinbaren"}
+              {i18n.language === "de"
+                ? ctaButtonTextDe || "Architektur-Review vereinbaren"
+                : ctaButtonText || "Schedule Architecture Review"}
               <ArrowRight className="w-6 h-6" />
             </motion.button>
           </motion.div>

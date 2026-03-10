@@ -83,12 +83,36 @@ export default async function IndustryPage({ params }: Props) {
       contextParagraph2={industry.contextParagraph2}
       contextParagraph2De={industry.contextParagraph2De}
       heroImage={industry.heroImage}
+      exploreArchitecture={industry.exploreArchitecture}
+      exploreArchitectureDe={industry.exploreArchitectureDe}
       challenges={challengesWithIcons}
+      challengesHeadlineWhite={industry.challengesHeadlineWhite}
+      challengesHeadlineAccent={industry.challengesHeadlineAccent}
+      challengesHeadlineWhiteDe={industry.challengesHeadlineWhiteDe}
+      challengesHeadlineAccentDe={industry.challengesHeadlineAccentDe}
       capabilityCards={capabilityCardsWithIcons}
+      capabilityHeadlineWhite={industry.capabilityHeadlineWhite}
+      capabilityHeadlineAccent={industry.capabilityHeadlineAccent}
+      capabilityHeadlineWhiteDe={industry.capabilityHeadlineWhiteDe}
+      capabilityHeadlineAccentDe={industry.capabilityHeadlineAccentDe}
       useCaseTitle={industry.useCaseTitle}
       useCaseTitleDe={industry.useCaseTitleDe}
+      applicationHeadlineWhite={industry.applicationHeadlineWhite}
+      applicationHeadlineAccent={industry.applicationHeadlineAccent}
+      applicationHeadlineWhiteDe={industry.applicationHeadlineWhiteDe}
+      applicationHeadlineAccentDe={industry.applicationHeadlineAccentDe}
       workflowSteps={industry.workflowSteps || []}
       faqItems={industry.faqItems || []}
+      faqHeadlineWhite={industry.faqHeadlineWhite}
+      faqHeadlineAccent={industry.faqHeadlineAccent}
+      faqHeadlineWhiteDe={industry.faqHeadlineWhiteDe}
+      faqHeadlineAccentDe={industry.faqHeadlineAccentDe}
+      ctaHeadline={industry.ctaHeadline}
+      ctaHeadlineDe={industry.ctaHeadlineDe}
+      ctaSubtext={industry.ctaSubtext}
+      ctaSubtextDe={industry.ctaSubtextDe}
+      ctaButtonText={industry.ctaButtonText}
+      ctaButtonTextDe={industry.ctaButtonTextDe}
       accentColor="#00CC66"
     />
   );
