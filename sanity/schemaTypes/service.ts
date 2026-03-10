@@ -60,6 +60,86 @@ export default defineType({
       type: "text",
     }),
 
+    // Section Headlines
+    defineField({
+      name: "scopeHeadlineWhite",
+      title: "Scope Section Headline - White Part (EN)",
+      type: "string",
+      description: "e.g. 'Included in the '",
+    }),
+    defineField({
+      name: "scopeHeadlineAccent",
+      title: "Scope Section Headline - Green Part (EN)",
+      type: "string",
+      description: "e.g. 'Package'",
+    }),
+    defineField({
+      name: "scopeHeadlineWhiteDe",
+      title: "Scope Section Headline - White Part (DE)",
+      type: "string",
+      description: "e.g. 'Im '",
+    }),
+    defineField({
+      name: "scopeHeadlineAccentDe",
+      title: "Scope Section Headline - Green Part (DE)",
+      type: "string",
+      description: "e.g. 'Paket enthalten'",
+    }),
+
+    defineField({
+      name: "timelineHeadlineAccent",
+      title: "Timeline Section Headline - Green Part (EN)",
+      type: "string",
+      description: "e.g. '4-Week'",
+    }),
+    defineField({
+      name: "timelineHeadlineWhite",
+      title: "Timeline Section Headline - White Part (EN)",
+      type: "string",
+      description: "e.g. ' Implementation Process'",
+    }),
+    defineField({
+      name: "timelineHeadlineAccentDe",
+      title: "Timeline Section Headline - Green Part (DE)",
+      type: "string",
+      description: "e.g. '4-Week'",
+    }),
+    defineField({
+      name: "timelineHeadlineWhiteDe",
+      title: "Timeline Section Headline - White Part (DE)",
+      type: "string",
+      description: "e.g. ' Implementierungsprozess'",
+    }),
+
+    // Hero Benefit List
+    defineField({
+      name: "benefitList",
+      title: "Hero Benefit List",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "text", title: "Text (EN)", type: "string" },
+            { name: "textDe", title: "Text (DE)", type: "string" },
+          ],
+        },
+      ],
+    }),
+
+    // Hero CTA
+    defineField({
+      name: "heroCta",
+      title: "Hero CTA Button (EN)",
+      type: "string",
+    }),
+
+    defineField({
+      name: "heroCtaDe",
+      title: "Hero CTA Button (DE)",
+      type: "string",
+    }),
+
     // Scope Cards
     defineField({
       name: "scopeCards",
@@ -126,6 +206,88 @@ export default defineType({
       options: { hotspot: true },
       description:
         "Blueprint/Architecture visualization image for the right side of hero section",
+    }),
+
+    // Case Study Text Content
+    defineField({
+      name: "caseStudyEyebrow",
+      title: "Case Study Eyebrow Badge (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "caseStudyEyebrowDe",
+      title: "Case Study Eyebrow Badge (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "caseStudyHeadline",
+      title: "Case Study Headline (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "caseStudyHeadlineDe",
+      title: "Case Study Headline (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "caseStudySubline",
+      title: "Case Study Subline (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudySublineDe",
+      title: "Case Study Subline (DE)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudyProblem",
+      title: "Case Study Problem (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudyProblemDe",
+      title: "Case Study Problem (DE)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudySolution",
+      title: "Case Study Solution (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudySolutionDe",
+      title: "Case Study Solution (DE)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudyResult",
+      title: "Case Study Result (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudyResultDe",
+      title: "Case Study Result (DE)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudyQuoteText",
+      title: "Case Study Quote Text (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudyQuoteTextDe",
+      title: "Case Study Quote Text (DE)",
+      type: "text",
+    }),
+    defineField({
+      name: "caseStudyQuoteAuthor",
+      title: "Case Study Quote Author (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "caseStudyQuoteAuthorDe",
+      title: "Case Study Quote Author (DE)",
+      type: "string",
     }),
 
     // Case Study Metrics
