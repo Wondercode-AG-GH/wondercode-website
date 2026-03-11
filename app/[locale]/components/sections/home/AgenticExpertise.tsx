@@ -1,4 +1,5 @@
 "use client";
+import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Search,
@@ -8,62 +9,154 @@ import {
   Shield,
   TrendingUp,
   Zap,
+  Settings,
 } from "lucide-react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { iconMap } from "@/sanity/lib/iconMap";
+
+interface AgenticExpertiseData {
+  title?: string;
+  titleDe?: string;
+  titleHighlight?: string;
+  titleHighlightDe?: string;
+  description1?: string;
+  description1De?: string;
+  description2?: string;
+  description2De?: string;
+  roadmapTitle?: string;
+  roadmapTitleDe?: string;
+  roadmapSubline?: string;
+  roadmapSublineDe?: string;
+  processSteps?: any[];
+  techSpecsLabel?: string;
+  techSpecsLabelDe?: string;
+  techSpecsSubline?: string;
+  techSpecsSublineDe?: string;
+  features?: any[];
+}
 
 export default function AgentforceSplitScreen() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const [activeFeature, setActiveFeature] = useState(0);
+  const [data, setData] = useState<AgenticExpertiseData | null>(null);
 
-  const processSteps = [
-    {
-      icon: Search,
-      title: t("agentforceExpertise.processSteps.0.title"),
-      description: t("agentforceExpertise.processSteps.0.description"),
-    },
-    {
-      icon: Cpu,
-      title: t("agentforceExpertise.processSteps.1.title"),
-      description: t("agentforceExpertise.processSteps.1.description"),
-    },
-    {
-      icon: Rocket,
-      title: t("agentforceExpertise.processSteps.2.title"),
-      description: t("agentforceExpertise.processSteps.2.description"),
-    },
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/agentic-expertise");
+        if (res.ok) {
+          const fetchedData = await res.json();
+          setData(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching agentic expertise data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
-  const features = [
-    {
-      icon: Brain,
-      label: t("agentforceExpertise.features.decisionPower"),
-      title: t("agentforceExpertise.features.decisionPowerTitle"),
-      description: t("agentforceExpertise.features.decisionPowerDesc"),
-      badge: "PRODUCTION READY",
-    },
-    {
-      icon: Shield,
-      label: t("agentforceExpertise.features.security"),
-      title: t("agentforceExpertise.features.securityTitle"),
-      description: t("agentforceExpertise.features.securityDesc"),
-      badge: "PRODUCTION READY",
-    },
-    {
-      icon: TrendingUp,
-      label: t("agentforceExpertise.features.learningCurve"),
-      title: t("agentforceExpertise.features.learningCurveTitle"),
-      description: t("agentforceExpertise.features.learningCurveDesc"),
-      badge: "PRODUCTION READY",
-    },
-    {
-      icon: Zap,
-      label: t("agentforceExpertise.features.speed"),
-      title: t("agentforceExpertise.features.speedTitle"),
-      description: t("agentforceExpertise.features.speedDesc"),
-      badge: "PRODUCTION READY",
-    },
-  ];
+  const isGerman = i18n.language === "de";
+
+  const mainTitle = isGerman
+    ? data?.titleDe || t("agentforceExpertise.title")
+    : data?.title || t("agentforceExpertise.title");
+
+  const titleHighlight = isGerman
+    ? data?.titleHighlightDe || t("agentforceExpertise.titleHighlight")
+    : data?.titleHighlight || t("agentforceExpertise.titleHighlight");
+
+  const description1 = isGerman
+    ? data?.description1De || t("agentforceExpertise.description")
+    : data?.description1 || t("agentforceExpertise.description");
+
+  const description2 = isGerman
+    ? data?.description2De || t("agentforceExpertise.description2")
+    : data?.description2 || t("agentforceExpertise.description2");
+
+  const roadmapTitle = isGerman
+    ? data?.roadmapTitleDe || t("agentforceExpertise.roadmapTitle")
+    : data?.roadmapTitle || t("agentforceExpertise.roadmapTitle");
+
+  const roadmapSubline = isGerman
+    ? data?.roadmapSublineDe || "Wie wir den Sprung sicher machen"
+    : data?.roadmapSubline || "How we make the leap safe";
+
+  const techSpecsLabel = isGerman
+    ? data?.techSpecsLabelDe || "The Tech Specs"
+    : data?.techSpecsLabel || "The Tech Specs";
+
+  const techSpecsSubline = isGerman
+    ? data?.techSpecsSublineDe || "Warum es jetzt funktioniert"
+    : data?.techSpecsSubline || "Why it works now";
+
+  const processSteps =
+    data?.processSteps && data.processSteps.length > 0
+      ? data.processSteps.map((step: any) => ({
+          icon: iconMap[step.icon] || Settings,
+          title: isGerman ? step.titleDe || step.title : step.title,
+          description: isGerman
+            ? step.descriptionDe || step.description
+            : step.description,
+        }))
+      : [
+          {
+            icon: Search,
+            title: t("agentforceExpertise.processSteps.0.title"),
+            description: t("agentforceExpertise.processSteps.0.description"),
+          },
+          {
+            icon: Cpu,
+            title: t("agentforceExpertise.processSteps.1.title"),
+            description: t("agentforceExpertise.processSteps.1.description"),
+          },
+          {
+            icon: Rocket,
+            title: t("agentforceExpertise.processSteps.2.title"),
+            description: t("agentforceExpertise.processSteps.2.description"),
+          },
+        ];
+
+  const features =
+    data?.features && data.features.length > 0
+      ? data.features.map((f: any) => ({
+          icon: iconMap[f.icon] || Zap,
+          label: isGerman ? f.labelDe || f.label : f.label,
+          title: isGerman ? f.titleDe || f.title : f.title,
+          description: isGerman
+            ? f.descriptionDe || f.description
+            : f.description,
+          badge: f.badge || "PRODUCTION READY",
+        }))
+      : [
+          {
+            icon: Brain,
+            label: t("agentforceExpertise.features.decisionPower"),
+            title: t("agentforceExpertise.features.decisionPowerTitle"),
+            description: t("agentforceExpertise.features.decisionPowerDesc"),
+            badge: "PRODUCTION READY",
+          },
+          {
+            icon: Shield,
+            label: t("agentforceExpertise.features.security"),
+            title: t("agentforceExpertise.features.securityTitle"),
+            description: t("agentforceExpertise.features.securityDesc"),
+            badge: "PRODUCTION READY",
+          },
+          {
+            icon: TrendingUp,
+            label: t("agentforceExpertise.features.learningCurve"),
+            title: t("agentforceExpertise.features.learningCurveTitle"),
+            description: t("agentforceExpertise.features.learningCurveDesc"),
+            badge: "PRODUCTION READY",
+          },
+          {
+            icon: Zap,
+            label: t("agentforceExpertise.features.speed"),
+            title: t("agentforceExpertise.features.speedTitle"),
+            description: t("agentforceExpertise.features.speedDesc"),
+            badge: "PRODUCTION READY",
+          },
+        ];
 
   return (
     <section
@@ -108,23 +201,21 @@ export default function AgentforceSplitScreen() {
             className="text-3xl md:text-6xl font-bold mb-3 md:mb-4"
             style={{ color: "white" }}
           >
-            {t("agentforceExpertise.title")}{" "}
-            <span style={{ color: "#00CC66" }}>
-              {t("agentforceExpertise.titleHighlight")}
-            </span>
+            {mainTitle}{" "}
+            <span style={{ color: "#00CC66" }}>{titleHighlight}</span>
           </h2>
           <p
             className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed"
             style={{ color: "rgba(156, 163, 175, 1)" }}
           >
-            {t("agentforceExpertise.description")}
+            {description1}
           </p>
           <br />
           <p
             className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed"
             style={{ color: "rgba(156, 163, 175, 1)" }}
           >
-            {t("agentforceExpertise.description2")}
+            {description2}
           </p>
         </motion.div>
 
@@ -145,13 +236,13 @@ export default function AgentforceSplitScreen() {
                 className="text-3xl md:text-4xl font-bold mb-4"
                 style={{ color: "white" }}
               >
-                {t("agentforceExpertise.roadmapTitle")}
+                {roadmapTitle}
               </h3>
               <p
                 className="text-base leading-relaxed"
                 style={{ color: "rgba(156, 163, 175, 1)" }}
               >
-                Wie wir den Sprung sicher machen
+                {roadmapSubline}
               </p>
             </div>
 
@@ -232,10 +323,10 @@ export default function AgentforceSplitScreen() {
                   className="text-xs font-medium uppercase tracking-wider"
                   style={{ color: "#666666" }}
                 >
-                  The Tech Specs
+                  {techSpecsLabel}
                 </p>
                 <p className="text-xs mt-1" style={{ color: "#555555" }}>
-                  Warum es jetzt funktioniert
+                  {techSpecsSubline}
                 </p>
               </div>
 
@@ -415,10 +506,10 @@ export default function AgentforceSplitScreen() {
                 className="text-sm font-medium uppercase tracking-wider"
                 style={{ color: "#666666" }}
               >
-                The Tech Specs
+                {techSpecsLabel}
               </p>
               <p className="text-xs mt-1" style={{ color: "#555555" }}>
-                Warum es jetzt funktioniert
+                {techSpecsSubline}
               </p>
             </div>
 

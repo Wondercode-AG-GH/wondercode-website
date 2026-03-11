@@ -14,29 +14,62 @@ interface Industry {
   heroSublineDe: string;
 }
 
+interface IndustryExpertiseHeader {
+  title?: string;
+  titleDe?: string;
+  titleHighlight?: string;
+  titleHighlightDe?: string;
+  description?: string;
+  descriptionDe?: string;
+}
+
 export default function IndustryExpertise() {
   const { t, i18n } = useTranslation("common");
   const [industries, setIndustries] = useState<Industry[]>([]);
+  const [headerData, setHeaderData] = useState<IndustryExpertiseHeader | null>(
+    null,
+  );
   const [loading, setLoading] = useState(true);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [expandedIndex, setExpandedIndex] = useState<number>(0); // First item expanded on mobile
 
   const lang = i18n.language?.split("-")[0] ?? "en";
   useEffect(() => {
-    const fetchIndustries = async () => {
+    const loadData = async () => {
       try {
+        // Fetch header data
+        const headerResponse = await fetch("/api/industry-expertise-header");
+        if (headerResponse.ok) {
+          const hData = await headerResponse.json();
+          setHeaderData(hData);
+        }
+
         const response = await fetch("/api/industries");
         const data = await response.json();
         setIndustries(data);
       } catch (error) {
-        console.error("Failed to fetch industries:", error);
+        console.error("Failed to load industry expertise data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchIndustries();
+    loadData();
   }, []);
+
+  const isGerman = i18n.language === "de";
+
+  const title = isGerman
+    ? headerData?.titleDe || t("industriesSection.title")
+    : headerData?.title || t("industriesSection.title");
+
+  const titleHighlight = isGerman
+    ? headerData?.titleHighlightDe || t("industriesSection.titleHighlight")
+    : headerData?.titleHighlight || t("industriesSection.titleHighlight");
+
+  const description = isGerman
+    ? headerData?.descriptionDe || t("industriesSection.description")
+    : headerData?.description || t("industriesSection.description");
 
   return (
     <motion.section
@@ -51,13 +84,10 @@ export default function IndustryExpertise() {
         {/* Section Header */}
         <div className="mb-12 md:mb-20" style={{ position: "relative" }}>
           <h2 className="text-4xl md:text-6xl font-bold mb-4 md:mb-6 text-white">
-            {t("industriesSection.title")}{" "}
-            <span className="text-[#00CC66]">
-              {t("industriesSection.titleHighlight")}
-            </span>
+            {title} <span className="text-[#00CC66]">{titleHighlight}</span>
           </h2>
           <p className="text-base md:text-lg text-gray-400 max-w-2xl">
-            {t("industriesSection.description")}
+            {description}
           </p>
         </div>
 

@@ -4,12 +4,147 @@ import { useRef, useEffect, useState } from "react";
 import { Shield, Rocket, Handshake } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { ImageWithFallback } from "../../figma/ImageWithFallback";
+import { iconMap } from "@/sanity/lib/iconMap";
+
+interface AboutUsData {
+  aboutText?: string;
+  aboutTextDe?: string;
+  usText?: string;
+  usTextDe?: string;
+  badge?: string;
+  badgeDe?: string;
+  title?: string;
+  titleDe?: string;
+  titleHighlight?: string;
+  titleHighlightDe?: string;
+  description1?: string;
+  description1De?: string;
+  description2?: string;
+  description2De?: string;
+  description3?: string;
+  description3De?: string;
+  description4?: string;
+  description4De?: string;
+  foundersImage?: string;
+  foundersLabel?: string;
+  foundersLabelDe?: string;
+  foundersTitle?: string;
+  foundersTitleDe?: string;
+  foundersDescription?: string;
+  foundersDescriptionDe?: string;
+  valuesTitle?: string;
+  valuesTitleDe?: string;
+  coreValues?: any[];
+}
 
 export default function AboutUs() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const impactRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(impactRef, { once: true });
   const [count, setCount] = useState(0);
+  const [data, setData] = useState<AboutUsData | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/about-us");
+        if (res.ok) {
+          const fetchedData = await res.json();
+          setData(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching about us data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const isGerman = i18n.language === "de";
+
+  const aboutText = isGerman
+    ? data?.aboutTextDe || t("aboutUsSection.about")
+    : data?.aboutText || t("aboutUsSection.about");
+
+  const usText = isGerman
+    ? data?.usTextDe || t("aboutUsSection.us")
+    : data?.usText || t("aboutUsSection.us");
+
+  const badge = isGerman
+    ? data?.badgeDe || t("aboutUsSection.badge")
+    : data?.badge || t("aboutUsSection.badge");
+
+  const title = isGerman
+    ? data?.titleDe || t("aboutUsSection.title")
+    : data?.title || t("aboutUsSection.title");
+
+  const titleHighlight = isGerman
+    ? data?.titleHighlightDe || t("aboutUsSection.titleHighlight")
+    : data?.titleHighlight || t("aboutUsSection.titleHighlight");
+
+  const description1 = isGerman
+    ? data?.description1De || t("aboutUsSection.description")
+    : data?.description1 || t("aboutUsSection.description");
+
+  const description2 = isGerman
+    ? data?.description2De || t("aboutUsSection.description2")
+    : data?.description2 || t("aboutUsSection.description2");
+
+  const description3 = isGerman
+    ? data?.description3De || t("aboutUsSection.description3")
+    : data?.description3 || t("aboutUsSection.description3");
+
+  const description4 = isGerman
+    ? data?.description4De || t("aboutUsSection.description4")
+    : data?.description4 || t("aboutUsSection.description4");
+
+  const foundersImage =
+    data?.foundersImage ||
+    "https://images.unsplash.com/photo-1763550662603-78aa2f2033bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHRlYW0lMjBwb3J0cmFpdCUyMGJsYWNrJTIwd2hpdGV8ZW58MXx8fHwxNzcwMTMwNTM5fDA&ixlib=rb-4.1.0&q=80&w=1080";
+
+  const foundersLabel = isGerman
+    ? data?.foundersLabelDe || "DIE GRÜNDER"
+    : data?.foundersLabel || "THE FOUNDERS";
+
+  const foundersTitle = isGerman
+    ? data?.foundersTitleDe || "Experts in Digital Transformation"
+    : data?.foundersTitle || "Experts in Digital Transformation";
+
+  const foundersDescription = isGerman
+    ? data?.foundersDescriptionDe ||
+      "Seasoned leaders with backgrounds in AI research, enterprise architecture, and strategic consulting."
+    : data?.foundersDescription ||
+      "Seasoned leaders with backgrounds in AI research, enterprise architecture, and strategic consulting.";
+
+  const valuesTitle = isGerman
+    ? data?.valuesTitleDe || "Unsere Werte"
+    : data?.valuesTitle || "Core Values";
+
+  const coreValues =
+    data?.coreValues && data.coreValues.length > 0
+      ? data.coreValues.map((v: any) => ({
+          icon: iconMap[v.icon] || Shield,
+          title: isGerman ? v.titleDe || v.title : v.title,
+          description: isGerman
+            ? v.descriptionDe || v.description
+            : v.description,
+        }))
+      : [
+          {
+            icon: Shield,
+            title: t("aboutUsSection.coreValues.trustTitle"),
+            description: t("aboutUsSection.coreValues.trustDesc"),
+          },
+          {
+            icon: Rocket,
+            title: t("aboutUsSection.coreValues.innovationTitle"),
+            description: t("aboutUsSection.coreValues.innovationDesc"),
+          },
+          {
+            icon: Handshake,
+            title: t("aboutUsSection.coreValues.partnershipTitle"),
+            description: t("aboutUsSection.coreValues.partnershipDesc"),
+          },
+        ];
 
   // Counting animation
   useEffect(() => {
@@ -33,34 +168,6 @@ export default function AboutUs() {
     }
   }, [isInView]);
 
-  const coreValues = [
-    {
-      icon: Shield,
-      title: t("aboutUsSection.coreValues.trustTitle"),
-      description: t("aboutUsSection.coreValues.trustDesc"),
-    },
-    {
-      icon: Rocket,
-      title: t("aboutUsSection.coreValues.innovationTitle"),
-      description: t("aboutUsSection.coreValues.innovationDesc"),
-    },
-    {
-      icon: Handshake,
-      title: t("aboutUsSection.coreValues.partnershipTitle"),
-      description: t("aboutUsSection.coreValues.partnershipDesc"),
-    },
-  ];
-
-  // Chart data points for the line chart
-  const chartPoints = [
-    { x: 0, y: 80 },
-    { x: 20, y: 70 },
-    { x: 40, y: 85 },
-    { x: 60, y: 60 },
-    { x: 80, y: 75 },
-    { x: 100, y: 20 },
-  ];
-
   return (
     <div
       className="max-w-[1600px] mx-auto px-5 md:px-8 relative"
@@ -71,8 +178,7 @@ export default function AboutUs() {
         style={{ position: "relative" }}
       >
         <h2 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6">
-          {t("aboutUsSection.about")}{" "}
-          <span className="text-[#00CC66]"> {t("aboutUsSection.us")}</span>
+          {aboutText} <span className="text-[#00CC66]"> {usText}</span>
         </h2>
       </div>
       {/* Bento Grid */}
@@ -103,7 +209,7 @@ export default function AboutUs() {
                 className="inline-block px-4 py-2 rounded-full bg-[#00CC66]/10 border border-[#00CC66]/30 text-[#00CC66] text-white text-sm font-semibold mb-8"
                 style={{ position: "relative" }}
               >
-                {t("aboutUsSection.badge")}
+                {badge}
               </motion.div>
 
               <motion.h2
@@ -117,11 +223,9 @@ export default function AboutUs() {
                   position: "relative",
                 }}
               >
-                {t("aboutUsSection.title")}
+                {title}
                 <br />
-                <span className="text-[#00CC66]">
-                  {t("aboutUsSection.titleHighlight")}
-                </span>
+                <span className="text-[#00CC66]">{titleHighlight}</span>
               </motion.h2>
 
               <motion.p
@@ -132,7 +236,7 @@ export default function AboutUs() {
                 className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
-                {t("aboutUsSection.description")}
+                {description1}
               </motion.p>
               <br />
               <motion.p
@@ -143,7 +247,7 @@ export default function AboutUs() {
                 className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
-                {t("aboutUsSection.description2")}
+                {description2}
               </motion.p>
               <br />
               <motion.p
@@ -154,7 +258,7 @@ export default function AboutUs() {
                 className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
-                {t("aboutUsSection.description3")}
+                {description3}
               </motion.p>
               <br />
               <motion.p
@@ -165,7 +269,7 @@ export default function AboutUs() {
                 className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
-                {t("aboutUsSection.description4")}
+                {description4}
               </motion.p>
             </div>
           </div>
@@ -187,7 +291,7 @@ export default function AboutUs() {
             {/* Image with grayscale filter */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1763550662603-78aa2f2033bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHRlYW0lMjBwb3J0cmFpdCUyMGJsYWNrJTIwd2hpdGV8ZW58MXx8fHwxNzcwMTMwNTM5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                src={foundersImage}
                 alt="The Founders"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
@@ -205,17 +309,16 @@ export default function AboutUs() {
                 style={{ position: "relative" }}
               >
                 <div className="text-sm text-[#00CC66] font-semibold mb-2 tracking-wider">
-                  THE FOUNDERS
+                  {foundersLabel}
                 </div>
                 <h3
                   className="text-2xl font-bold mb-2"
                   style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
                 >
-                  Experts in Digital Transformation
+                  {foundersTitle}
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Seasoned leaders with backgrounds in AI research, enterprise
-                  architecture, and strategic consulting.
+                  {foundersDescription}
                 </p>
               </motion.div>
             </div>
@@ -237,7 +340,10 @@ export default function AboutUs() {
                 className="text-2xl font-bold mb-8 text-white"
                 style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
               >
-                Core <span className="text-[#00CC66]">Values</span>
+                {valuesTitle.split(" ")[0]}{" "}
+                <span className="text-[#00CC66]">
+                  {valuesTitle.split(" ").slice(1).join(" ")}
+                </span>
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

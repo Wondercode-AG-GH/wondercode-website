@@ -29,14 +29,35 @@ interface Capability {
   isHighlighted?: boolean;
 }
 
+interface CoreExpertiseHeader {
+  title?: string;
+  titleDe?: string;
+  titleHighlight?: string;
+  titleHighlightDe?: string;
+  description1?: string;
+  description1De?: string;
+  description2?: string;
+  description2De?: string;
+}
+
 export default function CoreExpertise() {
   const { t, i18n } = useTranslation("common");
   const [capabilities, setCapabilities] = useState<Capability[]>([]);
+  const [headerData, setHeaderData] = useState<CoreExpertiseHeader | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function loadServices() {
+    async function loadData() {
       try {
+        // Fetch header data
+        const headerResponse = await fetch("/api/core-expertise-header");
+        if (headerResponse.ok) {
+          const hData = await headerResponse.json();
+          setHeaderData(hData);
+        }
+
         const response = await fetch("/api/services");
         if (!response.ok) throw new Error("Failed to fetch services");
         const services: Service[] = await response.json();
@@ -89,8 +110,32 @@ export default function CoreExpertise() {
       }
     }
 
-    loadServices();
+    loadData();
   }, [i18n.language]);
+
+  const isGerman = i18n.language === "de";
+
+  const title = isGerman
+    ? headerData?.titleDe || t("coreExpertise.salesforceEcosystem.title")
+    : headerData?.title || t("coreExpertise.salesforceEcosystem.title");
+
+  const titleHighlight = isGerman
+    ? headerData?.titleHighlightDe ||
+      t("coreExpertise.salesforceEcosystem.titleHighlight")
+    : headerData?.titleHighlight ||
+      t("coreExpertise.salesforceEcosystem.titleHighlight");
+
+  const description1 = isGerman
+    ? headerData?.description1De ||
+      t("coreExpertise.salesforceEcosystem.description")
+    : headerData?.description1 ||
+      t("coreExpertise.salesforceEcosystem.description");
+
+  const description2 = isGerman
+    ? headerData?.description2De ||
+      t("coreExpertise.salesforceEcosystem.description2")
+    : headerData?.description2 ||
+      t("coreExpertise.salesforceEcosystem.description2");
 
   return (
     <section
@@ -140,17 +185,14 @@ export default function CoreExpertise() {
           </div> */}
 
           <h2 className="text-6xl md:text-7xl font-bold mb-6 text-white">
-            {t("coreExpertise.salesforceEcosystem.title")}{" "}
-            <span className="text-[#00CC66]">
-              {t("coreExpertise.salesforceEcosystem.titleHighlight")}
-            </span>
+            {title} <span className="text-[#00CC66]">{titleHighlight}</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            {t("coreExpertise.salesforceEcosystem.description")}
+            {description1}
           </p>
           <br />
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            {t("coreExpertise.salesforceEcosystem.description2")}
+            {description2}
           </p>
         </motion.div>
 

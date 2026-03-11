@@ -1,13 +1,51 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AuroraBackground } from "../../AuroraBackground";
 import { LogoMarquee } from "../../LogoMarquee";
 
+interface HeroData {
+  line1?: string;
+  line1De?: string;
+  line2Highlight?: string;
+  line2HighlightDe?: string;
+  line3?: string;
+  line3De?: string;
+  line4Highlight?: string;
+  line4HighlightDe?: string;
+  subtagline?: string;
+  subtaglineDe?: string;
+  tagline?: string;
+  taglineDe?: string;
+  subtaglineHighlight?: string;
+  subtaglineHighlightDe?: string;
+  ctaPrimary?: string;
+  ctaPrimaryDe?: string;
+  ctaSecondary?: string;
+  ctaSecondaryDe?: string;
+}
+
 export function HeroSection() {
   const { t, i18n } = useTranslation("common");
+  const [heroData, setHeroData] = useState<HeroData | null>(null);
+
+  useEffect(() => {
+    async function fetchHero() {
+      try {
+        const res = await fetch("/api/hero");
+        if (res.ok) {
+          const data = await res.json();
+          setHeroData(data);
+        }
+      } catch (error) {
+        console.error("Error fetching hero:", error);
+      }
+    }
+    fetchHero();
+  }, []);
+
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -17,9 +55,51 @@ export function HeroSection() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
-  const headlineLines = t("hero.headlineMultiline", {
-    returnObjects: true,
-  }) as string[];
+  const isGerman = i18n.language === "de";
+
+  const hLine1 = isGerman
+    ? heroData?.line1De ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[0]
+    : heroData?.line1 ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[0];
+
+  const hLine2 = isGerman
+    ? heroData?.line2HighlightDe ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[1]
+    : heroData?.line2Highlight ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[1];
+
+  const hLine3 = isGerman
+    ? heroData?.line3De ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[2]
+    : heroData?.line3 ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[2];
+
+  const hLine4 = isGerman
+    ? heroData?.line4HighlightDe ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[3]
+    : heroData?.line4Highlight ||
+      (t("hero.headlineMultiline", { returnObjects: true }) as string[])[3];
+
+  const subtaglineText = isGerman
+    ? heroData?.subtaglineDe || t("hero.subtagline")
+    : heroData?.subtagline || t("hero.subtagline");
+
+  const taglineText = isGerman
+    ? heroData?.taglineDe || t("hero.tagline")
+    : heroData?.tagline || t("hero.tagline");
+
+  const taglineHighlightText = isGerman
+    ? heroData?.subtaglineHighlightDe || t("hero.subtaglineHighlight")
+    : heroData?.subtaglineHighlight || t("hero.subtaglineHighlight");
+
+  const ctaPrimaryText = isGerman
+    ? heroData?.ctaPrimaryDe || t("hero.cta")
+    : heroData?.ctaPrimary || t("hero.cta");
+
+  const ctaSecondaryText = isGerman
+    ? heroData?.ctaSecondaryDe || t("hero.ctaSecondary")
+    : heroData?.ctaSecondary || t("hero.ctaSecondary");
 
   return (
     <motion.section
@@ -29,8 +109,6 @@ export function HeroSection() {
         opacity: heroOpacity,
         scale: heroScale,
       }}
-      // FIX 1: Changed h-screen → min-h-screen so taller German text never
-      // clips the layout. The section grows to fit content if needed.
       className="min-h-screen flex flex-col pt-20 overflow-hidden relative"
     >
       {/* Aurora Mesh Gradient Background */}
@@ -50,48 +128,18 @@ export function HeroSection() {
 
       {/* Hero Content */}
       <div className="relative z-10 flex-1 flex flex-col">
-        {/* Center content — overflow-hidden + py padding keeps it from
-            pushing LogoMarquee off screen */}
         <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-8 text-center py-8">
-          {/* <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full border backdrop-blur-xl mb-5 md:mb-7 shrink-0"
-            style={{
-              backgroundColor: "rgba(0, 204, 102, 0.1)",
-              borderColor: "rgba(0, 204, 102, 0.3)",
-            }}
-          >
-            <div
-              className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full shrink-0"
-              style={{ backgroundColor: "#00CC66" }}
-            />
-            <span
-              className="text-xs md:text-sm font-medium"
-              style={{ color: "#00CC66" }}
-            >
-              {t("hero.badge")}
-            </span>
-          </motion.div> */}
-
-          {/* FIX 2: Removed isEn conditional font sizes — both EN and DE now
-              share the same responsive scale. German longer words wrap
-              naturally via break-words instead of needing a smaller font.
-              This prevents the jarring size difference between languages. */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-bold mb-4 md:mb-6 leading-[0.95] tracking-tight text-white text-3xl md:text-5xl lg:text-6xl xl:text-7xl break-words max-w-5xl mx-auto shrink-0"
           >
-            {headlineLines[0]}
+            {hLine1}
             <br />
-            {/* FIX 3: Replaced motion.span glow (caused hover blink) with
-                plain span + CSS animation */}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
-                {headlineLines[1]}
+                {hLine2}
               </span>
               <span
                 aria-hidden="true"
@@ -100,11 +148,11 @@ export function HeroSection() {
               />
             </span>
             <br />
-            {headlineLines[2]}
+            {hLine3}
             <br />
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
-                {headlineLines[3]}
+                {hLine4}
               </span>
               <span
                 aria-hidden="true"
@@ -114,7 +162,6 @@ export function HeroSection() {
             </span>
           </motion.h1>
 
-          {/* FIX 4: Subheading also uses unified font size — no isEn branching */}
           <motion.p
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -122,15 +169,12 @@ export function HeroSection() {
             className="mb-7 md:mb-10 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0"
             style={{ color: "#999999" }}
           >
-            {t("hero.subtagline")} <br />
+            {subtaglineText} <br />
             <br />
-            <div>{t("hero.tagline")} </div>
-            <span style={{ color: "#00CC66" }}>
-              {t("hero.subtaglineHighlight")}
-            </span>
+            <div>{taglineText} </div>
+            <span style={{ color: "#00CC66" }}>{taglineHighlightText}</span>
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -138,9 +182,6 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 shrink-0"
             style={{ position: "relative" }}
           >
-            {/* FIX 5: Removed nested motion.div whileHover (caused blink).
-                Using CSS group-hover instead. Removed conflicting boxShadow
-                default "0 0 0px" style. */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
@@ -151,7 +192,7 @@ export function HeroSection() {
                 position: "relative",
               }}
             >
-              <span className="relative z-10">{t("hero.cta")}</span>
+              <span className="relative z-10">{ctaPrimaryText}</span>
               <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
               <div
                 aria-hidden="true"
@@ -170,14 +211,11 @@ export function HeroSection() {
                 position: "relative",
               }}
             >
-              {t("hero.ctaSecondary")}
+              {ctaSecondaryText}
             </motion.button>
           </motion.div>
         </div>
 
-        {/* FIX 6: shrink-0 on the marquee wrapper means flex will NEVER
-            collapse this row regardless of how tall the content above is.
-            This guarantees LogoMarquee is always visible in both languages. */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -188,7 +226,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* CSS keyframes for glow pulse — pure CSS avoids Framer hover conflicts */}
       <style>{`
         @keyframes glowPulse {
           0%, 100% { opacity: 0.3; }

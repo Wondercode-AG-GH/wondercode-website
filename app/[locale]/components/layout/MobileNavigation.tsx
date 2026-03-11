@@ -1,18 +1,66 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
 
 export function MobileNavigation() {
+  const { i18n } = useTranslation("common");
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [sanityNavData, setSanityNavData] = useState<{
+    navItems?: any[];
+  } | null>(null);
 
-  const menuItems = [
-    { label: "Services", href: "#services" },
-    { label: "Industries", href: "#industries" },
-    { label: "Case Studies", href: "#case-studies" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+  useEffect(() => {
+    async function fetchHeader() {
+      try {
+        const res = await fetch("/api/header");
+        if (res.ok) {
+          const data = await res.json();
+          setSanityNavData(data);
+        }
+      } catch (error) {
+        console.error("Error fetching mobile header:", error);
+      }
+    }
+    fetchHeader();
+  }, []);
+
+  const locale = pathname?.split("/")?.[1] ?? "en";
+  const normalizedPath = pathname ? pathname.replace(/^\/[^/]+/, "") : "";
+  const routeNavMap: { prefix: string; navKey: string }[] = [
+    { prefix: "/services/", navKey: "services" },
+    { prefix: "/industries/", navKey: "industry-expertise" },
+    { prefix: "/case-studies/", navKey: "success-stories" },
   ];
+  const activeNavKey =
+    routeNavMap.find(({ prefix }) => normalizedPath.startsWith(prefix))
+      ?.navKey ?? null;
+  const isOnDetailPage = activeNavKey !== null;
+
+  const getHref = (key: string) => {
+    if (isOnDetailPage) {
+      return `/${locale}/#${key}`;
+    }
+    return `#${key}`;
+  };
+
+  const menuItems =
+    sanityNavData?.navItems && sanityNavData.navItems.length > 0
+      ? sanityNavData.navItems.map((item: any) => ({
+          label:
+            i18n.language === "de" ? item.labelDe || item.label : item.label,
+          href: getHref(item.key),
+        }))
+      : [
+          { label: "Services", href: getHref("services") },
+          { label: "Industries", href: getHref("industries") },
+          { label: "Case Studies", href: getHref("case-studies") },
+          { label: "About", href: getHref("about") },
+          { label: "Contact", href: getHref("contact") },
+        ];
 
   return (
     <>

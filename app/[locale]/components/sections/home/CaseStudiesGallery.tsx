@@ -18,28 +18,61 @@ interface CaseStudy {
   color: string;
 }
 
+interface CaseStudiesGalleryHeader {
+  title?: string;
+  titleDe?: string;
+  titleHighlight?: string;
+  titleHighlightDe?: string;
+  description?: string;
+  descriptionDe?: string;
+}
+
 export default function CaseStudiesGallery() {
   const { t, i18n } = useTranslation("common");
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [headerData, setHeaderData] = useState<CaseStudiesGalleryHeader | null>(
+    null,
+  );
   const [loading, setLoading] = useState(true);
   const [activeCase, setActiveCase] = useState(0);
 
   const lang = i18n.language?.split("-")[0] ?? "en";
   useEffect(() => {
-    const fetchCaseStudies = async () => {
+    const loadData = async () => {
       try {
+        // Fetch header data
+        const headerResponse = await fetch("/api/case-studies-gallery-header");
+        if (headerResponse.ok) {
+          const hData = await headerResponse.json();
+          setHeaderData(hData);
+        }
+
         const response = await fetch("/api/case-studies");
         const data = await response.json();
         setCaseStudies(data);
       } catch (error) {
-        console.error("Failed to fetch case studies:", error);
+        console.error("Failed to load case studies gallery data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCaseStudies();
+    loadData();
   }, []);
+
+  const isGerman = i18n.language === "de";
+
+  const title = isGerman
+    ? headerData?.titleDe || t("caseStudiesSection.title")
+    : headerData?.title || t("caseStudiesSection.title");
+
+  const titleHighlight = isGerman
+    ? headerData?.titleHighlightDe || t("caseStudiesSection.titleHighlight")
+    : headerData?.titleHighlight || t("caseStudiesSection.titleHighlight");
+
+  const description = isGerman
+    ? headerData?.descriptionDe || t("caseStudiesSection.description")
+    : headerData?.description || t("caseStudiesSection.description");
 
   return (
     <section
@@ -56,14 +89,9 @@ export default function CaseStudiesGallery() {
           style={{ position: "relative" }}
         >
           <h2 className="text-6xl md:text-7xl font-bold mb-6 text-white">
-            {t("caseStudiesSection.title")}{" "}
-            <span className="text-[#00CC66]">
-              {t("caseStudiesSection.titleHighlight")}
-            </span>
+            {title} <span className="text-[#00CC66]">{titleHighlight}</span>
           </h2>
-          <p className="text-xl text-gray-400">
-            {t("caseStudiesSection.description")}
-          </p>
+          <p className="text-xl text-gray-400">{description}</p>
         </motion.div>
 
         {/* Loading State */}

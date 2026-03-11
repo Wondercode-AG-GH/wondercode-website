@@ -16,27 +16,67 @@ interface FAQItem {
   };
 }
 
+interface FAQHeader {
+  title?: string;
+  titleDe?: string;
+  description?: string;
+  descriptionDe?: string;
+  ctaText?: string;
+  ctaTextDe?: string;
+  buttonText?: string;
+  buttonTextDe?: string;
+}
+
 export default function FAQSection() {
   const { i18n } = useTranslation("common");
   const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
+  const [headerData, setHeaderData] = useState<FAQHeader | null>(null);
   const [loading, setLoading] = useState(true);
   const [openItems, setOpenItems] = useState<Set<number>>(new Set());
 
   useEffect(() => {
-    const fetchFaqs = async () => {
+    const fetchData = async () => {
       try {
+        // Fetch header data
+        const headerResponse = await fetch("/api/faqs-header");
+        if (headerResponse.ok) {
+          const hData = await headerResponse.json();
+          setHeaderData(hData);
+        }
+
         const response = await fetch("/api/faqs");
         const data = await response.json();
         setFaqItems(data);
       } catch (error) {
-        console.error("Failed to fetch FAQs:", error);
+        console.error("Failed to load FAQs data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFaqs();
+    fetchData();
   }, []);
+
+  const isGerman = i18n.language === "de";
+
+  const title = isGerman
+    ? headerData?.titleDe || "Fragen & Antworten"
+    : headerData?.title || "Questions & Answers";
+
+  const description = isGerman
+    ? headerData?.descriptionDe || "Expertenwissen zu Agentforce & Datenschutz."
+    : headerData?.description ||
+      "Expert insights on Agentforce & Data Privacy.";
+
+  const ctaText = isGerman
+    ? headerData?.ctaTextDe ||
+      "Weitere Fragen? Unsere Experten helfen gerne weiter."
+    : headerData?.ctaText ||
+      "Have more questions? Our experts are ready to help.";
+
+  const buttonText = isGerman
+    ? headerData?.buttonTextDe || "Beratungsgespräch vereinbaren"
+    : headerData?.buttonText || "Schedule a Consultation";
 
   const toggleItem = (index: number) => {
     const newOpenItems = new Set(openItems);
@@ -63,15 +103,9 @@ export default function FAQSection() {
           style={{ position: "relative" }}
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
-            {i18n.language === "en"
-              ? "Questions & Answers"
-              : "Fragen & Antworten"}
+            {title}
           </h2>
-          <p className="text-lg text-gray-400">
-            {i18n.language === "en"
-              ? "Expert insights on Agentforce & Data Privacy."
-              : "Expertenwissen zu Agentforce & Datenschutz."}
-          </p>
+          <p className="text-lg text-gray-400">{description}</p>
         </motion.div>
 
         {/* Loading State */}
@@ -181,11 +215,7 @@ export default function FAQSection() {
           className="mt-16 text-center"
           style={{ position: "relative" }}
         >
-          <p className="text-gray-400 mb-6">
-            {i18n.language === "en"
-              ? "Have more questions? Our experts are ready to help."
-              : "Weitere Fragen? Unsere Experten helfen gerne weiter."}
-          </p>
+          <p className="text-gray-400 mb-6">{ctaText}</p>
           <motion.button
             whileHover={{
               scale: 1.05,
@@ -194,9 +224,7 @@ export default function FAQSection() {
             whileTap={{ scale: 0.98 }}
             className="px-8 py-4 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-base transition-all"
           >
-            {i18n.language === "en"
-              ? "Schedule a Consultation"
-              : "Beratungsgespräch vereinbaren"}
+            {buttonText}
           </motion.button>
         </motion.div>
       </div>

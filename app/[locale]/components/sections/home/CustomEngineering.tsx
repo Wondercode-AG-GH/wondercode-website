@@ -1,11 +1,111 @@
 "use client";
+import { useRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Code, Database, Cloud, Layers, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+interface CustomEngineeringData {
+  badge?: string;
+  badgeDe?: string;
+  headline?: string;
+  headlineDe?: string;
+  description1?: string;
+  description1De?: string;
+  description2?: string;
+  description2De?: string;
+  description3?: string;
+  description3De?: string;
+  techStackLabel?: string;
+  techStackLabelDe?: string;
+  techStack?: string[];
+  expertsReady?: string;
+  expertsReadyDe?: string;
+  archLabelLeft?: string;
+  archLabelLeftDe?: string;
+  archSublabelLeft?: string;
+  archSublabelLeftDe?: string;
+  archLabelRight?: string;
+  archLabelRightDe?: string;
+  archSublabelRight?: string;
+  archSublabelRightDe?: string;
+  archConnectionLabel?: string;
+  codeSnippetTitle?: string;
+  codeSnippet?: string;
+}
+
 export default function CustomEngineering() {
-  const { t } = useTranslation("common");
-  const techStack = ["React", "Node.js", "Heroku", "GraphQL"];
+  const { t, i18n } = useTranslation("common");
+  const [data, setData] = useState<CustomEngineeringData | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/custom-engineering");
+        if (res.ok) {
+          const fetchedData = await res.json();
+          setData(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching custom engineering data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const isGerman = i18n.language === "de";
+
+  const badge = isGerman
+    ? data?.badgeDe || t("customEngineeringSection.badge")
+    : data?.badge || t("customEngineeringSection.badge");
+
+  const headline = isGerman
+    ? data?.headlineDe || t("customEngineeringSection.headline")
+    : data?.headline || t("customEngineeringSection.headline");
+
+  const description1 = isGerman
+    ? data?.description1De || t("customEngineeringSection.description")
+    : data?.description1 || t("customEngineeringSection.description");
+
+  const description2 = isGerman
+    ? data?.description2De || t("customEngineeringSection.description2")
+    : data?.description2 || t("customEngineeringSection.description2");
+
+  const description3 = isGerman
+    ? data?.description3De || t("customEngineeringSection.description3")
+    : data?.description3 || t("customEngineeringSection.description3");
+
+  const techStackLabel = isGerman
+    ? data?.techStackLabelDe || t("customEngineeringSection.techStackLabel")
+    : data?.techStackLabel || t("customEngineeringSection.techStackLabel");
+
+  const techStack =
+    data?.techStack && data.techStack.length > 0
+      ? data.techStack
+      : ["React", "Node.js", "Heroku", "GraphQL"];
+
+  const expertsReady = isGerman
+    ? data?.expertsReadyDe || t("customEngineeringSection.expertsReady")
+    : data?.expertsReady || t("customEngineeringSection.expertsReady");
+
+  const archLabelLeft = isGerman
+    ? data?.archLabelLeftDe || "Custom App"
+    : data?.archLabelLeft || "Custom App";
+
+  const archSublabelLeft = isGerman
+    ? data?.archSublabelLeftDe || "Web Interface"
+    : data?.archSublabelLeft || "Web Interface";
+
+  const archLabelRight = isGerman
+    ? data?.archLabelRightDe || "Salesforce"
+    : data?.archLabelRight || "Salesforce";
+
+  const archSublabelRight = isGerman
+    ? data?.archSublabelRightDe || "Core Data"
+    : data?.archSublabelRight || "Core Data";
+
+  const archConnectionLabel = data?.archConnectionLabel || "REST / GraphQL";
+  const codeSnippetTitle = data?.codeSnippetTitle || "api/salesforce.ts";
+  const codeSnippet = data?.codeSnippet || "";
 
   return (
     <section
@@ -70,27 +170,27 @@ export default function CustomEngineering() {
                 className="text-6xl font-bold mb-4"
                 style={{ color: "#FFFFFF" }}
               >
-                {t("customEngineeringSection.headline")}
+                {headline}
               </h2>
               <p
                 className="text-xl leading-relaxed"
                 style={{ color: "rgba(255, 255, 255, 0.6)" }}
               >
-                {t("customEngineeringSection.description")}
+                {description1}
               </p>
               <br />
               <p
                 className="text-xl leading-relaxed"
                 style={{ color: "rgba(255, 255, 255, 0.6)" }}
               >
-                {t("customEngineeringSection.description2")}
+                {description2}
               </p>
               <br />
               <p
                 className="text-xl leading-relaxed"
                 style={{ color: "rgba(255, 255, 255, 0.6)" }}
               >
-                {t("customEngineeringSection.description3")}
+                {description3}
               </p>
             </div>
 
@@ -100,7 +200,7 @@ export default function CustomEngineering() {
                 className="text-xs font-mono mb-4"
                 style={{ color: "rgba(0, 204, 102, 0.6)" }}
               >
-                {t("customEngineeringSection.techStackLabel")}
+                {techStackLabel}
               </div>
               <div className="flex flex-wrap gap-3">
                 {techStack.map((tech, index) => (
@@ -129,9 +229,7 @@ export default function CustomEngineering() {
               className="flex items-center gap-2 text-sm"
               style={{ color: "rgba(0, 204, 102, 0.8)" }}
             >
-              <span className="font-mono">
-                {t("customEngineeringSection.expertsReady")}
-              </span>
+              <span className="font-mono">{expertsReady}</span>
               <ArrowRight className="w-4 h-4" />
             </div>
           </motion.div>
@@ -214,13 +312,13 @@ export default function CustomEngineering() {
                           className="text-sm font-bold"
                           style={{ color: "#FFFFFF" }}
                         >
-                          Custom App
+                          {archLabelLeft}
                         </div>
                         <div
                           className="text-xs font-mono mt-1"
                           style={{ color: "rgba(0, 204, 102, 0.6)" }}
                         >
-                          Web Interface
+                          {archSublabelLeft}
                         </div>
                       </div>
                     </div>
@@ -290,13 +388,13 @@ export default function CustomEngineering() {
                           className="text-sm font-bold"
                           style={{ color: "#FFFFFF" }}
                         >
-                          Salesforce
+                          {archLabelRight}
                         </div>
                         <div
                           className="text-xs font-mono mt-1"
                           style={{ color: "rgba(0, 204, 102, 0.6)" }}
                         >
-                          Core Data
+                          {archSublabelRight}
                         </div>
                       </div>
                     </div>
@@ -320,7 +418,7 @@ export default function CustomEngineering() {
                     className="text-xs font-mono"
                     style={{ color: "#00CC66" }}
                   >
-                    REST / GraphQL
+                    {archConnectionLabel}
                   </span>
                 </motion.div>
               </div>
@@ -347,7 +445,7 @@ export default function CustomEngineering() {
                     className="text-xs font-mono"
                     style={{ color: "rgba(255, 255, 255, 0.6)" }}
                   >
-                    api/salesforce.ts
+                    {codeSnippetTitle}
                   </span>
                 </div>
                 <div className="space-y-1 font-mono text-xs">
@@ -426,13 +524,13 @@ export default function CustomEngineering() {
                 className="text-5xl font-bold mb-4"
                 style={{ color: "#FFFFFF" }}
               >
-                {t("customEngineeringSection.headline")}
+                {headline}
               </h2>
               <p
                 className="text-lg leading-relaxed"
                 style={{ color: "rgba(255, 255, 255, 0.6)" }}
               >
-                {t("customEngineeringSection.description")}
+                {description1}
               </p>
             </div>
             <div>
@@ -440,7 +538,7 @@ export default function CustomEngineering() {
                 className="text-xs font-mono mb-3"
                 style={{ color: "rgba(0, 204, 102, 0.6)" }}
               >
-                {t("customEngineeringSection.techStackLabel")}
+                {techStackLabel}
               </div>
               <div className="flex flex-wrap justify-center gap-3">
                 {techStack.map((tech, index) => (
@@ -466,9 +564,7 @@ export default function CustomEngineering() {
               className="flex items-center justify-center gap-2 text-sm"
               style={{ color: "rgba(0, 204, 102, 0.8)" }}
             >
-              <span className="font-mono">
-                {t("customEngineeringSection.expertsReady")}
-              </span>
+              <span className="font-mono">{expertsReady}</span>
               <ArrowRight className="w-4 h-4" />
             </div>
           </motion.div>
@@ -532,13 +628,13 @@ export default function CustomEngineering() {
                       className="text-sm font-bold"
                       style={{ color: "#FFFFFF" }}
                     >
-                      Custom App
+                      {archLabelLeft}
                     </div>
                     <div
                       className="text-xs font-mono mt-0.5"
                       style={{ color: "rgba(0, 204, 102, 0.6)" }}
                     >
-                      Web Interface
+                      {archSublabelLeft}
                     </div>
                   </div>
                 </div>
@@ -579,7 +675,7 @@ export default function CustomEngineering() {
                     backgroundColor: "rgba(0, 204, 102, 0.1)",
                   }}
                 >
-                  REST / GraphQL
+                  {archConnectionLabel}
                 </span>
                 <div
                   className="h-0.5 w-24"
@@ -617,13 +713,13 @@ export default function CustomEngineering() {
                       className="text-sm font-bold"
                       style={{ color: "#FFFFFF" }}
                     >
-                      Salesforce
+                      {archLabelRight}
                     </div>
                     <div
                       className="text-xs font-mono mt-0.5"
                       style={{ color: "rgba(0, 204, 102, 0.6)" }}
                     >
-                      Core Data
+                      {archSublabelRight}
                     </div>
                   </div>
                 </div>
@@ -651,7 +747,7 @@ export default function CustomEngineering() {
                   className="text-xs font-mono"
                   style={{ color: "rgba(255, 255, 255, 0.6)" }}
                 >
-                  api/salesforce.ts
+                  {codeSnippetTitle}
                 </span>
               </div>
               <div className="space-y-1 font-mono text-xs">
@@ -726,13 +822,13 @@ export default function CustomEngineering() {
                 className="text-4xl font-bold mb-3"
                 style={{ color: "#FFFFFF" }}
               >
-                {t("customEngineeringSection.headline")}
+                {headline}
               </h2>
               <p
                 className="text-base leading-relaxed"
                 style={{ color: "rgba(255, 255, 255, 0.6)" }}
               >
-                {t("customEngineeringSection.description")}
+                {description1}
               </p>
             </div>
 
@@ -741,7 +837,7 @@ export default function CustomEngineering() {
                 className="text-xs font-mono mb-3"
                 style={{ color: "rgba(0, 204, 102, 0.6)" }}
               >
-                {t("customEngineeringSection.techStackLabel")}
+                {techStackLabel}
               </div>
               <div className="flex flex-wrap gap-2">
                 {techStack.map((tech) => (
@@ -788,13 +884,13 @@ export default function CustomEngineering() {
                     className="text-xs font-bold"
                     style={{ color: "#FFFFFF" }}
                   >
-                    Custom App
+                    {archLabelLeft}
                   </div>
                   <div
                     className="text-xs font-mono"
                     style={{ color: "rgba(0, 204, 102, 0.6)" }}
                   >
-                    Web Interface
+                    {archSublabelLeft}
                   </div>
                 </div>
               </div>
@@ -813,7 +909,7 @@ export default function CustomEngineering() {
                     borderColor: "rgba(0, 204, 102, 0.3)",
                   }}
                 >
-                  REST / GraphQL
+                  {archConnectionLabel}
                 </span>
                 <div
                   className="w-0.5 h-6"
@@ -835,13 +931,13 @@ export default function CustomEngineering() {
                     className="text-xs font-bold"
                     style={{ color: "#FFFFFF" }}
                   >
-                    Salesforce
+                    {archLabelRight}
                   </div>
                   <div
                     className="text-xs font-mono"
                     style={{ color: "rgba(0, 204, 102, 0.6)" }}
                   >
-                    Core Data
+                    {archSublabelRight}
                   </div>
                 </div>
               </div>
@@ -860,7 +956,7 @@ export default function CustomEngineering() {
                     className="text-xs font-mono"
                     style={{ color: "rgba(255, 255, 255, 0.6)" }}
                   >
-                    salesforce.ts
+                    {codeSnippetTitle}
                   </span>
                 </div>
                 <div
@@ -868,7 +964,7 @@ export default function CustomEngineering() {
                   style={{ color: "rgba(255, 255, 255, 0.4)" }}
                 >
                   <span style={{ color: "rgba(0, 204, 102, 0.8)" }}>const</span>{" "}
-                  query = ...
+                  {codeSnippet || `const query = ...`}
                 </div>
               </div>
             </div>
