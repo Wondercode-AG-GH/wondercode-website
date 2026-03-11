@@ -4,29 +4,157 @@ import { motion } from "motion/react";
 import { Sparkles, Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../languageSwitcher";
+import { useEffect, useState } from "react";
+
+interface FooterData {
+  description?: string;
+  descriptionDe?: string;
+  cityHQ?: string;
+  region?: string;
+  regionDe?: string;
+  languageLabel?: string;
+  languageLabelDe?: string;
+  servicesHeading?: string;
+  servicesHeadingDe?: string;
+  companyHeading?: string;
+  companyHeadingDe?: string;
+  contactHeading?: string;
+  contactHeadingDe?: string;
+  servicesList?: string[];
+  servicesListDe?: string[];
+  companyList?: string[];
+  companyListDe?: string[];
+  legalList?: string[];
+  legalListDe?: string[];
+  email?: string;
+  phone?: string;
+  addressLines?: string[];
+  country?: string;
+  countryDe?: string;
+  allRightsReserved?: string;
+  allRightsReservedDe?: string;
+  madeInText?: string;
+  madeInTextDe?: string;
+}
+
 export default function Footer() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
+  const [data, setData] = useState<FooterData | null>(null);
 
-  const services = [
-    t("footer.services.salesforceConsulting"),
-    t("footer.services.aiStrategy"),
-    t("footer.services.customWebApps"),
-    t("footer.services.agentforceImplementation"),
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/footer");
+        if (res.ok) {
+          const fetchedData = await res.json();
+          setData(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching footer data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
-  const company = [
-    t("footer.company.aboutUs"),
-    t("footer.company.careers"),
-    t("footer.company.blog"),
-    t("footer.company.contact"),
-  ];
+  const isGerman = i18n.language === "de";
 
-  const legal = [
-    t("footer.legal.privacyPolicy"),
-    t("footer.legal.termsOfService"),
-    t("footer.legal.cookiePolicy"),
-    t("footer.legal.imprint"),
-  ];
+  const description = isGerman
+    ? data?.descriptionDe || t("footer.description")
+    : data?.description || t("footer.description");
+
+  const cityHQ = data?.cityHQ || "Zürich (HQ)";
+  const region = isGerman
+    ? data?.regionDe || t("footer.region")
+    : data?.region || t("footer.region");
+
+  const languageLabel = isGerman
+    ? data?.languageLabelDe || t("footer.languageLabel")
+    : data?.languageLabel || t("footer.languageLabel");
+
+  const servicesHeading = isGerman
+    ? data?.servicesHeadingDe || t("footer.headings.services")
+    : data?.servicesHeading || t("footer.headings.services");
+
+  const companyHeading = isGerman
+    ? data?.companyHeadingDe || t("footer.headings.company")
+    : data?.companyHeading || t("footer.headings.company");
+
+  const contactHeading = isGerman
+    ? data?.contactHeadingDe || t("footer.headings.contact")
+    : data?.contactHeading || t("footer.headings.contact");
+
+  const services = isGerman
+    ? data?.servicesListDe && data.servicesListDe.length > 0
+      ? data.servicesListDe
+      : [
+          t("footer.services.salesforceConsulting"),
+          t("footer.services.aiStrategy"),
+          t("footer.services.customWebApps"),
+          t("footer.services.agentforceImplementation"),
+        ]
+    : data?.servicesList && data.servicesList.length > 0
+      ? data.servicesList
+      : [
+          t("footer.services.salesforceConsulting"),
+          t("footer.services.aiStrategy"),
+          t("footer.services.customWebApps"),
+          t("footer.services.agentforceImplementation"),
+        ];
+
+  const company = isGerman
+    ? data?.companyListDe && data.companyListDe.length > 0
+      ? data.companyListDe
+      : [
+          t("footer.company.aboutUs"),
+          t("footer.company.careers"),
+          t("footer.company.blog"),
+          t("footer.company.contact"),
+        ]
+    : data?.companyList && data.companyList.length > 0
+      ? data.companyList
+      : [
+          t("footer.company.aboutUs"),
+          t("footer.company.careers"),
+          t("footer.company.blog"),
+          t("footer.company.contact"),
+        ];
+
+  const legal = isGerman
+    ? data?.legalListDe && data.legalListDe.length > 0
+      ? data.legalListDe
+      : [
+          t("footer.legal.privacyPolicy"),
+          t("footer.legal.termsOfService"),
+          t("footer.legal.cookiePolicy"),
+          t("footer.legal.imprint"),
+        ]
+    : data?.legalList && data.legalList.length > 0
+      ? data.legalList
+      : [
+          t("footer.legal.privacyPolicy"),
+          t("footer.legal.termsOfService"),
+          t("footer.legal.cookiePolicy"),
+          t("footer.legal.imprint"),
+        ];
+
+  const email = data?.email || "hello@wondercode.ch";
+  const phone = data?.phone || "+41 44 555 01 00";
+  const addressLines =
+    data?.addressLines && data.addressLines.length > 0
+      ? data.addressLines
+      : ["Bahnhofstrasse 100", "8001 Zürich"];
+
+  const country = isGerman
+    ? data?.countryDe || t("footer.country")
+    : data?.country || t("footer.country");
+
+  const allRightsReserved = isGerman
+    ? data?.allRightsReservedDe || t("footer.allRightsReserved")
+    : data?.allRightsReserved || t("footer.allRightsReserved");
+
+  const madeInText = isGerman
+    ? data?.madeInTextDe || t("footer.madeIn")
+    : data?.madeInText || t("footer.madeIn");
 
   return (
     <footer
@@ -60,7 +188,7 @@ export default function Footer() {
               </svg>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed max-w-sm">
-              {t("footer.description")}
+              {description}
             </p>
 
             {/* Region Badge */}
@@ -70,20 +198,14 @@ export default function Footer() {
             >
               <MapPin className="w-5 h-5 text-[#00CC66]" />
               <div>
-                <div className="text-sm font-semibold text-white">
-                  Zürich (HQ)
-                </div>
-                <div className="text-xs text-gray-500">
-                  {t("footer.region")}
-                </div>
+                <div className="text-sm font-semibold text-white">{cityHQ}</div>
+                <div className="text-xs text-gray-500">{region}</div>
               </div>
             </motion.div>
 
             {/* Language Switcher in Footer */}
             <div className="mb-4">
-              <p className="text-xs text-gray-500 mb-2">
-                {t("footer.languageLabel")}
-              </p>
+              <p className="text-xs text-gray-500 mb-2">{languageLabel}</p>
               <LanguageSwitcher />
             </div>
           </div>
@@ -91,7 +213,7 @@ export default function Footer() {
           {/* Services Column */}
           <div>
             <h3 className="text-sm font-semibold text-white mb-6 uppercase tracking-wider">
-              {t("footer.headings.services")}
+              {servicesHeading}
             </h3>
             <ul className="space-y-3">
               {services.map((service) => (
@@ -110,7 +232,7 @@ export default function Footer() {
           {/* Company Column */}
           <div>
             <h3 className="text-sm font-semibold text-white mb-6 uppercase tracking-wider">
-              {t("footer.headings.company")}
+              {companyHeading}
             </h3>
             <ul className="space-y-3">
               {company.map((item) => (
@@ -129,35 +251,37 @@ export default function Footer() {
           {/* Contact Column */}
           <div>
             <h3 className="text-sm font-semibold text-white mb-6 uppercase tracking-wider">
-              {t("footer.headings.contact")}
+              {contactHeading}
             </h3>
             <ul className="space-y-4">
               <li>
                 <a
-                  href="mailto:hello@wondercode.ch"
+                  href={`mailto:${email}`}
                   className="flex items-center gap-3 text-gray-400 hover:text-[#00CC66] transition-colors text-sm group"
                 >
                   <Mail className="w-4 h-4 text-[#00CC66] group-hover:scale-110 transition-transform" />
-                  hello@wondercode.ch
+                  {email}
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+41445550100"
+                  href={`tel:${phone.replace(/\s/g, "")}`}
                   className="flex items-center gap-3 text-gray-400 hover:text-[#00CC66] transition-colors text-sm group"
                 >
                   <Phone className="w-4 h-4 text-[#00CC66] group-hover:scale-110 transition-transform" />
-                  +41 44 555 01 00
+                  {phone}
                 </a>
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-[#00CC66] flex-shrink-0 mt-0.5" />
                 <span>
-                  Bahnhofstrasse 100
-                  <br />
-                  8001 Zürich
-                  <br />
-                  {t("footer.country")}
+                  {addressLines.map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                  {country}
                 </span>
               </li>
             </ul>
@@ -170,8 +294,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Wondercode AG.{" "}
-            {t("footer.allRightsReserved")}
+            © {new Date().getFullYear()} Wondercode AG. {allRightsReserved}
           </div>
 
           {/* Legal Links */}
@@ -193,7 +316,7 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-2 text-xs text-gray-500"
           >
-            <span>{t("footer.madeIn")}</span>
+            <span>{madeInText}</span>
             <div className="w-6 h-6 bg-red-600 flex items-center justify-center rounded">
               <div className="text-white text-xs font-bold">🇨🇭</div>
             </div>

@@ -3,14 +3,13 @@
     "badge": "Schweizer Präzision × Silicon Valley Innovation",
     "headline": "Machen Sie Technologie zu Ihrem Wettbewerbsvorteil",
     "headlineMultiline": [
-      "Machen Sie",
-      "Technologie",
-      "zu Ihrem",
-      "Wettbewerbsvorteil."
+      "Die meisten Systeme",
+      "wachsen nicht",
+      "mit dem Unternehmen."
     ],
-    "tagline": "Wir bauen intelligente Systeme, die Prozesse automatisieren und Ihr Geschäft skalieren",
-    "subtagline": "Wachstum erzeugt Chaos, wenn Systeme fehlen. Wir implementieren das digitale Rückgrat, das Ihre gesamte Customer Journey automatisiert – vom ersten Klick bis zum Service-Ticket.",
-    "subtaglineHighlight": "In 4 Wochen startklar.",
+    "tagline": "Wir bauen Systeme, die wirklich funktionieren – strukturiert, pragmatisch und direkt umgesetzt mit den Gründern von Wondercode.",
+    "subtagline": "Mit jedem neuen Tool werden Prozesse komplizierter. Daten verteilen sich über verschiedene Systeme und das CRM wird schnell zur Verwaltung statt zur Unterstützung des Geschäfts.",
+    "subtaglineHighlight": "Go-Live meist in 4–8 Wochen.",
     "cta": "Zum System-Check",
     "ctaSecondary": "Case Studies ansehen"
   },
@@ -31,7 +30,8 @@
       "badge": "SALESFORCE-ÖKOSYSTEM",
       "title": "Das gesamte",
       "titleHighlight": "Salesforce-Ökosystem.",
-      "description": "Wir beherrschen die Klaviatur der komplexesten Clouds. Ob hochregulierte Bankprozesse, komplexe Abo-Modelle oder Non-Profit-Management: Wir integrieren spezialisierte Module zu einer nahtlosen Gesamtarchitektur."
+      "description": "Vertrieb, Service, Abrechnung oder Kundenportale – wachsende Unternehmen arbeiten selten nur mit einer Cloud.",
+      "description2": "Wir verbinden die wichtigsten Salesforce-Module zu einer funktionierenden Systemarchitektur."
     }
   },
   "industriesSection": {
@@ -106,9 +106,10 @@
   },
   "agentforceExpertise": {
     "badge": "AGENTIC ENTERPRISE",
-    "title": "Der Schritt zum",
-    "titleHighlight": "Agentic Enterprise.",
-    "description": "Die Ära der rein manuellen Arbeit endet hier. Warten ist keine Strategie mehr. Wandeln Sie starre Abteilungen jetzt in agile, autonome Einheiten um. Der Wettbewerbsvorteil gehört denjenigen, die diesen Schritt heute machen.",
+    "title": "Der nächste Schritt:",
+    "titleHighlight": "Agenten in Ihren Geschäftsprozessen.",
+    "description": "Viele Aufgaben im Vertrieb, Service oder Backoffice folgen klaren Mustern. Mit Agentforce lassen sich diese Prozesse heute automatisieren – direkt in Ihrer Salesforce-Plattform.",
+    "description2": "Wir helfen Unternehmen dabei, diese Agenten sinnvoll einzusetzen und Schritt für Schritt in den Arbeitsalltag zu integrieren.",
     "roadmapTitle": "Die Roadmap",
     "processSteps": [
       {
@@ -141,16 +142,23 @@
   },
   "customEngineeringSection": {
     "badge": "CUSTOM ENGINEERING",
-    "headline": "Wenn der Standard Sie ausbremst",
-    "description": "Lassen Sie sich von 'Out-of-the-Box'-Grenzen nicht von Ihrer Strategie abbringen. Wenn Standard-Komponenten nicht ausreichen, engineeren wir maßgeschneiderte Headless-Applikationen. Hochperformant, intuitiv wie Consumer-Apps und nahtlos mit Ihren Salesforce-Daten verbunden. Keine Workarounds. Echter Code.",
+    "headline": "Wenn der Standard an seine Grenzen kommt.",
+    "description": "Viele Systeme decken Standardprozesse gut ab. Doch sobald Geschäftsmodelle komplexer werden, entstehen Lücken zwischen Tools, Daten und Prozessen.",
+    "description2": "Wir entwickeln individuelle Anwendungen, Integrationen und Weblösungen, die diese Lücken schliessen. Von kundenspezifischen Portalen über Integrationen bis zu kompletten Webapplikationen.",
+    "description3": "So entstehen Lösungen, die genau zu Ihrem Unternehmen passen und sich sauber in Ihre bestehende Systemlandschaft integrieren.",
     "techStackLabel": "// TECH STACK",
-    "expertsReady": "Expert developers ready"
+    "expertsReady": "Technische Umsetzung besprechen"
   },
   "aboutUsSection": {
     "badge": "ÜBER UNS",
-    "title": "Menschliche Strategie,",
-    "titleHighlight": "Intelligenter Code",
-    "description": "Wir verbinden die Präzision und Zuverlässigkeit von Schweizer Engineering mit der transformativen Kraft von künstlicher Intelligenz. Unser Team aus Strategisten, Ingenieuren und KI-Spezialisten implementiert nicht nur Technologie – wir architekturieren Lösungen, die Ihre gesamte Organisation höherstufen.",
+    "title": "Systeme, die im",
+    "about": "Über",
+    "us": "Wondercode",
+    "titleHighlight": "Alltag funktionieren",
+    "description": "Wondercode ist ein Technologiepartner für Unternehmen im DACH-Raum, die ihre Systeme sauber aufbauen und weiterentwickeln wollen.",
+    "description2": "Wir unterstützen unsere Kunden bei der Implementierung von CRM-Plattformen, der Architektur komplexer Systemlandschaften und der Entwicklung individueller Anwendungen.",
+    "description3": "Viele Projekte beginnen mit einer klaren Frage: Wie strukturieren wir unsere Prozesse besser, verbinden Systeme und schaffen eine Grundlage, die langfristig funktioniert?",
+    "description4": "Genau daran arbeiten wir – gemeinsam mit unseren Kunden.",
     "stats": {
       "experience": "15+",
       "experienceLabel": "Jahre Erfahrung",

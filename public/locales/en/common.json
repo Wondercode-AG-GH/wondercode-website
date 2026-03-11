@@ -149,8 +149,13 @@
   "aboutUsSection": {
     "badge": "ABOUT US",
     "title": "Human Strategy,",
+    "about": "About",
+    "us": "US",
     "titleHighlight": "Intelligent Code",
     "description": "We merge the precision and reliability of Swiss engineering with the transformative power of artificial intelligence. Our team of strategists, engineers, and AI specialists doesn't just implement technology—we architect solutions that elevate your entire organization.",
+    "description2": "We support our clients in implementing CRM platforms, architecting complex system landscapes, and developing individual applications.",
+    "description3": "Many projects start with a clear question: How do we structure our processes better, connect systems, and create a foundation that works long-term?",
+    "description4": "That's exactly what we work on—together with our clients.",
     "stats": {
       "experience": "15+",
       "experienceLabel": "Years Combined",

@@ -16,6 +16,10 @@ import {
   Heart,
   User,
   Factory,
+  Search,
+  Brain,
+  TrendingUp,
+  Handshake,
 } from "lucide-react";
 
 export const iconMap: Record<string, any> = {
@@ -36,4 +40,8 @@ export const iconMap: Record<string, any> = {
   Heart,
   User,
   Factory,
+  Search,
+  Brain,
+  TrendingUp,
+  Handshake,
 };

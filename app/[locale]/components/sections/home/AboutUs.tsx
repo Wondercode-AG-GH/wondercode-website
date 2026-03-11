@@ -4,12 +4,147 @@ import { useRef, useEffect, useState } from "react";
 import { Shield, Rocket, Handshake } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { ImageWithFallback } from "../../figma/ImageWithFallback";
+import { iconMap } from "@/sanity/lib/iconMap";
+
+interface AboutUsData {
+  aboutText?: string;
+  aboutTextDe?: string;
+  usText?: string;
+  usTextDe?: string;
+  badge?: string;
+  badgeDe?: string;
+  title?: string;
+  titleDe?: string;
+  titleHighlight?: string;
+  titleHighlightDe?: string;
+  description1?: string;
+  description1De?: string;
+  description2?: string;
+  description2De?: string;
+  description3?: string;
+  description3De?: string;
+  description4?: string;
+  description4De?: string;
+  foundersImage?: string;
+  foundersLabel?: string;
+  foundersLabelDe?: string;
+  foundersTitle?: string;
+  foundersTitleDe?: string;
+  foundersDescription?: string;
+  foundersDescriptionDe?: string;
+  valuesTitle?: string;
+  valuesTitleDe?: string;
+  coreValues?: any[];
+}
 
 export default function AboutUs() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const impactRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(impactRef, { once: true });
   const [count, setCount] = useState(0);
+  const [data, setData] = useState<AboutUsData | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("/api/about-us");
+        if (res.ok) {
+          const fetchedData = await res.json();
+          setData(fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching about us data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const isGerman = i18n.language === "de";
+
+  const aboutText = isGerman
+    ? data?.aboutTextDe || t("aboutUsSection.about")
+    : data?.aboutText || t("aboutUsSection.about");
+
+  const usText = isGerman
+    ? data?.usTextDe || t("aboutUsSection.us")
+    : data?.usText || t("aboutUsSection.us");
+
+  const badge = isGerman
+    ? data?.badgeDe || t("aboutUsSection.badge")
+    : data?.badge || t("aboutUsSection.badge");
+
+  const title = isGerman
+    ? data?.titleDe || t("aboutUsSection.title")
+    : data?.title || t("aboutUsSection.title");
+
+  const titleHighlight = isGerman
+    ? data?.titleHighlightDe || t("aboutUsSection.titleHighlight")
+    : data?.titleHighlight || t("aboutUsSection.titleHighlight");
+
+  const description1 = isGerman
+    ? data?.description1De || t("aboutUsSection.description")
+    : data?.description1 || t("aboutUsSection.description");
+
+  const description2 = isGerman
+    ? data?.description2De || t("aboutUsSection.description2")
+    : data?.description2 || t("aboutUsSection.description2");
+
+  const description3 = isGerman
+    ? data?.description3De || t("aboutUsSection.description3")
+    : data?.description3 || t("aboutUsSection.description3");
+
+  const description4 = isGerman
+    ? data?.description4De || t("aboutUsSection.description4")
+    : data?.description4 || t("aboutUsSection.description4");
+
+  const foundersImage =
+    data?.foundersImage ||
+    "https://images.unsplash.com/photo-1763550662603-78aa2f2033bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHRlYW0lMjBwb3J0cmFpdCUyMGJsYWNrJTIwd2hpdGV8ZW58MXx8fHwxNzcwMTMwNTM5fDA&ixlib=rb-4.1.0&q=80&w=1080";
+
+  const foundersLabel = isGerman
+    ? data?.foundersLabelDe || "DIE GRÜNDER"
+    : data?.foundersLabel || "THE FOUNDERS";
+
+  const foundersTitle = isGerman
+    ? data?.foundersTitleDe || "Experts in Digital Transformation"
+    : data?.foundersTitle || "Experts in Digital Transformation";
+
+  const foundersDescription = isGerman
+    ? data?.foundersDescriptionDe ||
+      "Seasoned leaders with backgrounds in AI research, enterprise architecture, and strategic consulting."
+    : data?.foundersDescription ||
+      "Seasoned leaders with backgrounds in AI research, enterprise architecture, and strategic consulting.";
+
+  const valuesTitle = isGerman
+    ? data?.valuesTitleDe || "Unsere Werte"
+    : data?.valuesTitle || "Core Values";
+
+  const coreValues =
+    data?.coreValues && data.coreValues.length > 0
+      ? data.coreValues.map((v: any) => ({
+          icon: iconMap[v.icon] || Shield,
+          title: isGerman ? v.titleDe || v.title : v.title,
+          description: isGerman
+            ? v.descriptionDe || v.description
+            : v.description,
+        }))
+      : [
+          {
+            icon: Shield,
+            title: t("aboutUsSection.coreValues.trustTitle"),
+            description: t("aboutUsSection.coreValues.trustDesc"),
+          },
+          {
+            icon: Rocket,
+            title: t("aboutUsSection.coreValues.innovationTitle"),
+            description: t("aboutUsSection.coreValues.innovationDesc"),
+          },
+          {
+            icon: Handshake,
+            title: t("aboutUsSection.coreValues.partnershipTitle"),
+            description: t("aboutUsSection.coreValues.partnershipDesc"),
+          },
+        ];
 
   // Counting animation
   useEffect(() => {
@@ -33,39 +168,19 @@ export default function AboutUs() {
     }
   }, [isInView]);
 
-  const coreValues = [
-    {
-      icon: Shield,
-      title: t("aboutUsSection.coreValues.trustTitle"),
-      description: t("aboutUsSection.coreValues.trustDesc"),
-    },
-    {
-      icon: Rocket,
-      title: t("aboutUsSection.coreValues.innovationTitle"),
-      description: t("aboutUsSection.coreValues.innovationDesc"),
-    },
-    {
-      icon: Handshake,
-      title: t("aboutUsSection.coreValues.partnershipTitle"),
-      description: t("aboutUsSection.coreValues.partnershipDesc"),
-    },
-  ];
-
-  // Chart data points for the line chart
-  const chartPoints = [
-    { x: 0, y: 80 },
-    { x: 20, y: 70 },
-    { x: 40, y: 85 },
-    { x: 60, y: 60 },
-    { x: 80, y: 75 },
-    { x: 100, y: 20 },
-  ];
-
   return (
     <div
       className="max-w-[1600px] mx-auto px-5 md:px-8 relative"
       style={{ position: "relative" }}
     >
+      <div
+        className="text-center mb-12 md:mb-20"
+        style={{ position: "relative" }}
+      >
+        <h2 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6">
+          {aboutText} <span className="text-[#00CC66]"> {usText}</span>
+        </h2>
+      </div>
       {/* Bento Grid */}
       <div
         className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative"
@@ -94,7 +209,7 @@ export default function AboutUs() {
                 className="inline-block px-4 py-2 rounded-full bg-[#00CC66]/10 border border-[#00CC66]/30 text-[#00CC66] text-white text-sm font-semibold mb-8"
                 style={{ position: "relative" }}
               >
-                {t("aboutUsSection.badge")}
+                {badge}
               </motion.div>
 
               <motion.h2
@@ -108,11 +223,9 @@ export default function AboutUs() {
                   position: "relative",
                 }}
               >
-                {t("aboutUsSection.title")}
+                {title}
                 <br />
-                <span className="text-[#00CC66]">
-                  {t("aboutUsSection.titleHighlight")}
-                </span>
+                <span className="text-[#00CC66]">{titleHighlight}</span>
               </motion.h2>
 
               <motion.p
@@ -123,42 +236,41 @@ export default function AboutUs() {
                 className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
-                {t("aboutUsSection.description")}
+                {description1}
               </motion.p>
-
-              <motion.div
+              <br />
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="mt-10 grid grid-cols-3 gap-8"
+                transition={{ delay: 0.4 }}
+                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
-                <div>
-                  <div className="text-4xl font-bold text-[#00CC66] mb-2">
-                    {t("aboutUsSection.stats.experience")}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {t("aboutUsSection.stats.experienceLabel")}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-4xl font-bold text-[#00CC66] mb-2">
-                    {t("aboutUsSection.stats.projects")}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {t("aboutUsSection.stats.projectsLabel")}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-4xl font-bold text-[#00CC66] mb-2">
-                    {t("aboutUsSection.stats.satisfaction")}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {t("aboutUsSection.stats.satisfactionLabel")}
-                  </div>
-                </div>
-              </motion.div>
+                {description2}
+              </motion.p>
+              <br />
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                style={{ position: "relative" }}
+              >
+                {description3}
+              </motion.p>
+              <br />
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                style={{ position: "relative" }}
+              >
+                {description4}
+              </motion.p>
             </div>
           </div>
         </motion.div>
@@ -179,7 +291,7 @@ export default function AboutUs() {
             {/* Image with grayscale filter */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1763550662603-78aa2f2033bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHRlYW0lMjBwb3J0cmFpdCUyMGJsYWNrJTIwd2hpdGV8ZW58MXx8fHwxNzcwMTMwNTM5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                src={foundersImage}
                 alt="The Founders"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
@@ -197,17 +309,16 @@ export default function AboutUs() {
                 style={{ position: "relative" }}
               >
                 <div className="text-sm text-[#00CC66] font-semibold mb-2 tracking-wider">
-                  THE FOUNDERS
+                  {foundersLabel}
                 </div>
                 <h3
                   className="text-2xl font-bold mb-2"
                   style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
                 >
-                  Experts in Digital Transformation
+                  {foundersTitle}
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Seasoned leaders with backgrounds in AI research, enterprise
-                  architecture, and strategic consulting.
+                  {foundersDescription}
                 </p>
               </motion.div>
             </div>
@@ -220,7 +331,7 @@ export default function AboutUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-7"
+          className="lg:col-span-12"
           style={{ position: "relative" }}
         >
           <div className="relative h-full p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/40 backdrop-blur-xl transition-all duration-500 overflow-hidden">
@@ -229,7 +340,10 @@ export default function AboutUs() {
                 className="text-2xl font-bold mb-8 text-white"
                 style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
               >
-                Core <span className="text-[#00CC66]">Values</span>
+                {valuesTitle.split(" ")[0]}{" "}
+                <span className="text-[#00CC66]">
+                  {valuesTitle.split(" ").slice(1).join(" ")}
+                </span>
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -262,130 +376,6 @@ export default function AboutUs() {
                     </div>
                   </motion.div>
                 ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Bottom Right - Live Impact (Vertical) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="lg:col-span-5 group"
-          style={{ position: "relative" }}
-        >
-          <div className="relative h-full p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/40 backdrop-blur-xl transition-all duration-500 overflow-hidden min-h-[300px] flex flex-col">
-            {/* Ambient glow */}
-            <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-[#00CC66]/0 group-hover:bg-[#00CC66]/10 rounded-full blur-[80px] transition-all duration-500" />
-
-            <div className="relative z-10 flex-1 flex flex-col">
-              <h3
-                className="text-2xl font-bold mb-4 text-white"
-                style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
-              >
-                Live <span className="text-[#00CC66]">Impact</span>
-              </h3>
-
-              <div className="flex-1 flex flex-col justify-center">
-                {/* Counting number */}
-                <div ref={impactRef} className="mb-8">
-                  <motion.div
-                    className="text-6xl lg:text-7xl font-bold text-[#00CC66] mb-2"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                    transition={{ type: "spring", duration: 0.8 }}
-                  >
-                    +{count}%
-                  </motion.div>
-                  <div className="text-lg text-gray-400">
-                    Average Client Growth
-                  </div>
-                </div>
-
-                {/* Clean line chart */}
-                <div className="relative h-32 w-full">
-                  <svg
-                    className="w-full h-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                  >
-                    {/* Grid lines */}
-                    {[0, 25, 50, 75, 100].map((y) => (
-                      <line
-                        key={y}
-                        x1="0"
-                        y1={y}
-                        x2="100"
-                        y2={y}
-                        stroke="rgba(255,255,255,0.05)"
-                        strokeWidth="0.5"
-                      />
-                    ))}
-
-                    {/* Line path */}
-                    <motion.path
-                      d={`M ${chartPoints.map((p) => `${p.x},${p.y}`).join(" L ")}`}
-                      fill="none"
-                      stroke="#00CC66"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      initial={{ pathLength: 0 }}
-                      animate={isInView ? { pathLength: 1 } : {}}
-                      transition={{ duration: 2, ease: "easeInOut" }}
-                    />
-
-                    {/* Gradient fill under line */}
-                    <defs>
-                      <linearGradient
-                        id="chartGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="0%"
-                        y2="100%"
-                      >
-                        <stop
-                          offset="0%"
-                          stopColor="#00CC66"
-                          stopOpacity="0.3"
-                        />
-                        <stop
-                          offset="100%"
-                          stopColor="#00CC66"
-                          stopOpacity="0"
-                        />
-                      </linearGradient>
-                    </defs>
-                    <motion.path
-                      d={`M ${chartPoints.map((p) => `${p.x},${p.y}`).join(" L ")} L 100,100 L 0,100 Z`}
-                      fill="url(#chartGradient)"
-                      initial={{ opacity: 0 }}
-                      animate={isInView ? { opacity: 1 } : {}}
-                      transition={{ duration: 1.5, delay: 0.5 }}
-                    />
-
-                    {/* Data points */}
-                    {chartPoints.map((point, i) => (
-                      <motion.circle
-                        key={i}
-                        cx={point.x}
-                        cy={point.y}
-                        r="2"
-                        fill="#00CC66"
-                        initial={{ scale: 0 }}
-                        animate={isInView ? { scale: 1 } : {}}
-                        transition={{ duration: 0.3, delay: 0.8 + i * 0.1 }}
-                      />
-                    ))}
-                  </svg>
-                </div>
-
-                {/* Metric label */}
-                <div className="mt-6 text-xs text-gray-500 tracking-wider">
-                  MEASURED ACROSS 50+ SUCCESSFUL PROJECTS
-                </div>
               </div>
             </div>
           </div>

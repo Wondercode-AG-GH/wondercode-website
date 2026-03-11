@@ -1,15 +1,35 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../languageSwitcher";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function Header() {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sanityNavData, setSanityNavData] = useState<{
+    navItems?: any[];
+    ctaLabel?: string;
+    ctaLabelDe?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    async function fetchHeader() {
+      try {
+        const res = await fetch("/api/header");
+        if (res.ok) {
+          const data = await res.json();
+          setSanityNavData(data);
+        }
+      } catch (error) {
+        console.error("Error fetching header:", error);
+      }
+    }
+    fetchHeader();
+  }, []);
   const pathname = usePathname();
 
   // Extract locale from the pathname (e.g. "/en/services/erp" → "en")
@@ -36,14 +56,34 @@ export default function Header() {
   // True on any detail page (services, industries, case-studies)
   const isOnDetailPage = activeNavKey !== null;
 
-  const navItems = [
-    { label: t("header.nav.services"), key: "services" },
-    { label: t("header.nav.agentforce"), key: "agentforce" },
-    { label: t("header.nav.customEngineering"), key: "custom-engineering" },
-    { label: t("header.nav.industryExpertise"), key: "industry-expertise" },
-    { label: t("header.nav.successStories"), key: "success-stories" },
-    { label: t("header.nav.about"), key: "about" },
-  ];
+  const navItems =
+    sanityNavData?.navItems && sanityNavData.navItems.length > 0
+      ? sanityNavData.navItems.map((item: any) => ({
+          label:
+            i18n.language === "de" ? item.labelDe || item.label : item.label,
+          key: item.key,
+        }))
+      : [
+          { label: t("header.nav.services"), key: "services" },
+          { label: t("header.nav.agentforce"), key: "agentforce" },
+          {
+            label: t("header.nav.customEngineering"),
+            key: "custom-engineering",
+          },
+          {
+            label: t("header.nav.industryExpertise"),
+            key: "industry-expertise",
+          },
+          { label: t("header.nav.successStories"), key: "success-stories" },
+          { label: t("header.nav.about"), key: "about" },
+        ];
+
+  const ctaLabel =
+    sanityNavData?.ctaLabel || sanityNavData?.ctaLabelDe
+      ? i18n.language === "de"
+        ? sanityNavData.ctaLabelDe || sanityNavData.ctaLabel
+        : sanityNavData.ctaLabel || sanityNavData.ctaLabelDe
+      : t("header.cta");
 
   /**
    * Resolve the correct href for a nav item.
@@ -150,7 +190,7 @@ export default function Header() {
                 whileTap={{ scale: 0.97 }}
                 className="hidden md:block px-3 lg:px-4 xl:px-5 2xl:px-6 py-2 md:py-2.5 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-xs lg:text-[13px] xl:text-sm transition-all shadow-md hover:shadow-lg hover:shadow-[#00CC66]/30 whitespace-nowrap"
               >
-                {t("header.cta")}
+                {ctaLabel}
               </motion.button>
 
               <motion.button
@@ -215,7 +255,7 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full mt-4 py-4 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-base sm:text-lg shadow-md whitespace-nowrap"
               >
-                {t("header.cta")}
+                {ctaLabel}
               </motion.button>
             </div>
           </motion.div>
