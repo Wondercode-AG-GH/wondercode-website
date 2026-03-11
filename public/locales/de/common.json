@@ -151,9 +151,14 @@
   },
   "aboutUsSection": {
     "badge": "ÜBER UNS",
-    "title": "Menschliche Strategie,",
-    "titleHighlight": "Intelligenter Code",
-    "description": "Wir verbinden die Präzision und Zuverlässigkeit von Schweizer Engineering mit der transformativen Kraft von künstlicher Intelligenz. Unser Team aus Strategisten, Ingenieuren und KI-Spezialisten implementiert nicht nur Technologie – wir architekturieren Lösungen, die Ihre gesamte Organisation höherstufen.",
+    "title": "Systeme, die im",
+    "about": "Über",
+    "us": "Wondercode",
+    "titleHighlight": "Alltag funktionieren",
+    "description": "Wondercode ist ein Technologiepartner für Unternehmen im DACH-Raum, die ihre Systeme sauber aufbauen und weiterentwickeln wollen.",
+    "description2": "Wir unterstützen unsere Kunden bei der Implementierung von CRM-Plattformen, der Architektur komplexer Systemlandschaften und der Entwicklung individueller Anwendungen.",
+    "description3": "Viele Projekte beginnen mit einer klaren Frage: Wie strukturieren wir unsere Prozesse besser, verbinden Systeme und schaffen eine Grundlage, die langfristig funktioniert?",
+    "description4": "Genau daran arbeiten wir – gemeinsam mit unseren Kunden.",
     "stats": {
       "experience": "15+",
       "experienceLabel": "Jahre Erfahrung",

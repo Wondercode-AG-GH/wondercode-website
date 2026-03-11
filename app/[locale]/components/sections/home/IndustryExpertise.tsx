@@ -50,13 +50,6 @@ export default function IndustryExpertise() {
       >
         {/* Section Header */}
         <div className="mb-12 md:mb-20" style={{ position: "relative" }}>
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#00CC66]/10 border border-[#00CC66]/30 backdrop-blur-xl mb-8">
-            <div className="w-2.5 h-2.5 bg-[#00CC66] rounded-full" />
-            <span className="text-sm font-medium text-[#00CC66]">
-              {t("industriesSection.badge")}
-            </span>
-          </div>
-
           <h2 className="text-4xl md:text-6xl font-bold mb-4 md:mb-6 text-white">
             {t("industriesSection.title")}{" "}
             <span className="text-[#00CC66]">

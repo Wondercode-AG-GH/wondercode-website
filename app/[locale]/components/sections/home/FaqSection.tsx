@@ -62,15 +62,6 @@ export default function FAQSection() {
           className="text-center mb-16"
           style={{ position: "relative" }}
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#00CC66]/10 border border-[#00CC66]/30 backdrop-blur-xl mb-8">
-            <motion.div
-              className="w-2.5 h-2.5 bg-[#00CC66] rounded-full"
-              animate={{ scale: [1, 1.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className="text-sm font-medium text-[#00CC66]">FAQ</span>
-          </div>
-
           <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
             {i18n.language === "en"
               ? "Questions & Answers"

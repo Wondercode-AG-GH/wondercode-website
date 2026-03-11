@@ -66,6 +66,15 @@ export default function AboutUs() {
       className="max-w-[1600px] mx-auto px-5 md:px-8 relative"
       style={{ position: "relative" }}
     >
+      <div
+        className="text-center mb-12 md:mb-20"
+        style={{ position: "relative" }}
+      >
+        <h2 className="text-4xl md:text-7xl font-bold mb-4 md:mb-6">
+          {t("aboutUsSection.about")}{" "}
+          <span className="text-[#00CC66]"> {t("aboutUsSection.us")}</span>
+        </h2>
+      </div>
       {/* Bento Grid */}
       <div
         className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 relative"
@@ -125,40 +134,39 @@ export default function AboutUs() {
               >
                 {t("aboutUsSection.description")}
               </motion.p>
-
-              <motion.div
+              <br />
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="mt-10 grid grid-cols-3 gap-8"
+                transition={{ delay: 0.4 }}
+                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
-                <div>
-                  <div className="text-4xl font-bold text-[#00CC66] mb-2">
-                    {t("aboutUsSection.stats.experience")}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {t("aboutUsSection.stats.experienceLabel")}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-4xl font-bold text-[#00CC66] mb-2">
-                    {t("aboutUsSection.stats.projects")}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {t("aboutUsSection.stats.projectsLabel")}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-4xl font-bold text-[#00CC66] mb-2">
-                    {t("aboutUsSection.stats.satisfaction")}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {t("aboutUsSection.stats.satisfactionLabel")}
-                  </div>
-                </div>
-              </motion.div>
+                {t("aboutUsSection.description2")}
+              </motion.p>
+              <br />
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                style={{ position: "relative" }}
+              >
+                {t("aboutUsSection.description3")}
+              </motion.p>
+              <br />
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                style={{ position: "relative" }}
+              >
+                {t("aboutUsSection.description4")}
+              </motion.p>
             </div>
           </div>
         </motion.div>
@@ -220,7 +228,7 @@ export default function AboutUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-7"
+          className="lg:col-span-12"
           style={{ position: "relative" }}
         >
           <div className="relative h-full p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/40 backdrop-blur-xl transition-all duration-500 overflow-hidden">
@@ -262,130 +270,6 @@ export default function AboutUs() {
                     </div>
                   </motion.div>
                 ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Bottom Right - Live Impact (Vertical) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="lg:col-span-5 group"
-          style={{ position: "relative" }}
-        >
-          <div className="relative h-full p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/40 backdrop-blur-xl transition-all duration-500 overflow-hidden min-h-[300px] flex flex-col">
-            {/* Ambient glow */}
-            <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-[#00CC66]/0 group-hover:bg-[#00CC66]/10 rounded-full blur-[80px] transition-all duration-500" />
-
-            <div className="relative z-10 flex-1 flex flex-col">
-              <h3
-                className="text-2xl font-bold mb-4 text-white"
-                style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
-              >
-                Live <span className="text-[#00CC66]">Impact</span>
-              </h3>
-
-              <div className="flex-1 flex flex-col justify-center">
-                {/* Counting number */}
-                <div ref={impactRef} className="mb-8">
-                  <motion.div
-                    className="text-6xl lg:text-7xl font-bold text-[#00CC66] mb-2"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                    transition={{ type: "spring", duration: 0.8 }}
-                  >
-                    +{count}%
-                  </motion.div>
-                  <div className="text-lg text-gray-400">
-                    Average Client Growth
-                  </div>
-                </div>
-
-                {/* Clean line chart */}
-                <div className="relative h-32 w-full">
-                  <svg
-                    className="w-full h-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                  >
-                    {/* Grid lines */}
-                    {[0, 25, 50, 75, 100].map((y) => (
-                      <line
-                        key={y}
-                        x1="0"
-                        y1={y}
-                        x2="100"
-                        y2={y}
-                        stroke="rgba(255,255,255,0.05)"
-                        strokeWidth="0.5"
-                      />
-                    ))}
-
-                    {/* Line path */}
-                    <motion.path
-                      d={`M ${chartPoints.map((p) => `${p.x},${p.y}`).join(" L ")}`}
-                      fill="none"
-                      stroke="#00CC66"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      initial={{ pathLength: 0 }}
-                      animate={isInView ? { pathLength: 1 } : {}}
-                      transition={{ duration: 2, ease: "easeInOut" }}
-                    />
-
-                    {/* Gradient fill under line */}
-                    <defs>
-                      <linearGradient
-                        id="chartGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="0%"
-                        y2="100%"
-                      >
-                        <stop
-                          offset="0%"
-                          stopColor="#00CC66"
-                          stopOpacity="0.3"
-                        />
-                        <stop
-                          offset="100%"
-                          stopColor="#00CC66"
-                          stopOpacity="0"
-                        />
-                      </linearGradient>
-                    </defs>
-                    <motion.path
-                      d={`M ${chartPoints.map((p) => `${p.x},${p.y}`).join(" L ")} L 100,100 L 0,100 Z`}
-                      fill="url(#chartGradient)"
-                      initial={{ opacity: 0 }}
-                      animate={isInView ? { opacity: 1 } : {}}
-                      transition={{ duration: 1.5, delay: 0.5 }}
-                    />
-
-                    {/* Data points */}
-                    {chartPoints.map((point, i) => (
-                      <motion.circle
-                        key={i}
-                        cx={point.x}
-                        cy={point.y}
-                        r="2"
-                        fill="#00CC66"
-                        initial={{ scale: 0 }}
-                        animate={isInView ? { scale: 1 } : {}}
-                        transition={{ duration: 0.3, delay: 0.8 + i * 0.1 }}
-                      />
-                    ))}
-                  </svg>
-                </div>
-
-                {/* Metric label */}
-                <div className="mt-6 text-xs text-gray-500 tracking-wider">
-                  MEASURED ACROSS 50+ SUCCESSFUL PROJECTS
-                </div>
               </div>
             </div>
           </div>
