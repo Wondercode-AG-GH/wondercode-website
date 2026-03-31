@@ -4,15 +4,60 @@ import { motion } from "motion/react";
 export function LogoMarquee() {
   // 10 minimalist, abstract enterprise logos - Geometric Tech Style
   const logos = [
-    <img key="1" src="/logos/21G_26.jpg" alt="21G" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="2" src="/logos/Heim_Logo_1B_RGB_schwarz_26.png" alt="Heim" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="3" src="/logos/Logo_SwissQuant_Large_26.jpg" alt="SwissQuant" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="4" src="/logos/autofox_26.svg" alt="Autofox" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="5" src="/logos/chimpy-logo_26.svg" alt="Chimpy" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="6" src="/logos/ec-promo_26.png" alt="EC Promo" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="7" src="/logos/histocom_26.svg" alt="Histocom" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="8" src="/logos/logo-blumer-partner_26.svg" alt="Blumer Partner" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
-    <img key="9" src="/logos/logo-sah-zuerich-cropped-small_26.svg" alt="SAH Zuerich" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img
+      key="1"
+      src="/logos/21G_26.jpg"
+      alt="21G"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="2"
+      src="/logos/Heim_Logo_1B_RGB_schwarz_26.png"
+      alt="Heim"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="3"
+      src="/logos/Logo_SwissQuant_Large_26.jpg"
+      alt="SwissQuant"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="4"
+      src="/logos/autofox_26.svg"
+      alt="Autofox"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="5"
+      src="/logos/chimpy-logo_26.svg"
+      alt="Chimpy"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="6"
+      src="/logos/ec-promo_26.png"
+      alt="EC Promo"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="7"
+      src="/logos/histocom_26.svg"
+      alt="Histocom"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="8"
+      src="/logos/logo-blumer-partner_26.svg"
+      alt="Blumer Partner"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
+    <img
+      key="9"
+      src="/logos/logo-sah-zuerich-cropped-small_26.svg"
+      alt="SAH Zuerich"
+      className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity"
+    />,
   ];
 
   // Duplicate logos for seamless infinite scroll

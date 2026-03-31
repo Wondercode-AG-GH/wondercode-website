@@ -192,7 +192,7 @@ export default function AboutUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-7 group"
+          className="lg:col-span-6 group"
           style={{ position: "relative" }}
         >
           <div className="relative h-full p-10 lg:p-14 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/40 backdrop-blur-xl transition-all duration-500 overflow-hidden min-h-[400px] flex flex-col justify-center">
@@ -217,7 +217,7 @@ export default function AboutUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
-                className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-8 leading-[1.1]"
+                className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-8 leading-[1.1]"
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   position: "relative",
@@ -233,7 +233,7 @@ export default function AboutUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                className="text-base lg:text-lg text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
                 {description1}
@@ -244,7 +244,7 @@ export default function AboutUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                className="text-base lg:text-lg text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
                 {description2}
@@ -255,7 +255,7 @@ export default function AboutUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                className="text-base lg:text-lg text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
                 {description3}
@@ -266,7 +266,7 @@ export default function AboutUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="text-xl lg:text-2xl text-gray-400 leading-relaxed max-w-3xl"
+                className="text-base lg:text-lg text-gray-400 leading-relaxed max-w-3xl"
                 style={{ position: "relative" }}
               >
                 {description4}
@@ -275,85 +275,47 @@ export default function AboutUs() {
           </div>
         </motion.div>
 
-        {/* Top Right - The Founders (Square) */}
+        {/* Top Right - The Founders (Expanded Width) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="lg:col-span-5 group"
+          className="lg:col-span-6 group flex"
           style={{ position: "relative" }}
         >
-          {/* DESKTOP VIEW - Kept exactly as it was previously */}
-          <div className="hidden lg:block relative h-full min-h-[400px] rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/60 backdrop-blur-xl transition-all duration-500 overflow-hidden">
-            {/* Malachite border glow on hover */}
-            <div className="absolute inset-0 rounded-3xl shadow-[0_0_0_1px_rgba(0,204,102,0)] group-hover:shadow-[0_0_20px_2px_rgba(0,204,102,0.3)] transition-all duration-500" />
-
-            {/* Image (Fills the whole height/width as requested) */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden">
+          <div className="relative w-full rounded-3xl bg-[#0a0a0a] border border-white/10 hover:border-[#00CC66]/40 transition-all duration-500 overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[650px]">
+            {/* The Image - High impact object-cover */}
+            <div className="absolute inset-0 z-0">
               <ImageWithFallback
                 src={foundersImage}
                 alt="The Founders"
-                className="w-full h-full object-cover object-[center_35%]"
+                className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-[0.9]"
               />
+              {/* Complex gradient layer */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
             </div>
 
-            {/* Content overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 z-10 w-full">
+            {/* Content overlay - Optimised for mobile visibility */}
+            <div className="absolute bottom-0 left-0 right-0 p-3 md:p-8 z-10 w-full mb-1 md:mb-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
                 style={{ position: "relative" }}
-                className="bg-black/50 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-2xl"
+                className="bg-black/20 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/10 shadow-xl"
               >
-                <div className="text-sm text-[#00CC66] font-semibold mb-2 tracking-wider">
+                <div className="text-[9px] md:text-xs text-[#00CC66] font-bold mb-1 md:mb-2 tracking-[0.2em] uppercase">
                   {foundersLabel}
                 </div>
                 <h3
-                  className="text-2xl font-bold mb-2 text-white"
+                  className="text-lg md:text-2xl font-bold mb-1 md:mb-2 text-white"
                   style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
                 >
                   {foundersTitle}
                 </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {foundersDescription}
-                </p>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* MOBILE / TABLET VIEW - Responsive split layout */}
-          <div className="lg:hidden relative flex flex-col rounded-3xl bg-[#111111] border border-white/10 hover:border-[#00CC66]/60 transition-all duration-500 overflow-hidden">
-            {/* Image Container - Top half */}
-            <div className="relative h-[250px] sm:h-[300px] w-full overflow-hidden shrink-0">
-              <ImageWithFallback
-                src={foundersImage}
-                alt="The Founders"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Content Container - Bottom half */}
-            <div className="relative p-5 sm:p-6 z-10 w-full bg-[#111111]">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                style={{ position: "relative" }}
-              >
-                <div className="text-xs sm:text-sm text-[#00CC66] font-semibold mb-2 tracking-wider">
-                  {foundersLabel}
-                </div>
-                <h3
-                  className="text-xl sm:text-2xl font-bold mb-2 text-white"
-                  style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
-                >
-                  {foundersTitle}
-                </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-200 text-[10px] md:text-sm leading-relaxed">
                   {foundersDescription}
                 </p>
               </motion.div>
@@ -361,13 +323,13 @@ export default function AboutUs() {
           </div>
         </motion.div>
 
-        {/* Bottom Left - Core Values (Horizontal) */}
+        {/* Bottom - Core Values (Restored Original Design) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-12"
+          className="lg:col-span-12 mt-2"
           style={{ position: "relative" }}
         >
           <div className="relative h-full p-8 lg:p-10 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/40 backdrop-blur-xl transition-all duration-500 overflow-hidden">
