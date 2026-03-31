@@ -4,185 +4,15 @@ import { motion } from "motion/react";
 export function LogoMarquee() {
   // 10 minimalist, abstract enterprise logos - Geometric Tech Style
   const logos = [
-    // Logo 1 - Nested Squares
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <rect
-        x="15"
-        y="15"
-        width="50"
-        height="50"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <rect
-        x="25"
-        y="25"
-        width="30"
-        height="30"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-    </svg>,
-
-    // Logo 2 - Circle with Cross
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <circle cx="40" cy="40" r="25" stroke="currentColor" strokeWidth="2.5" />
-      <path
-        d="M 40 20 L 40 60 M 20 40 L 60 40"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-    </svg>,
-
-    // Logo 3 - Pentagon with Dot
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <path
-        d="M 40 15 L 65 35 L 55 65 L 25 65 L 15 35 Z"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <circle cx="40" cy="40" r="8" fill="currentColor" />
-    </svg>,
-
-    // Logo 4 - Hexagon Horizontal
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <path
-        d="M 25 20 L 55 20 L 65 40 L 55 60 L 25 60 L 15 40 Z"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-    </svg>,
-
-    // Logo 5 - Hexagon with Circle
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <path
-        d="M 40 15 L 60 30 L 60 50 L 40 65 L 20 50 L 20 30 Z"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <circle cx="40" cy="40" r="12" stroke="currentColor" strokeWidth="2.5" />
-    </svg>,
-
-    // Logo 6 - Rounded Square with Check
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <rect
-        x="20"
-        y="20"
-        width="40"
-        height="40"
-        rx="8"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <path
-        d="M 30 40 L 40 50 L 55 30"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>,
-
-    // Logo 7 - Triangle with Line
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <path
-        d="M 40 15 L 65 65 L 15 65 Z"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-      />
-      <path d="M 28 50 L 52 50" stroke="currentColor" strokeWidth="2.5" />
-    </svg>,
-
-    // Logo 8 - Concentric Circles
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <circle cx="40" cy="40" r="25" stroke="currentColor" strokeWidth="2.5" />
-      <circle cx="40" cy="40" r="15" stroke="currentColor" strokeWidth="2.5" />
-      <circle cx="40" cy="40" r="5" fill="currentColor" />
-    </svg>,
-
-    // Logo 9 - Rectangle with Lines
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <rect
-        x="15"
-        y="20"
-        width="50"
-        height="40"
-        rx="5"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <path
-        d="M 30 35 L 50 35 M 30 45 L 50 45"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>,
-
-    // Logo 10 - Square with X
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-    >
-      <path
-        d="M 25 25 L 55 25 L 55 55 L 25 55 Z"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <path
-        d="M 25 25 L 55 55 M 55 25 L 25 55"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-    </svg>,
+    <img key="1" src="/logos/21G_26.jpg" alt="21G" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="2" src="/logos/Heim_Logo_1B_RGB_schwarz_26.png" alt="Heim" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="3" src="/logos/Logo_SwissQuant_Large_26.jpg" alt="SwissQuant" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="4" src="/logos/autofox_26.svg" alt="Autofox" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="5" src="/logos/chimpy-logo_26.svg" alt="Chimpy" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="6" src="/logos/ec-promo_26.png" alt="EC Promo" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="7" src="/logos/histocom_26.svg" alt="Histocom" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="8" src="/logos/logo-blumer-partner_26.svg" alt="Blumer Partner" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
+    <img key="9" src="/logos/logo-sah-zuerich-cropped-small_26.svg" alt="SAH Zuerich" className="w-full h-full object-contain filter grayscale brightness-200 contrast-100 opacity-60 hover:opacity-100 transition-opacity" />,
   ];
 
   // Duplicate logos for seamless infinite scroll
@@ -202,12 +32,12 @@ export function LogoMarquee() {
 
       {/* Marquee Container - TRANSPARENT BACKGROUND */}
       <div
-        className="relative h-16 md:h-20 overflow-hidden"
+        className="relative h-20 md:h-28 overflow-hidden"
         style={{ position: "relative" }}
       >
         {/* Animated Logo Track */}
         <motion.div
-          className="flex items-center gap-12 md:gap-16 lg:gap-20 absolute"
+          className="flex items-center gap-16 md:gap-24 lg:gap-28 absolute"
           style={{ position: "absolute" }}
           animate={{
             x: [0, -50 + "%"],
@@ -223,7 +53,7 @@ export function LogoMarquee() {
           {duplicatedLogos.map((logo, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16"
+              className="shrink-0 w-16 h-16 md:w-24 md:h-24"
               style={{
                 color: "rgba(255, 255, 255, 0.4)",
                 position: "relative",
