@@ -284,18 +284,18 @@ export default function AboutUs() {
           className="lg:col-span-5 group"
           style={{ position: "relative" }}
         >
-          <div className="relative h-full min-h-[400px] rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/60 backdrop-blur-xl transition-all duration-500 overflow-hidden">
+          {/* DESKTOP VIEW - Kept exactly as it was previously */}
+          <div className="hidden lg:block relative h-full min-h-[400px] rounded-3xl bg-white/[0.02] border border-white/10 hover:border-[#00CC66]/60 backdrop-blur-xl transition-all duration-500 overflow-hidden">
             {/* Malachite border glow on hover */}
             <div className="absolute inset-0 rounded-3xl shadow-[0_0_0_1px_rgba(0,204,102,0)] group-hover:shadow-[0_0_20px_2px_rgba(0,204,102,0.3)] transition-all duration-500" />
 
-            {/* Image with grayscale filter */}
+            {/* Image (Fills the whole height/width as requested) */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden">
               <ImageWithFallback
                 src={foundersImage}
                 alt="The Founders"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_35%]"
               />
-              {/* Dark overlay removed as requested */}
             </div>
 
             {/* Content overlay */}
@@ -313,6 +313,42 @@ export default function AboutUs() {
                 </div>
                 <h3
                   className="text-2xl font-bold mb-2 text-white"
+                  style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
+                >
+                  {foundersTitle}
+                </h3>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {foundersDescription}
+                </p>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* MOBILE / TABLET VIEW - Responsive split layout */}
+          <div className="lg:hidden relative flex flex-col rounded-3xl bg-[#111111] border border-white/10 hover:border-[#00CC66]/60 transition-all duration-500 overflow-hidden">
+            {/* Image Container - Top half */}
+            <div className="relative h-[250px] sm:h-[300px] w-full overflow-hidden shrink-0">
+              <ImageWithFallback
+                src={foundersImage}
+                alt="The Founders"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Content Container - Bottom half */}
+            <div className="relative p-5 sm:p-6 z-10 w-full bg-[#111111]">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                style={{ position: "relative" }}
+              >
+                <div className="text-xs sm:text-sm text-[#00CC66] font-semibold mb-2 tracking-wider">
+                  {foundersLabel}
+                </div>
+                <h3
+                  className="text-xl sm:text-2xl font-bold mb-2 text-white"
                   style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
                 >
                   {foundersTitle}
