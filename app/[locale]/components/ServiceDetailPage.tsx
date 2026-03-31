@@ -55,10 +55,6 @@ interface ServiceDetailProps {
   heroCta?: string;
   heroCtaDe?: string;
   scopeCards: ScopeCard[];
-  timelineHeadlineWhite?: string;
-  timelineHeadlineAccent?: string;
-  timelineHeadlineWhiteDe?: string;
-  timelineHeadlineAccentDe?: string;
   timelineSubline?: string;
   timelineSublineDe?: string;
   timelineSteps?: TimelineStep[];
@@ -71,12 +67,10 @@ interface ServiceDetailProps {
   }[];
   ctaHeadline?: string;
   ctaHeadlineDe?: string;
-  ctaText?: string;
-  ctaTextDe?: string;
-  ctaButtonPrimary?: string;
-  ctaButtonPrimaryDe?: string;
-  ctaButtonSecondary?: string;
-  ctaButtonSecondaryDe?: string;
+  ctaDescription?: string;
+  ctaDescriptionDe?: string;
+  ctaButtonText?: string;
+  ctaButtonTextDe?: string;
   heroImage?: {
     asset?: { url: string; _id?: string };
     alt?: string;
@@ -84,13 +78,19 @@ interface ServiceDetailProps {
     crop?: any;
   };
   caseStudyMetrics?: {
+    timeToValueHeading?: string;
+    timeToValueHeadingDe?: string;
     timeToValue?: string;
     timeToValueDe?: string;
     timeToValueLabel?: string;
     timeToValueLabelDe?: string;
+    userAdoptionHeading?: string;
+    userAdoptionHeadingDe?: string;
     userAdoption?: string;
     userAdoptionLabel?: string;
     userAdoptionLabelDe?: string;
+    efficiencyHeading?: string;
+    efficiencyHeadingDe?: string;
     efficiency?: string;
     efficiencyLabel?: string;
     efficiencyLabelDe?: string;
@@ -133,10 +133,6 @@ export default function ServiceDetailPage({
   scopeHeadlineWhiteDe,
   scopeHeadlineAccentDe,
   scopeCards,
-  timelineHeadlineWhite,
-  timelineHeadlineAccent,
-  timelineHeadlineWhiteDe,
-  timelineHeadlineAccentDe,
   timelineSubline,
   timelineSublineDe,
   timelineSteps,
@@ -144,12 +140,10 @@ export default function ServiceDetailPage({
   faqItems,
   ctaHeadline,
   ctaHeadlineDe,
-  ctaText,
-  ctaTextDe,
-  ctaButtonPrimary,
-  ctaButtonPrimaryDe,
-  ctaButtonSecondary,
-  ctaButtonSecondaryDe,
+  ctaDescription,
+  ctaDescriptionDe,
+  ctaButtonText,
+  ctaButtonTextDe,
   heroImage,
   caseStudyMetrics,
   caseStudyEyebrow,
@@ -354,53 +348,39 @@ export default function ServiceDetailPage({
               </p>
 
               {/* Benefit List with Green Checkmarks */}
-              <div className="space-y-4 mb-10">
-                {(benefitList && benefitList.length > 0
-                  ? benefitList
-                  : [
-                      {
-                        text: "Default Benefit 1",
-                        textDe: "Strikter Bauplan statt 'agilem' Chaos",
-                      },
-                      {
-                        text: "Default Benefit 2",
-                        textDe: "Skalierbare Datenmodelle ab Tag 1",
-                      },
-                      {
-                        text: "Default Benefit 3",
-                        textDe: "Keine technischen Schulden",
-                      },
-                    ]
-                ).map((benefit, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <div
-                      className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
-                      style={{ backgroundColor: `${accentColor}20` }}
-                    >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
+              {benefitList && benefitList.length > 0 && (
+                <div className="space-y-4 mb-10">
+                  {benefitList.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div
+                        className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5"
+                        style={{ backgroundColor: `${accentColor}20` }}
                       >
-                        <path
-                          d="M11.6667 3.5L5.25 9.91667L2.33334 7"
-                          stroke={accentColor}
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                        >
+                          <path
+                            d="M11.6667 3.5L5.25 9.91667L2.33334 7"
+                            stroke={accentColor}
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <p
+                        className="text-base leading-relaxed"
+                        style={{ color: "#CCCCCC" }}
+                      >
+                        {i18n.language === "de" ? benefit.textDe : benefit.text}
+                      </p>
                     </div>
-                    <p
-                      className="text-base leading-relaxed"
-                      style={{ color: "#CCCCCC" }}
-                    >
-                      {i18n.language === "de" ? benefit.textDe : benefit.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
 
               {/* CTA Buttons */}
               <div className="flex flex-wrap items-center gap-4">
@@ -416,9 +396,7 @@ export default function ServiceDetailPage({
                     color: "#050505",
                   }}
                 >
-                  {i18n.language === "de"
-                    ? heroCtaDe || "Strategie-Gespräch buchen"
-                    : heroCta || "Book Strategy Session"}
+                  {i18n.language === "de" ? heroCtaDe : heroCta}
                   <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </div>
@@ -453,7 +431,7 @@ export default function ServiceDetailPage({
                   >
                     <img
                       src={heroImage.asset.url}
-                      alt={heroImage.alt || "Service hero visualization"}
+                      alt={heroImage.alt}
                       className="w-full h-full object-cover rounded-3xl"
                       style={{
                         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
@@ -780,14 +758,14 @@ export default function ServiceDetailPage({
                 <>
                   {scopeHeadlineWhiteDe || "Im "}{" "}
                   <span style={{ color: accentColor }}>
-                    {scopeHeadlineAccentDe || "Paket enthalten"}
+                    {scopeHeadlineAccentDe}
                   </span>
                 </>
               ) : (
                 <>
-                  {scopeHeadlineWhite || "Included in the "}{" "}
+                  {scopeHeadlineWhite}{" "}
                   <span style={{ color: accentColor }}>
-                    {scopeHeadlineAccent || "Package"}
+                    {scopeHeadlineAccent}
                   </span>
                 </>
               )}
@@ -877,10 +855,8 @@ export default function ServiceDetailPage({
         </div>
       </section>
 
-      {/* 3. THE DEPLOYMENT CYCLE - 4-Week Timeline */}
-      <section className="relative py-24 px-8" style={{ position: "relative" }}>
+      {/* <section className="relative py-24 px-8" style={{ position: "relative" }}>
         <div className="max-w-[1400px] mx-auto">
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -891,25 +867,19 @@ export default function ServiceDetailPage({
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               {i18n.language === "de" ? (
                 <>
-                  <span style={{ color: accentColor }}>
-                    {timelineHeadlineAccentDe || "4-Week"}
-                  </span>{" "}
-                  {timelineHeadlineWhiteDe || "Implementierungsprozess"}
+                  <span style={{ color: accentColor }}>5-Week</span>{" "}
+                  Implementierungsprozess
                 </>
               ) : (
                 <>
-                  <span style={{ color: accentColor }}>
-                    {timelineHeadlineAccent || "4-Week"}
-                  </span>{" "}
-                  {timelineHeadlineWhite || "Implementation Process"}
+                  <span style={{ color: accentColor }}>5-Week</span>{" "}
+                  Implementation Process
                 </>
               )}
             </h2>
           </motion.div>
 
-          {/* Horizontal Timeline */}
           <div className="relative" style={{ position: "relative" }}>
-            {/* Connection Line */}
             <div
               className="absolute top-20 left-0 right-0 h-[2px] hidden md:block"
               style={{
@@ -929,7 +899,6 @@ export default function ServiceDetailPage({
                   className="relative text-center"
                   style={{ position: "relative" }}
                 >
-                  {/* Week Node */}
                   <motion.div
                     whileHover={{ scale: 1.1 }}
                     className="relative z-10 w-40 h-40 mx-auto mb-6 rounded-full border-2 flex flex-col items-center justify-center"
@@ -940,7 +909,6 @@ export default function ServiceDetailPage({
                       boxShadow: `0 0 40px ${accentColor}40`,
                     }}
                   >
-                    {/* Glowing ring animation */}
                     <motion.div
                       className="absolute inset-0 rounded-full"
                       style={{
@@ -958,7 +926,6 @@ export default function ServiceDetailPage({
                       }}
                     />
 
-                    {/* Week Label */}
                     <div
                       className="text-sm font-medium mb-1"
                       style={{ color: "#999999" }}
@@ -973,7 +940,6 @@ export default function ServiceDetailPage({
                     </div>
                   </motion.div>
 
-                  {/* Phase Label */}
                   <h3 className="text-xl font-bold">
                     {i18n.language === "en" ? item.title : item.titleDe}
                   </h3>
@@ -982,7 +948,7 @@ export default function ServiceDetailPage({
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 3.5. PROOF OF EXECUTION - Success Story (Case Study) */}
       <section className="relative py-24 px-8" style={{ position: "relative" }}>
@@ -1016,16 +982,14 @@ export default function ServiceDetailPage({
                   color: accentColor,
                 }}
               >
-                {i18n.language === "de"
-                  ? caseStudyEyebrowDe || "CASE STUDY"
-                  : caseStudyEyebrow || "CASE STUDY"}
+                {i18n.language === "de" ? caseStudyEyebrowDe : caseStudyEyebrow}
               </div>
 
               {/* Headline */}
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 {i18n.language === "de"
-                  ? caseStudyHeadlineDe || "Proof of Execution."
-                  : caseStudyHeadline || "Proof of Execution."}
+                  ? caseStudyHeadlineDe
+                  : caseStudyHeadline}
               </h2>
 
               {/* Subline */}
@@ -1033,11 +997,7 @@ export default function ServiceDetailPage({
                 className="text-2xl mb-8 leading-relaxed"
                 style={{ color: "#CCCCCC" }}
               >
-                {i18n.language === "de"
-                  ? caseStudySublineDe ||
-                    "Wie Case Study Solutions in 28 Tagen skalierte."
-                  : caseStudySubline ||
-                    "How Case Study Solutions scaled in 28 days."}
+                {i18n.language === "de" ? caseStudySublineDe : caseStudySubline}
               </p>
 
               {/* Story Content Block */}
@@ -1174,8 +1134,8 @@ export default function ServiceDetailPage({
                           style={{ color: "#999999" }}
                         >
                           {i18n.language === "en"
-                            ? "Time-to-Value"
-                            : "Zeit-bis-Wert"}
+                            ? caseStudyMetrics?.timeToValueHeading
+                            : caseStudyMetrics?.timeToValueHeadingDe}
                         </p>
                       </div>
                       <div
@@ -1262,8 +1222,8 @@ export default function ServiceDetailPage({
                           style={{ color: "#999999" }}
                         >
                           {i18n.language === "en"
-                            ? "User Adoption"
-                            : "Nutzer-Adoption"}
+                            ? caseStudyMetrics?.userAdoptionHeading
+                            : caseStudyMetrics?.userAdoptionHeadingDe}
                         </p>
                       </div>
                       <div
@@ -1345,7 +1305,9 @@ export default function ServiceDetailPage({
                           className="text-xs font-semibold tracking-wide uppercase"
                           style={{ color: "#999999" }}
                         >
-                          {i18n.language === "en" ? "Efficiency" : "Effizienz"}
+                          {i18n.language === "en"
+                            ? caseStudyMetrics?.efficiencyHeading
+                            : caseStudyMetrics?.efficiencyHeadingDe}
                         </p>
                       </div>
                       <div
@@ -1572,17 +1534,13 @@ export default function ServiceDetailPage({
             {/* Content */}
             <div className="relative z-10" style={{ position: "relative" }}>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                {i18n.language === "en"
-                  ? "Ready to Start?"
-                  : "Bereit zu starten?"}
+                {i18n.language === "de" ? ctaHeadlineDe : ctaHeadline}
               </h2>
               <p
                 className="text-lg mb-10 max-w-2xl mx-auto leading-relaxed"
                 style={{ color: "#CCCCCC" }}
               >
-                {i18n.language === "en"
-                  ? "Let's discuss your requirements and create a tailored implementation plan."
-                  : "Lassen Sie uns Ihre Anforderungen besprechen und einen maßgeschneiderten Implementierungsplan erstellen."}
+                {i18n.language === "de" ? ctaDescriptionDe : ctaDescription}
               </p>
 
               {/* CTA Button */}
@@ -1598,10 +1556,8 @@ export default function ServiceDetailPage({
                   color: "#050505",
                 }}
               >
-                {i18n.language === "en"
-                  ? "Book Strategy Call"
-                  : "Strategie-Gespräch buchen"}
-                <ArrowRight className="w-6 h-6" />
+                {i18n.language === "de" ? ctaButtonTextDe : ctaButtonText}
+                <ArrowRight className="w-5 h-5" />
               </motion.button>
             </div>
           </motion.div>

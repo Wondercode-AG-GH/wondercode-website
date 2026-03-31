@@ -120,31 +120,6 @@ export default defineType({
       description: "e.g. 'Paket enthalten'",
     }),
 
-    defineField({
-      name: "timelineHeadlineAccent",
-      title: "Timeline Section Headline - Green Part (EN)",
-      type: "string",
-      description: "e.g. '4-Week'",
-    }),
-    defineField({
-      name: "timelineHeadlineWhite",
-      title: "Timeline Section Headline - White Part (EN)",
-      type: "string",
-      description: "e.g. ' Implementation Process'",
-    }),
-    defineField({
-      name: "timelineHeadlineAccentDe",
-      title: "Timeline Section Headline - Green Part (DE)",
-      type: "string",
-      description: "e.g. '4-Week'",
-    }),
-    defineField({
-      name: "timelineHeadlineWhiteDe",
-      title: "Timeline Section Headline - White Part (DE)",
-      type: "string",
-      description: "e.g. ' Implementierungsprozess'",
-    }),
-
     // Hero Benefit List
     defineField({
       name: "benefitList",
@@ -331,6 +306,18 @@ export default defineType({
       type: "object",
       fields: [
         {
+          name: "timeToValueHeading",
+          title: "Time to Value Heading (EN)",
+          type: "string",
+          description: "e.g., Time-to-Value",
+        },
+        {
+          name: "timeToValueHeadingDe",
+          title: "Time to Value Heading (DE)",
+          type: "string",
+          description: "e.g., Zeit-bis-Wert",
+        },
+        {
           name: "timeToValue",
           title: "Time to Value (EN)",
           type: "string",
@@ -354,6 +341,18 @@ export default defineType({
           type: "string",
         },
         {
+          name: "userAdoptionHeading",
+          title: "User Adoption Heading (EN)",
+          type: "string",
+          description: "e.g., User Adoption",
+        },
+        {
+          name: "userAdoptionHeadingDe",
+          title: "User Adoption Heading (DE)",
+          type: "string",
+          description: "e.g., Nutzer-Adoption",
+        },
+        {
           name: "userAdoption",
           title: "User Adoption (EN)",
           type: "string",
@@ -369,6 +368,18 @@ export default defineType({
           name: "userAdoptionLabelDe",
           title: "User Adoption Label (DE)",
           type: "string",
+        },
+        {
+          name: "efficiencyHeading",
+          title: "Efficiency Heading (EN)",
+          type: "string",
+          description: "e.g., Efficiency",
+        },
+        {
+          name: "efficiencyHeadingDe",
+          title: "Efficiency Heading (DE)",
+          type: "string",
+          description: "e.g., Effizienz",
         },
         {
           name: "efficiency",
@@ -388,6 +399,38 @@ export default defineType({
           type: "string",
         },
       ],
+    }),
+
+    // Bottom CTA Section
+    defineField({
+      name: "ctaHeadline",
+      title: "Bottom CTA Headline (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "ctaHeadlineDe",
+      title: "Bottom CTA Headline (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "ctaDescription",
+      title: "Bottom CTA Description (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "ctaDescriptionDe",
+      title: "Bottom CTA Description (DE)",
+      type: "text",
+    }),
+    defineField({
+      name: "ctaButtonText",
+      title: "Bottom CTA Button Text (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "ctaButtonTextDe",
+      title: "Bottom CTA Button Text (DE)",
+      type: "string",
     }),
 
     // SEO
