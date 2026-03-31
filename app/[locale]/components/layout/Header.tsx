@@ -182,16 +182,22 @@ export default function Header() {
                 <LanguageSwitcher />
               </div>
 
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 0 30px rgba(0, 204, 102, 0.4)",
-                }}
-                whileTap={{ scale: 0.97 }}
-                className="hidden md:block px-3 lg:px-4 xl:px-5 2xl:px-6 py-2 md:py-2.5 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-xs lg:text-[13px] xl:text-sm transition-all shadow-md hover:shadow-lg hover:shadow-[#00CC66]/30 whitespace-nowrap"
+              <Link
+                href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {ctaLabel}
-              </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 30px rgba(0, 204, 102, 0.4)",
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                  className="hidden md:block px-3 lg:px-4 xl:px-5 2xl:px-6 py-2 md:py-2.5 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-xs lg:text-[13px] xl:text-sm transition-all shadow-md hover:shadow-lg hover:shadow-[#00CC66]/30 whitespace-nowrap"
+                >
+                  {ctaLabel}
+                </motion.button>
+              </Link>
 
               <motion.button
                 whileTap={{ scale: 0.92 }}
@@ -247,16 +253,22 @@ export default function Header() {
                 );
               })}
 
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full mt-4 py-4 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-base sm:text-lg shadow-md whitespace-nowrap"
+              <Link
+                href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
               >
-                {ctaLabel}
-              </motion.button>
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="w-full mt-4 py-4 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-base sm:text-lg shadow-md whitespace-nowrap"
+                >
+                  {ctaLabel}
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         )}

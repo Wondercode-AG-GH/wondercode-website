@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, Minus } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 interface FAQItem {
   _id: string;
@@ -216,16 +217,22 @@ export default function FAQSection() {
           style={{ position: "relative" }}
         >
           <p className="text-gray-400 mb-6">{ctaText}</p>
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 30px rgba(0, 204, 102, 0.5)",
-            }}
-            whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-base transition-all"
+          <Link
+            href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {buttonText}
-          </motion.button>
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 30px rgba(0, 204, 102, 0.5)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-4 bg-[#00CC66] text-[#0A0A0A] rounded-xl font-semibold text-base transition-all"
+            >
+              {buttonText}
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>

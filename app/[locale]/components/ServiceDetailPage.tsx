@@ -384,21 +384,27 @@ export default function ServiceDetailPage({
 
               {/* CTA Buttons */}
               <div className="flex flex-wrap items-center gap-4">
-                <motion.button
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: `0 0 30px ${accentColor}50`,
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  className="px-8 py-4 rounded-xl font-bold text-base flex items-center gap-2"
-                  style={{
-                    backgroundColor: accentColor,
-                    color: "#050505",
-                  }}
+                <Link
+                  href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {i18n.language === "de" ? heroCtaDe : heroCta}
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
+                  <motion.button
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: `0 0 30px ${accentColor}50`,
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-8 py-4 rounded-xl font-bold text-base flex items-center gap-2"
+                    style={{
+                      backgroundColor: accentColor,
+                      color: "#050505",
+                    }}
+                  >
+                    {i18n.language === "de" ? heroCtaDe : heroCta}
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.button>
+                </Link>
               </div>
             </motion.div>
 
@@ -1449,21 +1455,27 @@ export default function ServiceDetailPage({
               </p>
 
               {/* CTA Button */}
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: `0 0 40px ${accentColor}50`,
-                }}
-                whileTap={{ scale: 0.98 }}
-                className="px-10 py-5 rounded-xl font-semibold text-lg flex items-center gap-3 mx-auto"
-                style={{
-                  backgroundColor: accentColor,
-                  color: "#050505",
-                }}
+              <Link
+                href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {i18n.language === "de" ? ctaButtonTextDe : ctaButtonText}
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: `0 0 40px ${accentColor}50`,
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-10 py-5 rounded-xl font-semibold text-lg flex items-center gap-3 mx-auto"
+                  style={{
+                    backgroundColor: accentColor,
+                    color: "#050505",
+                  }}
+                >
+                  {i18n.language === "de" ? ctaButtonTextDe : ctaButtonText}
+                  <ArrowRight className="w-5 h-5" />
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         </div>

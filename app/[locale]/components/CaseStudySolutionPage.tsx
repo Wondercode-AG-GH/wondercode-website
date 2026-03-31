@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { ArrowRight, AlertTriangle, LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 import { iconMap } from "@/sanity/lib/iconMap";
 
 interface ChallengeIssue {
@@ -652,32 +653,38 @@ export default function CaseStudySolutionPage({
           >
             {i18n.language === "en" ? ctaDescription : ctaDescriptionDe}
           </p>
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 50px rgba(0, 204, 102, 0.6)",
-            }}
-            whileTap={{ scale: 0.98 }}
-            className="group px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 mx-auto transition-all relative overflow-hidden"
-            style={{
-              backgroundColor: "#00CC66",
-              color: "#050505",
-              position: "relative",
-              boxShadow: "0 0 0px rgba(0, 204, 102, 0)",
-            }}
+          <Link
+            href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <span className="relative z-10">
-              {i18n.language === "en" ? ctaButtonText : ctaButtonTextDe}
-            </span>
-            <ArrowRight className="w-6 h-6 relative z-10 group-hover:translate-x-1 transition-transform" />
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-[#00ff88] to-[#00CC66]"
-              style={{ position: "absolute" }}
-              initial={{ x: "-100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.button>
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 50px rgba(0, 204, 102, 0.6)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="group px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 mx-auto transition-all relative overflow-hidden"
+              style={{
+                backgroundColor: "#00CC66",
+                color: "#050505",
+                position: "relative",
+                boxShadow: "0 0 0px rgba(0, 204, 102, 0)",
+              }}
+            >
+              <span className="relative z-10">
+                {i18n.language === "en" ? ctaButtonText : ctaButtonTextDe}
+              </span>
+              <ArrowRight className="w-6 h-6 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#00ff88] to-[#00CC66]"
+                style={{ position: "absolute" }}
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
+          </Link>
         </motion.div>
       </section>
 

@@ -119,13 +119,12 @@ export default function Footer() {
           t("footer.company.contact"),
         ];
 
-  const legal = isGerman
+  const rawLegal = isGerman
     ? data?.legalListDe && data.legalListDe.length > 0
       ? data.legalListDe
       : [
           t("footer.legal.privacyPolicy"),
           t("footer.legal.termsOfService"),
-          t("footer.legal.cookiePolicy"),
           t("footer.legal.imprint"),
         ]
     : data?.legalList && data.legalList.length > 0
@@ -133,9 +132,17 @@ export default function Footer() {
       : [
           t("footer.legal.privacyPolicy"),
           t("footer.legal.termsOfService"),
-          t("footer.legal.cookiePolicy"),
           t("footer.legal.imprint"),
         ];
+
+  // Forcefully rename any Cookie Policy variant to Imprint
+  const legal = rawLegal.map((item: string) => {
+    const lower = item.toLowerCase();
+    if (lower.includes("cookie")) {
+      return isGerman ? t("footer.legal.imprint") : "Imprint";
+    }
+    return item;
+  });
 
   const email = data?.email || "hello@wondercode.ch";
   const phone = data?.phone || "+41 44 555 01 00";
@@ -299,15 +306,32 @@ export default function Footer() {
 
           {/* Legal Links */}
           <div className="flex flex-wrap items-center justify-center gap-6">
-            {legal.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-xs text-gray-500 hover:text-[#00CC66] transition-colors"
-              >
-                {item}
-              </a>
-            ))}
+            {legal.map((item: string) => {
+              let href = "#";
+              const locale = i18n.language || "en";
+              const label = item.toLowerCase();
+
+              // Robust matching for legal links
+              if (label.includes("privacy") || label.includes("datenschutz")) {
+                href = `/${locale}/privacy-policy`;
+              } else if (
+                label.includes("cookie") ||
+                label.includes("imprint") ||
+                label.includes("impressum")
+              ) {
+                href = `/${locale}/imprint`;
+              }
+
+              return (
+                <a
+                  key={item}
+                  href={href}
+                  className="text-xs text-gray-500 hover:text-[#00CC66] transition-colors"
+                >
+                  {item}
+                </a>
+              );
+            })}
           </div>
 
           {/* Swiss Flag Badge */}

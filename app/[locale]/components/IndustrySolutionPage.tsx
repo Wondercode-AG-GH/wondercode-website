@@ -219,25 +219,31 @@ export default function IndustrySolutionPage({
                 {i18n.language === "de" ? heroSublineDe : heroSubline}
               </p>
 
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: `0 0 40px ${accentColor}50`,
-                }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-3"
-                style={{
-                  backgroundColor: accentColor,
-                  color: "#050505",
-                }}
+              <Link
+                href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {i18n.language === "de"
-                  ? exploreArchitectureDe ||
-                    t("industryDetail.exploreArchitecture")
-                  : exploreArchitecture ||
-                    t("industryDetail.exploreArchitecture")}
-                <ArrowRight className="w-6 h-6" />
-              </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: `0 0 40px ${accentColor}50`,
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-8 py-4 rounded-xl font-semibold text-lg flex items-center gap-3"
+                  style={{
+                    backgroundColor: accentColor,
+                    color: "#050505",
+                  }}
+                >
+                  {i18n.language === "de"
+                    ? exploreArchitectureDe ||
+                      t("industryDetail.exploreArchitecture")
+                    : exploreArchitecture ||
+                      t("industryDetail.exploreArchitecture")}
+                  <ArrowRight className="w-6 h-6" />
+                </motion.button>
+              </Link>
             </motion.div>
 
             {/* Right: Hero Image or 3D Abstract Visualization */}
@@ -720,23 +726,29 @@ export default function IndustrySolutionPage({
                   `Let's architect your ${industryName.toLowerCase()} solution.`}
             </p>
 
-            <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: `0 0 40px ${accentColor}50`,
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="px-10 py-5 rounded-xl font-semibold text-lg flex items-center gap-3 mx-auto"
-              style={{
-                backgroundColor: accentColor,
-                color: "#050505",
-              }}
+            <Link
+              href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {i18n.language === "de"
-                ? ctaButtonTextDe || "Architektur-Review vereinbaren"
-                : ctaButtonText || "Schedule Architecture Review"}
-              <ArrowRight className="w-6 h-6" />
-            </motion.button>
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: `0 0 40px ${accentColor}50`,
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="px-10 py-5 rounded-xl font-semibold text-lg flex items-center gap-3 mx-auto"
+                style={{
+                  backgroundColor: accentColor,
+                  color: "#050505",
+                }}
+              >
+                {i18n.language === "de"
+                  ? ctaButtonTextDe || "Architektur-Review vereinbaren"
+                  : ctaButtonText || "Schedule Architecture Review"}
+                <ArrowRight className="w-6 h-6" />
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </section>
