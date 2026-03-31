@@ -293,31 +293,31 @@ export default function AboutUs() {
               <ImageWithFallback
                 src={foundersImage}
                 alt="The Founders"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover"
               />
-              {/* Dark overlay for better text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              {/* Dark overlay removed as requested */}
             </div>
 
             {/* Content overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-10 w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
                 style={{ position: "relative" }}
+                className="bg-black/50 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-2xl"
               >
                 <div className="text-sm text-[#00CC66] font-semibold mb-2 tracking-wider">
                   {foundersLabel}
                 </div>
                 <h3
-                  className="text-2xl font-bold mb-2"
+                  className="text-2xl font-bold mb-2 text-white"
                   style={{ fontFamily: "Plus Jakarta Sans, sans-serif" }}
                 >
                   {foundersTitle}
                 </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-gray-300 text-sm leading-relaxed">
                   {foundersDescription}
                 </p>
               </motion.div>
