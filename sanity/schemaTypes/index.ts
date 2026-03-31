@@ -13,6 +13,8 @@ import coreExpertiseHeaderType from "./coreExpertiseHeader";
 import industryExpertiseHeaderType from "./industryExpertiseHeader";
 import caseStudiesGalleryHeaderType from "./caseStudiesGalleryHeader";
 import faqHeaderType from "./faqHeader";
+import imprintType from "./imprint";
+import privacyPolicyType from "./privacyPolicy";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -30,5 +32,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     industryExpertiseHeaderType,
     caseStudiesGalleryHeaderType,
     faqHeaderType,
+    imprintType,
+    privacyPolicyType,
   ],
 };
