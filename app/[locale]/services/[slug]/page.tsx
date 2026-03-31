@@ -8,6 +8,8 @@ import { Service } from "@/sanity/lib/types";
 import ServiceDetailPage from "@/app/[locale]/components/ServiceDetailPage";
 import { notFound } from "next/navigation";
 
+export const revalidate = 0;
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -78,10 +80,6 @@ export default async function ServicePage({ params }: Props) {
       scopeHeadlineAccent={service.scopeHeadlineAccent}
       scopeHeadlineWhiteDe={service.scopeHeadlineWhiteDe}
       scopeHeadlineAccentDe={service.scopeHeadlineAccentDe}
-      timelineHeadlineWhite={service.timelineHeadlineWhite}
-      timelineHeadlineAccent={service.timelineHeadlineAccent}
-      timelineHeadlineWhiteDe={service.timelineHeadlineWhiteDe}
-      timelineHeadlineAccentDe={service.timelineHeadlineAccentDe}
       benefitList={service.benefitList || []}
       heroCta={service.heroCta}
       heroCtaDe={service.heroCtaDe}
@@ -105,6 +103,12 @@ export default async function ServicePage({ params }: Props) {
       caseStudyQuoteTextDe={service.caseStudyQuoteTextDe}
       caseStudyQuoteAuthor={service.caseStudyQuoteAuthor}
       caseStudyQuoteAuthorDe={service.caseStudyQuoteAuthorDe}
+      ctaHeadline={service.ctaHeadline}
+      ctaHeadlineDe={service.ctaHeadlineDe}
+      ctaDescription={service.ctaDescription}
+      ctaDescriptionDe={service.ctaDescriptionDe}
+      ctaButtonText={service.ctaButtonText}
+      ctaButtonTextDe={service.ctaButtonTextDe}
     />
   );
 }
