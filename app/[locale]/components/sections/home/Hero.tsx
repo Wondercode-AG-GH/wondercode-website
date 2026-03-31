@@ -3,6 +3,8 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { AuroraBackground } from "../../AuroraBackground";
 import { LogoMarquee } from "../../LogoMarquee";
 
@@ -55,7 +57,15 @@ export function HeroSection() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
+  const pathname = usePathname();
   const isGerman = i18n.language === "de";
+  const locale = pathname?.split("/")?.[1] ?? "en";
+
+  // Deep linking logic for #success-stories
+  const successStoriesHref =
+    pathname === `/${locale}` || pathname === `/${locale}/`
+      ? "#success-stories"
+      : `/${locale}/#success-stories`;
 
   const hLine1 = isGerman
     ? heroData?.line1De ||
@@ -182,37 +192,46 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 shrink-0"
             style={{ position: "relative" }}
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="group w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_50px_rgba(0,204,102,0.6)]"
-              style={{
-                backgroundColor: "#00CC66",
-                color: "#0A0A0A",
-                position: "relative",
-              }}
+            <Link
+              href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
-              <span className="relative z-10">{ctaPrimaryText}</span>
-              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-r from-[#00ff88] to-[#00CC66] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"
-              />
-            </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="group w-full px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_0_50px_rgba(0,204,102,0.6)]"
+                style={{
+                  backgroundColor: "#00CC66",
+                  color: "#0A0A0A",
+                  position: "relative",
+                }}
+              >
+                <span className="relative z-10">{ctaPrimaryText}</span>
+                <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-r from-[#00ff88] to-[#00CC66] -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"
+                />
+              </motion.button>
+            </Link>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base transition-all backdrop-blur-xl"
-              style={{
-                backgroundColor: "rgba(0, 0, 0, 0)",
-                color: "white",
-                border: "2px solid rgba(255, 255, 255, 0.2)",
-                position: "relative",
-              }}
-            >
-              {ctaSecondaryText}
-            </motion.button>
+            <a href={successStoriesHref} className="w-full sm:w-auto">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base transition-all backdrop-blur-xl"
+                style={{
+                  backgroundColor: "rgba(0, 0, 0, 0)",
+                  color: "white",
+                  border: "2px solid rgba(255, 255, 255, 0.2)",
+                  position: "relative",
+                }}
+              >
+                {ctaSecondaryText}
+              </motion.button>
+            </a>
           </motion.div>
         </div>
 
