@@ -36,32 +36,21 @@ export default async function ImprintPage({
     <main className="min-h-screen bg-[#050505] text-white selection:bg-[#00CC66]/30">
       <Header />
 
-      <div className="pt-32 pb-20 px-6 container mx-auto max-w-4xl">
+      <div className="pt-18 pb-16 px-6 container mx-auto max-w-4xl">
         {/* Brand Logo */}
-        <div className="flex justify-center mb-16">
+        <div className="flex justify-center">
           <Link
             href={`/${locale}`}
             className="hover:scale-105 transition-transform duration-300"
           >
-            <svg
-              width="240"
-              height="42"
-              viewBox="0 0 200 36"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-[180px] sm:w-[220px] h-auto drop-shadow-[0_0_15px_rgba(0,204,102,0.3)]"
-            >
-              <text
-                x="0"
-                y="28"
-                fill="#00CC66"
-                fontFamily="'Nunito', 'Poppins', 'Inter', sans-serif"
-                fontWeight="800"
-                fontSize="30"
-                letterSpacing="-0.5"
-              >
-                wondercode
-              </text>
-            </svg>
+            <Image
+              src="/Wondercode_logo.png"
+              alt="Wondercode Logo"
+              width={280}
+              height={42}
+              className="w-[220px] sm:w-[260px] h-auto drop-shadow-[0_0_15px_rgba(0,204,102,0.3)]"
+              priority
+            />
           </Link>
         </div>
 
