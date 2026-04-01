@@ -122,27 +122,24 @@ export default function Footer() {
   const rawLegal = isGerman
     ? data?.legalListDe && data.legalListDe.length > 0
       ? data.legalListDe
-      : [
-          t("footer.legal.privacyPolicy"),
-          t("footer.legal.termsOfService"),
-          t("footer.legal.imprint"),
-        ]
+      : [t("footer.legal.privacyPolicy"), t("footer.legal.imprint")]
     : data?.legalList && data.legalList.length > 0
       ? data.legalList
-      : [
-          t("footer.legal.privacyPolicy"),
-          t("footer.legal.termsOfService"),
-          t("footer.legal.imprint"),
-        ];
+      : [t("footer.legal.privacyPolicy"), t("footer.legal.imprint")];
 
-  // Forcefully rename any Cookie Policy variant to Imprint
-  const legal = rawLegal.map((item: string) => {
-    const lower = item.toLowerCase();
-    if (lower.includes("cookie")) {
-      return isGerman ? t("footer.legal.imprint") : "Imprint";
-    }
-    return item;
-  });
+  // Forcefully rename any Cookie Policy variant to Imprint and filter out Terms of Service
+  const legal = rawLegal
+    .filter((item: string) => {
+      const lower = item.toLowerCase();
+      return !lower.includes("terms") && !lower.includes("nutzungsbedingungen");
+    })
+    .map((item: string) => {
+      const lower = item.toLowerCase();
+      if (lower.includes("cookie")) {
+        return isGerman ? t("footer.legal.imprint") : "Imprint";
+      }
+      return item;
+    });
 
   const email = data?.email || "hello@wondercode.ch";
   const phone = data?.phone || "+41 44 555 01 00";
@@ -169,10 +166,10 @@ export default function Footer() {
       style={{ position: "relative" }}
     >
       <div className="max-w-[1600px] mx-auto" style={{ position: "relative" }}>
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 mb-12 md:mb-16">
-          {/* Brand Column */}
-          <div className="lg:col-span-2">
+        {/* Main Footer Content - Left/Right Layout */}
+        <div className="flex flex-col md:flex-row justify-between gap-12 mb-12 md:mb-16">
+          {/* Brand Column (Left) */}
+          <div className="max-w-sm">
             <div className="mb-6">
               <svg
                 width="200"
@@ -194,94 +191,24 @@ export default function Footer() {
                 </text>
               </svg>
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed max-w-sm">
-              {description}
-            </p>
-
-            {/* Region Badge */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border border-[#00CC66]/30 mb-6"
-            >
-              <MapPin className="w-5 h-5 text-[#00CC66]" />
-              <div>
-                <div className="text-sm font-semibold text-white">{cityHQ}</div>
-                <div className="text-xs text-gray-500">{region}</div>
-              </div>
-            </motion.div>
+            <p className="text-gray-400 mb-6 leading-relaxed">{description}</p>
 
             {/* Language Switcher in Footer */}
-            <div className="mb-4">
+            <div>
               <p className="text-xs text-gray-500 mb-2">{languageLabel}</p>
               <LanguageSwitcher />
             </div>
           </div>
 
-          {/* Services Column */}
-          <div>
-            <h3 className="text-sm font-semibold text-white mb-6 uppercase tracking-wider">
-              {servicesHeading}
-            </h3>
-            <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service}>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-[#00CC66] transition-colors text-sm"
-                  >
-                    {service}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Column */}
-          <div>
-            <h3 className="text-sm font-semibold text-white mb-6 uppercase tracking-wider">
-              {companyHeading}
-            </h3>
-            <ul className="space-y-3">
-              {company.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-[#00CC66] transition-colors text-sm"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column */}
-          <div>
+          {/* Contact Column (Right) */}
+          <div className="flex flex-col md:pr-16 lg:pr-24">
             <h3 className="text-sm font-semibold text-white mb-6 uppercase tracking-wider">
               {contactHeading}
             </h3>
             <ul className="space-y-4">
-              <li>
-                <a
-                  href={`mailto:${email}`}
-                  className="flex items-center gap-3 text-gray-400 hover:text-[#00CC66] transition-colors text-sm group"
-                >
-                  <Mail className="w-4 h-4 text-[#00CC66] group-hover:scale-110 transition-transform" />
-                  {email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-3 text-gray-400 hover:text-[#00CC66] transition-colors text-sm group"
-                >
-                  <Phone className="w-4 h-4 text-[#00CC66] group-hover:scale-110 transition-transform" />
-                  {phone}
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-gray-400 text-sm">
-                <MapPin className="w-4 h-4 text-[#00CC66] flex-shrink-0 mt-0.5" />
-                <span>
+              <li className="flex items-start gap-4 text-gray-400 text-sm">
+                <MapPin className="w-5 h-5 text-[#00CC66] flex-shrink-0 mt-0.5" />
+                <span className="leading-relaxed">
                   {addressLines.map((line, i) => (
                     <span key={i}>
                       {line}
