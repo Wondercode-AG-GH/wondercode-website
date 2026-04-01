@@ -27,5 +27,28 @@ export default defineType({
       type: "text",
       rows: 10,
     }),
+    // SEO
+    defineField({
+      name: "seoTitle",
+      title: "SEO Title (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "seoTitleDe",
+      title: "SEO Title (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "seoDescription",
+      title: "SEO Description (EN)",
+      type: "text",
+      rows: 2,
+    }),
+    defineField({
+      name: "seoDescriptionDe",
+      title: "SEO Description (DE)",
+      type: "text",
+      rows: 2,
+    }),
   ],
 });

@@ -1,13 +1,57 @@
 import React from "react";
 import Image from "next/image";
+import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
+import { imprintQuery } from "@/sanity/lib/sanity.queries";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import Link from "next/link";
 
 async function getImprintData() {
-  const query = `*[_type == "imprint"][0]`;
-  return await client.fetch(query);
+  return await client.fetch(imprintQuery);
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isGerman = locale === "de";
+  const data = await getImprintData();
+
+  if (!data) return {};
+
+  const title = isGerman
+    ? data.seoTitleDe || data.titleDe || "Impressum | Wondercode"
+    : data.seoTitle || data.titleEn || "Imprint | Wondercode";
+
+  const description = isGerman ? data.seoDescriptionDe : data.seoDescription;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/imprint`,
+      languages: {
+        en: "/en/imprint",
+        de: "/de/imprint",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/imprint`,
+      siteName: "Wondercode",
+      locale: isGerman ? "de_DE" : "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function ImprintPage({
