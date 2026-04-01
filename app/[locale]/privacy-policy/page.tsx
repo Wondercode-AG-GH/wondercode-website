@@ -1,13 +1,57 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
+import { privacyPolicyQuery } from "@/sanity/lib/sanity.queries";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
 async function getPrivacyPolicyData() {
-  const query = `*[_type == "privacyPolicy"][0]`;
-  return await client.fetch(query);
+  return await client.fetch(privacyPolicyQuery);
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isGerman = locale === "de";
+  const data = await getPrivacyPolicyData();
+
+  if (!data) return {};
+
+  const title = isGerman
+    ? data.seoTitleDe || data.titleDe || "Datenschutzerklärung | Wondercode"
+    : data.seoTitle || data.titleEn || "Privacy Policy | Wondercode";
+
+  const description = isGerman ? data.seoDescriptionDe : data.seoDescription;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/privacy-policy`,
+      languages: {
+        en: "/en/privacy-policy",
+        de: "/de/privacy-policy",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/privacy-policy`,
+      siteName: "Wondercode",
+      locale: isGerman ? "de_DE" : "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function PrivacyPolicyPage({

@@ -36,16 +36,50 @@ export async function generateStaticParams() {
 /* =========================
    SEO Metadata
 ========================= */
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const isGerman = locale === "de";
   const service = await getService(slug);
 
   if (!service) return {};
 
+  const title = isGerman
+    ? service.seoTitleDe || `${service.titleDe || service.title} | Wondercode`
+    : service.seoTitle || `${service.title} | Wondercode`;
+
+  const description = isGerman
+    ? service.seoDescriptionDe ||
+      service.definitionTextDe ||
+      service.heroSublineDe
+    : service.seoDescription || service.definitionText || service.heroSubline;
+
   return {
-    title: service.seoTitle || service.title,
-    description: service.seoDescription || service.definitionText,
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/services/${slug}`,
+      languages: {
+        en: `/en/services/${slug}`,
+        de: `/de/services/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/services/${slug}`,
+      siteName: "Wondercode",
+      locale: isGerman ? "de_DE" : "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

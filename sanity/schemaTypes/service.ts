@@ -436,13 +436,22 @@ export default defineType({
     // SEO
     defineField({
       name: "seoTitle",
-      title: "SEO Title",
+      title: "SEO Title (EN)",
       type: "string",
     }),
-
+    defineField({
+      name: "seoTitleDe",
+      title: "SEO Title (DE)",
+      type: "string",
+    }),
     defineField({
       name: "seoDescription",
-      title: "SEO Description",
+      title: "SEO Description (EN)",
+      type: "text",
+    }),
+    defineField({
+      name: "seoDescriptionDe",
+      title: "SEO Description (DE)",
       type: "text",
     }),
   ],

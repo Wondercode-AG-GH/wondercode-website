@@ -131,7 +131,9 @@ export const heroQuery = `
     tagline, taglineDe,
     subtaglineHighlight, subtaglineHighlightDe,
     ctaPrimary, ctaPrimaryDe,
-    ctaSecondary, ctaSecondaryDe
+    ctaSecondary, ctaSecondaryDe,
+    seoTitle, seoTitleDe,
+    seoDescription, seoDescriptionDe
   }
 `;
 
@@ -242,5 +244,21 @@ export const faqHeaderQuery = `
     description, descriptionDe,
     ctaText, ctaTextDe,
     buttonText, buttonTextDe
+  }
+`;
+
+export const imprintQuery = `
+  *[_type == "imprint"][0] {
+    ...,
+    seoTitle, seoTitleDe,
+    seoDescription, seoDescriptionDe
+  }
+`;
+
+export const privacyPolicyQuery = `
+  *[_type == "privacyPolicy"][0] {
+    ...,
+    seoTitle, seoTitleDe,
+    seoDescription, seoDescriptionDe
   }
 `;

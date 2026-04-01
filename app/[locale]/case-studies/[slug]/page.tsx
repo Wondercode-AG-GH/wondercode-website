@@ -33,16 +33,53 @@ export async function generateStaticParams() {
 /* =========================
    SEO Metadata
 ========================= */
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const isGerman = locale === "de";
   const caseStudy = await getCaseStudy(slug);
 
   if (!caseStudy) return {};
 
+  const title = isGerman
+    ? caseStudy.seoTitleDe ||
+      `${caseStudy.titleDe || caseStudy.title} | Wondercode`
+    : caseStudy.seoTitle || `${caseStudy.title} | Wondercode`;
+
+  const description = isGerman
+    ? caseStudy.seoDescriptionDe ||
+      caseStudy.heroSublineDe ||
+      caseStudy.heroHeadlineDe
+    : caseStudy.seoDescription ||
+      caseStudy.heroSubline ||
+      caseStudy.heroHeadline;
+
   return {
-    title: caseStudy.seoTitle || caseStudy.title,
-    description: caseStudy.seoDescription || caseStudy.heroSubline,
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/case-studies/${slug}`,
+      languages: {
+        en: `/en/case-studies/${slug}`,
+        de: `/de/case-studies/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/case-studies/${slug}`,
+      siteName: "Wondercode",
+      locale: isGerman ? "de_DE" : "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

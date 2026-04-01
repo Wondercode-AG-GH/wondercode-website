@@ -33,16 +33,53 @@ export async function generateStaticParams() {
 /* =========================
    SEO Metadata
 ========================= */
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const isGerman = locale === "de";
   const industry = await getIndustry(slug);
 
   if (!industry) return {};
 
+  const title = isGerman
+    ? industry.seoTitleDe ||
+      `${industry.titleDe || industry.title} | Wondercode`
+    : industry.seoTitle || `${industry.title} | Wondercode`;
+
+  const description = isGerman
+    ? industry.seoDescriptionDe ||
+      industry.contextParagraph1De ||
+      industry.heroSublineDe
+    : industry.seoDescription ||
+      industry.contextParagraph1 ||
+      industry.heroSubline;
+
   return {
-    title: industry.seoTitle || industry.title,
-    description: industry.seoDescription || industry.contextParagraph1,
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/industries/${slug}`,
+      languages: {
+        en: `/en/industries/${slug}`,
+        de: `/de/industries/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/industries/${slug}`,
+      siteName: "Wondercode",
+      locale: isGerman ? "de_DE" : "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
