@@ -139,38 +139,39 @@ export function HeroSection() {
       {/* Hero Content */}
       <div className="relative z-10 flex-1 flex flex-col">
         <div className="flex-1 flex flex-col items-center justify-center px-5 md:px-8 text-center py-8">
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-bold mb-4 md:mb-6 leading-[0.95] tracking-tight text-white text-3xl md:text-5xl lg:text-6xl xl:text-7xl break-words max-w-5xl mx-auto shrink-0"
           >
-            {hLine1}
-            <br />
-            <span className="relative inline-block">
-              <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
-                {hLine2}
+            <h1 className="font-bold mb-4 md:mb-6 leading-[0.95] tracking-tight text-white text-3xl md:text-5xl lg:text-6xl xl:text-7xl break-words max-w-5xl mx-auto shrink-0">
+              {hLine1}
+              <br />
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
+                  {hLine2}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] pointer-events-none glow-pulse"
+                  style={{ position: "absolute", opacity: 0.3 }}
+                />
               </span>
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] pointer-events-none glow-pulse"
-                style={{ position: "absolute", opacity: 0.3 }}
-              />
-            </span>
-            <br />
-            {hLine3}
-            <br />
-            <span className="relative inline-block">
-              <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
-                {hLine4}
+              <br />
+              {hLine3}
+              <br />
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] bg-clip-text text-transparent">
+                  {hLine4}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] pointer-events-none glow-pulse-delayed"
+                  style={{ position: "absolute", opacity: 0.3 }}
+                />
               </span>
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 blur-3xl bg-gradient-to-r from-[#00CC66] via-[#00ff88] to-[#00CC66] pointer-events-none glow-pulse-delayed"
-                style={{ position: "absolute", opacity: 0.3 }}
-              />
-            </span>
-          </motion.h1>
+            </h1>
+          </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 40 }}

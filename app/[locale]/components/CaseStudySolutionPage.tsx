@@ -149,7 +149,7 @@ export default function CaseStudySolutionPage({
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             {/* Left: Headline */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
