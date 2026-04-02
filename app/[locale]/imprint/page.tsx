@@ -1,15 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Metadata } from "next";
-import { client } from "@/sanity/lib/client";
-import { imprintQuery } from "@/sanity/lib/sanity.queries";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
-import Link from "next/link";
-
-async function getImprintData() {
-  return await client.fetch(imprintQuery);
-}
 
 export async function generateMetadata({
   params,
@@ -18,38 +12,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isGerman = locale === "de";
-  const data = await getImprintData();
 
-  if (!data) return {};
-
-  const title = isGerman
-    ? data.seoTitleDe || data.titleDe || "Impressum | Wondercode"
-    : data.seoTitle || data.titleEn || "Imprint | Wondercode";
-
-  const description = isGerman ? data.seoDescriptionDe : data.seoDescription;
+  const title = isGerman ? "Impressum | Wondercode" : "Imprint | Wondercode";
 
   return {
     title,
-    description,
     alternates: {
       canonical: `/${locale}/imprint`,
       languages: {
         en: "/en/imprint",
         de: "/de/imprint",
       },
-    },
-    openGraph: {
-      title,
-      description,
-      url: `/${locale}/imprint`,
-      siteName: "Wondercode",
-      locale: isGerman ? "de_DE" : "en_US",
-      type: "article",
-    },
-    twitter: {
-      card: "summary",
-      title,
-      description,
     },
   };
 }
@@ -60,26 +33,10 @@ export default async function ImprintPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const data = await getImprintData();
-
-  if (!data) {
-    return (
-      <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center">
-        <p>
-          Imprint data not found in Sanity. Please create a document of type
-          "imprint".
-        </p>
-      </div>
-    );
-  }
-
-  const title = locale === "de" ? data.titleDe : data.titleEn;
-  const description = locale === "de" ? data.descriptionDe : data.descriptionEn;
+  const isGerman = locale === "de";
 
   return (
     <main className="min-h-screen bg-[#050505] text-white selection:bg-[#00CC66]/30">
-      <Header />
-
       <div className="pt-18 pb-16 px-6 container mx-auto max-w-4xl">
         {/* Brand Logo */}
         <div className="flex justify-center">
@@ -99,19 +56,75 @@ export default async function ImprintPage({
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center text-white border-b border-white/10 pb-8">
-          {title || "Imprint"}
+          Impressum
         </h1>
 
-        <div className="prose prose-invert prose-green max-w-none">
-          {description ? (
-            description.split("\n").map((line: string, i: number) => (
-              <p key={i} className="text-gray-300 leading-relaxed mb-4 text-lg">
-                {line}
-              </p>
-            ))
-          ) : (
-            <p className="text-gray-500 italic">No description provided.</p>
-          )}
+        <div className="prose-static max-w-none text-gray-300">
+          <h2>Angaben gemäss Art. 3 Abs. 1 Bst. s UWG und Art. 5 DSG</h2>
+
+          <p>
+            <strong>Wondercode AG</strong>
+            <br />
+            Auf der Mauer 7<br />
+            8001 Zürich
+            <br />
+            Schweiz
+          </p>
+
+          <p>
+            <strong>Kontakt</strong>
+            <br />
+            E-Mail: <a href="mailto:info@wondercode.ch">info@wondercode.ch</a>
+          </p>
+
+          <p>
+            <strong>Vertretungsberechtigte Person</strong>
+            <br />
+            Bayram Sahin, Geschäftsführer
+          </p>
+
+          <p>
+            <strong>Handelsregistereintrag</strong>
+            <br />
+            Handelsregisteramt des Kantons Zürich
+            <br />
+            UID: CHE-184.529.198
+          </p>
+
+          <h2>Haftungsausschluss</h2>
+
+          <p>
+            Die Inhalte dieser Website werden mit Sorgfalt erstellt. Wondercode
+            AG übernimmt jedoch keine Gewähr für Richtigkeit, Vollständigkeit
+            oder Aktualität der bereitgestellten Inhalte. Die Nutzung der
+            Inhalte erfolgt auf eigene Verantwortung. Haftungsansprüche gegen
+            Wondercode AG, die sich auf Schäden materieller oder ideeller Art
+            beziehen, welche durch die Nutzung oder Nichtnutzung der
+            dargebotenen Informationen verursacht wurden, sind grundsätzlich
+            ausgeschlossen, sofern kein nachweislich vorsätzliches oder grob
+            fahrlässiges Verschulden vorliegt.
+          </p>
+
+          <h2>Verweise und Links</h2>
+
+          <p>
+            Diese Website kann Links zu externen Websites Dritter enthalten. Auf
+            deren Inhalte hat Wondercode AG keinen Einfluss. Für die Inhalte
+            verlinkter Seiten ist stets der jeweilige Anbieter verantwortlich.
+            Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf
+            mögliche Rechtsverstösse überprüft. Rechtswidrige Inhalte waren zu
+            diesem Zeitpunkt nicht erkennbar. Bei Bekanntwerden von
+            Rechtsverletzungen werden entsprechende Links umgehend entfernt.
+          </p>
+
+          <h2>Urheberrecht</h2>
+
+          <p>
+            Sämtliche Inhalte und Gestaltungselemente dieser Website sind
+            urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung,
+            Verbreitung oder sonstige Nutzung ausserhalb der Grenzen des
+            Urheberrechts bedarf der schriftlichen Zustimmung von Wondercode AG.
+          </p>
         </div>
       </div>
     </main>

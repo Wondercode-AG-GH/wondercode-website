@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import ConditionalLayout from "./[locale]/components/ConditionalLayout";
-import I18nProvider from "./providers";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -21,5 +19,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <html lang="en">
+      <body
+        className={`${geist.className} antialiased bg-[#0A0A0A] text-white`}
+      >
+        {children}
+      </body>
+    </html>
+  );
 }

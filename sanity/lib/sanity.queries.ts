@@ -246,19 +246,3 @@ export const faqHeaderQuery = `
     buttonText, buttonTextDe
   }
 `;
-
-export const imprintQuery = `
-  *[_type == "imprint"][0] {
-    ...,
-    seoTitle, seoTitleDe,
-    seoDescription, seoDescriptionDe
-  }
-`;
-
-export const privacyPolicyQuery = `
-  *[_type == "privacyPolicy"][0] {
-    ...,
-    seoTitle, seoTitleDe,
-    seoDescription, seoDescriptionDe
-  }
-`;
