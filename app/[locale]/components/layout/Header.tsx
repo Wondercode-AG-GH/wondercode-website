@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../languageSwitcher";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const { t, i18n } = useTranslation("common");
@@ -125,25 +126,14 @@ export default function Header() {
                 whileHover={{ scale: 1.04 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <svg
-                  width="160"
-                  height="28"
-                  viewBox="0 0 200 36"
-                  xmlns="http://www.w3.org/2000/svg"
+                <Image
+                  src="/Wondercode_logo.svg"
+                  alt="Wondercode"
+                  width={160}
+                  height={28}
                   className="w-[120px] sm:w-[140px] lg:w-[130px] xl:w-[150px] 2xl:w-[160px] h-auto drop-shadow-lg"
-                >
-                  <text
-                    x="0"
-                    y="28"
-                    fill="#00CC66"
-                    fontFamily="'Nunito', 'Poppins', 'Inter', sans-serif"
-                    fontWeight="800"
-                    fontSize="30"
-                    letterSpacing="-0.5"
-                  >
-                    wondercode
-                  </text>
-                </svg>
+                  priority
+                />
               </motion.div>
             </Link>
 

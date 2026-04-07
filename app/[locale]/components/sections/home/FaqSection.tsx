@@ -103,10 +103,15 @@ export default function FAQSection() {
           className="text-center mb-16"
           style={{ position: "relative" }}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
             {title}
           </h2>
-          <p className="text-lg text-gray-400">{description}</p>
+          <p
+            className="mb-4 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-left md:text-center"
+            style={{ color: "#999999" }}
+          >
+            {description}
+          </p>
         </motion.div>
 
         {/* Loading State */}

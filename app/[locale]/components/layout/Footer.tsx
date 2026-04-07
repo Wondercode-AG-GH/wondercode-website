@@ -5,6 +5,7 @@ import { Sparkles, Mail, MapPin, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../languageSwitcher";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface FooterData {
   description?: string;
@@ -169,27 +170,15 @@ export default function Footer() {
         {/* Main Footer Content - Left/Right Layout */}
         <div className="flex flex-col md:flex-row justify-between gap-12 mb-12 md:mb-16">
           {/* Brand Column (Left) */}
-          <div className="max-w-sm">
+          <div className="max-w-sm pt-0">
             <div className="mb-6">
-              <svg
-                width="200"
-                height="36"
-                viewBox="0 0 200 36"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Wondercode"
-              >
-                <text
-                  x="0"
-                  y="28"
-                  fill="#00CC66"
-                  fontFamily="'Nunito', 'Poppins', 'Inter', sans-serif"
-                  fontWeight="800"
-                  fontSize="30"
-                  letterSpacing="-0.5"
-                >
-                  wondercode
-                </text>
-              </svg>
+              <Image
+                src="/Wondercode_logo.svg"
+                alt="Wondercode"
+                width={160}
+                height={28}
+                className="w-[140px] md:w-[160px] h-auto"
+              />
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">{description}</p>
 

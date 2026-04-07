@@ -197,23 +197,18 @@ export default function AgentforceSplitScreen() {
             </span>
           </div> */}
 
-          <h2
-            className="text-3xl md:text-6xl font-bold mb-3 md:mb-4"
-            style={{ color: "white" }}
-          >
-            {mainTitle}{" "}
-            <span style={{ color: "#00CC66" }}>{titleHighlight}</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
+            {mainTitle} <span className="text-[#00CC66]">{titleHighlight}</span>
           </h2>
           <p
-            className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed"
-            style={{ color: "rgba(156, 163, 175, 1)" }}
+            className="mb-4 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-center md:text-center"
+            style={{ color: "#999999" }}
           >
             {description1}
           </p>
-          <br />
           <p
-            className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed"
-            style={{ color: "rgba(156, 163, 175, 1)" }}
+            className="max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-left md:text-center"
+            style={{ color: "#999999" }}
           >
             {description2}
           </p>
@@ -454,7 +449,7 @@ export default function AgentforceSplitScreen() {
 
                 {/* Feature Description */}
                 <motion.p
-                  className="text-base leading-relaxed max-w-md"
+                  className="text-base text-left leading-relaxed max-w-md"
                   style={{ color: "rgba(156, 163, 175, 1)" }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
