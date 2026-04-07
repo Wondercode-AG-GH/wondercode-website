@@ -1,5 +1,50 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Custom Rich Text Styles for Privacy / Imprint */
+.prose-static h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  color: white;
+}
+
+.prose-static h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #00cc66; /* Accent color */
+}
+
+.prose-static p {
+  margin-bottom: 1.25rem;
+  line-height: 1.75;
+}
+
+.prose-static ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.prose-static li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  display: list-item;
+}
+
+.prose-static a {
+  color: #00cc66;
+  text-decoration: underline;
+}
+
+.prose-static a:hover {
+  text-decoration: none;
 }
