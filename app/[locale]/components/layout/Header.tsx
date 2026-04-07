@@ -53,8 +53,8 @@ export default function Header() {
     routeNavMap.find(({ prefix }) => normalizedPath.startsWith(prefix))
       ?.navKey ?? null;
 
-  // True on any detail page (services, industries, case-studies)
-  const isOnDetailPage = activeNavKey !== null;
+  // True on any page that is not the home page (so links go to the home page sections)
+  const isOnDetailPage = normalizedPath !== "" && normalizedPath !== "/";
 
   const navItems =
     sanityNavData?.navItems && sanityNavData.navItems.length > 0
