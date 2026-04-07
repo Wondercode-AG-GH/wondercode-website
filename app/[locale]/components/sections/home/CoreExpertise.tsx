@@ -184,21 +184,26 @@ export default function CoreExpertise() {
             </span>
           </div> */}
 
-          <h2 className="text-6xl md:text-7xl font-bold mb-6 text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
             {title} <span className="text-[#00CC66]">{titleHighlight}</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p
+            className="mb-4 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0"
+            style={{ color: "#999999" }}
+          >
             {description1}
           </p>
-          <br />
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p
+            className="max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0"
+            style={{ color: "#999999" }}
+          >
             {description2}
           </p>
         </motion.div>
 
         {/* 8-Card Capability Matrix - Periodic Table Style */}
         <div
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4"
           style={{ position: "relative" }}
         >
           {isLoading ? (
@@ -281,7 +286,7 @@ export default function CoreExpertise() {
                     </h3>
 
                     {/* Description - Bottom */}
-                    <p className="text-sm text-gray-400 leading-relaxed mt-auto">
+                    <p className="hidden md:block text-sm text-gray-400 leading-relaxed mt-auto">
                       {capability.description}
                     </p>
                   </div>

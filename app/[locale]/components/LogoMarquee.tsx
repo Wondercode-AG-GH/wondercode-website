@@ -72,17 +72,17 @@ export function LogoMarquee() {
         </p>
       </div>
 
-      {/* Marquee Container - No filters or overlays */}
-      <div className="relative h-20 md:h-28 overflow-hidden">
+      {/* Marquee Container with Outlined Blur Background */}
+      <div className="relative h-32 md:h-40 py-2 overflow-hidden flex items-center">
         {/* Animated Logo Track */}
         <motion.div
-          className="flex items-center gap-16 md:gap-24 lg:gap-28 absolute inset-y-0"
+          className="flex items-center gap-6 md:gap-10 lg:gap-12 absolute inset-y-0"
           animate={{
             x: [0, -50 + "%"],
           }}
           transition={{
             x: {
-              duration: 30,
+              duration: 35,
               repeat: Infinity,
               ease: "linear",
             },
@@ -91,9 +91,11 @@ export function LogoMarquee() {
           {duplicatedLogos.map((logo, index) => (
             <div
               key={index}
-              className="shrink-0 w-16 h-16 md:w-24 md:h-24 relative flex items-center justify-center"
+              className="group overflow-hidden shrink-0 w-32 h-16 md:w-44 md:h-24 p-2 md:p-4 relative flex items-center justify-center bg-transparent border border-transparent rounded-2xl cursor-pointer transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:bg-white/10 hover:border-white/20 hover:backdrop-blur-lg hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)] z-10"
             >
-              {logo}
+              <div className="w-full h-full flex items-center justify-center transition-transform duration-300 [&_img]:transition-all [&_img]:duration-500 [&_img]:grayscale [&_img]:invert [&_img]:opacity-60 group-hover:[&_img]:grayscale-0 group-hover:[&_img]:invert-0 group-hover:[&_img]:opacity-100">
+                {logo}
+              </div>
             </div>
           ))}
         </motion.div>

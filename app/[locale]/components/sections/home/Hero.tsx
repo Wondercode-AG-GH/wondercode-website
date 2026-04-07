@@ -144,7 +144,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="font-bold mb-4 md:mb-6 leading-[0.95] tracking-tight text-white text-3xl md:text-5xl lg:text-6xl xl:text-7xl break-words max-w-5xl mx-auto shrink-0">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white break-words max-w-5xl mx-auto shrink-0">
               {hLine1}
               <br />
               <span className="relative inline-block">

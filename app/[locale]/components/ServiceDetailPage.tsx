@@ -335,7 +335,7 @@ export default function ServiceDetailPage({
               </div>
 
               {/* Headline */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
                 {i18n.language === "de" ? serviceNameDe : serviceName}
               </h1>
 
@@ -383,11 +383,12 @@ export default function ServiceDetailPage({
               )}
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
                 <Link
                   href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="block w-full sm:w-auto"
                 >
                   <motion.button
                     whileHover={{
@@ -395,14 +396,14 @@ export default function ServiceDetailPage({
                       boxShadow: `0 0 30px ${accentColor}50`,
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="px-8 py-4 rounded-xl font-bold text-base flex items-center gap-2"
+                    className="group w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-sm sm:text-base md:text-lg flex items-center justify-center gap-3 transition-all relative overflow-hidden break-words text-center"
                     style={{
                       backgroundColor: accentColor,
                       color: "#050505",
                     }}
                   >
                     {i18n.language === "de" ? heroCtaDe : heroCta}
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-5 h-5 shrink-0" />
                   </motion.button>
                 </Link>
               </div>
@@ -759,7 +760,7 @@ export default function ServiceDetailPage({
             className="mb-16"
             style={{ position: "relative" }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
               {i18n.language === "de" ? (
                 <>
                   {scopeHeadlineWhiteDe || "Im "}{" "}
@@ -897,7 +898,7 @@ export default function ServiceDetailPage({
               </div>
 
               {/* Headline */}
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
                 {i18n.language === "de"
                   ? caseStudyHeadlineDe
                   : caseStudyHeadline}
@@ -905,8 +906,8 @@ export default function ServiceDetailPage({
 
               {/* Subline */}
               <p
-                className="text-2xl mb-8 leading-relaxed"
-                style={{ color: "#CCCCCC" }}
+                className="text-xl md:text-2xl mb-10 leading-relaxed shrink-0 text-left"
+                style={{ color: "#E5E5E5" }}
               >
                 {i18n.language === "de" ? caseStudySublineDe : caseStudySubline}
               </p>
@@ -1313,7 +1314,7 @@ export default function ServiceDetailPage({
               viewport={{ once: true }}
               style={{ position: "relative" }}
             >
-              <h3 className="text-3xl font-bold mb-8">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
                 {i18n.language === "en" ? "Ideal for..." : "Ideal für..."}
               </h3>
 
@@ -1347,7 +1348,7 @@ export default function ServiceDetailPage({
               viewport={{ once: true }}
               style={{ position: "relative" }}
             >
-              <h3 className="text-3xl font-bold mb-8">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
                 {i18n.language === "en"
                   ? "Frequently Asked"
                   : "Häufig gestellte Fragen"}
@@ -1420,13 +1421,16 @@ export default function ServiceDetailPage({
       </section>
 
       {/* CTA Section at Bottom */}
-      <section className="relative py-24 px-8" style={{ position: "relative" }}>
+      <section
+        className="relative py-16 md:py-24 px-4 md:px-8"
+        style={{ position: "relative" }}
+      >
         <div className="max-w-[1000px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-3xl overflow-hidden p-12 md:p-16 text-center"
+            className="relative rounded-3xl overflow-hidden p-6 md:p-12 lg:p-16 text-center"
             style={{
               backgroundColor: "#0D0D0D",
               border: `1px solid ${accentColor}30`,
@@ -1444,12 +1448,12 @@ export default function ServiceDetailPage({
 
             {/* Content */}
             <div className="relative z-10" style={{ position: "relative" }}>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white break-words">
                 {i18n.language === "de" ? ctaHeadlineDe : ctaHeadline}
               </h2>
               <p
-                className="text-lg mb-10 max-w-2xl mx-auto leading-relaxed"
-                style={{ color: "#CCCCCC" }}
+                className="mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed text-lg md:text-xl lg:text-2xl shrink-0 text-left md:text-center"
+                style={{ color: "#E5E5E5" }}
               >
                 {i18n.language === "de" ? ctaDescriptionDe : ctaDescription}
               </p>
@@ -1459,6 +1463,7 @@ export default function ServiceDetailPage({
                 href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="block w-full sm:w-auto"
               >
                 <motion.button
                   whileHover={{
@@ -1466,14 +1471,14 @@ export default function ServiceDetailPage({
                     boxShadow: `0 0 40px ${accentColor}50`,
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-10 py-5 rounded-xl font-semibold text-lg flex items-center gap-3 mx-auto"
+                  className="group w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-sm sm:text-base md:text-lg flex items-center justify-center gap-3 mx-auto transition-all relative overflow-hidden break-words text-center"
                   style={{
                     backgroundColor: accentColor,
                     color: "#050505",
                   }}
                 >
                   {i18n.language === "de" ? ctaButtonTextDe : ctaButtonText}
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-5 h-5 shrink-0" />
                 </motion.button>
               </Link>
             </div>

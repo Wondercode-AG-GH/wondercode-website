@@ -37,7 +37,7 @@ export default async function ImprintPage({
 
   return (
     <main className="min-h-screen bg-[#050505] text-white selection:bg-[#00CC66]/30">
-      <div className="pt-18 pb-16 px-6 container mx-auto max-w-4xl">
+      <div className="pt-30 pb-28 px-6 container mx-auto max-w-4xl">
         {/* Brand Logo */}
         <div className="flex justify-center">
           <Link
@@ -45,17 +45,17 @@ export default async function ImprintPage({
             className="hover:scale-105 transition-transform duration-300"
           >
             <Image
-              src="/Wondercode_logo.png"
+              src="/Wondercode_logo.svg"
               alt="Wondercode Logo"
               width={280}
-              height={42}
+              height={60}
               className="w-[220px] sm:w-[260px] h-auto drop-shadow-[0_0_15px_rgba(0,204,102,0.3)]"
               priority
             />
           </Link>
         </div>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center text-white border-b border-white/10 pb-8">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-10 text-center text-white border-b border-white/10 pb-8 pt-8 leading-[1.1] tracking-tight">
           Impressum
         </h1>
 

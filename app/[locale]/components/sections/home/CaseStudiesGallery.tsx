@@ -88,10 +88,15 @@ export default function CaseStudiesGallery() {
           className="text-center mb-20"
           style={{ position: "relative" }}
         >
-          <h2 className="text-6xl md:text-7xl font-bold mb-6 text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
             {title} <span className="text-[#00CC66]">{titleHighlight}</span>
           </h2>
-          <p className="text-xl text-gray-400">{description}</p>
+          <p
+            className="mb-4 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-left md:text-center"
+            style={{ color: "#999999" }}
+          >
+            {description}
+          </p>
         </motion.div>
 
         {/* Loading State */}

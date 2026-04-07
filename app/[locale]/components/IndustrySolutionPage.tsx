@@ -204,7 +204,7 @@ export default function IndustrySolutionPage({
               transition={{ duration: 0.8 }}
               style={{ position: "relative" }}
             >
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
                 {i18n.language === "de" ? industryNameDe : industryName}
                 <br />
                 <span style={{ color: accentColor }}>

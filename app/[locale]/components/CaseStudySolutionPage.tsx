@@ -173,10 +173,7 @@ export default function CaseStudySolutionPage({
                 </span>
               </div>
 
-              <h1
-                className="text-5xl lg:text-7xl font-bold mb-8 leading-[0.95] tracking-tight"
-                style={{ color: "white" }}
-              >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
                 {i18n.language === "en" ? heroHeadline : heroHeadlineDe}
               </h1>
 
@@ -280,7 +277,7 @@ export default function CaseStudySolutionPage({
               </div>
 
               <p
-                className="text-xl leading-relaxed mb-12"
+                className="text-base md:text-lg lg:text-xl leading-relaxed mb-12 shrink-0 text-left"
                 style={{ color: "#999999" }}
               >
                 {i18n.language === "en"
@@ -342,7 +339,7 @@ export default function CaseStudySolutionPage({
               </div>
 
               <p
-                className="text-xl leading-relaxed mb-12"
+                className="text-base md:text-lg lg:text-xl leading-relaxed mb-12 shrink-0 text-left"
                 style={{ color: "#999999" }}
               >
                 {i18n.language === "en" ? challengeIntro : challengeIntroDe}
@@ -410,14 +407,11 @@ export default function CaseStudySolutionPage({
                 style={{ backgroundColor: "#00CC66" }}
               />
             </div>
-            <h2
-              className="text-5xl lg:text-6xl font-bold mb-8"
-              style={{ color: "white" }}
-            >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
               {i18n.language === "en" ? solutionHeadline : solutionHeadlineDe}
             </h2>
             <p
-              className="text-xl max-w-3xl mx-auto leading-relaxed"
+              className="mb-8 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-left md:text-center"
               style={{ color: "#999999" }}
             >
               {i18n.language === "en" ? solutionIntro : solutionIntroDe}
@@ -508,10 +502,7 @@ export default function CaseStudySolutionPage({
                 style={{ backgroundColor: "#00CC66" }}
               />
             </div>
-            <h2
-              className="text-5xl lg:text-6xl font-bold"
-              style={{ color: "white" }}
-            >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-white">
               {i18n.language === "en" ? resultsHeadline : resultsHeadlineDe}
             </h2>
           </motion.div>
@@ -628,28 +619,28 @@ export default function CaseStudySolutionPage({
       </section>
 
       {/* SECTION 6: CTA */}
-      <section className="py-24 px-8 relative" style={{ position: "relative" }}>
+      <section
+        className="py-16 md:py-24 px-4 md:px-8 relative"
+        style={{ position: "relative" }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="max-w-[1200px] mx-auto p-16 rounded-3xl text-center border-2"
+          className="max-w-[1200px] mx-auto p-6 md:p-12 lg:p-16 rounded-3xl text-center border-2 overflow-hidden"
           style={{
             backgroundColor: "rgba(0, 204, 102, 0.05)",
             borderColor: "#00CC66",
             position: "relative",
           }}
         >
-          <h2
-            className="text-4xl lg:text-5xl font-bold mb-8"
-            style={{ color: "white" }}
-          >
+          <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 leading-[1.1] tracking-tight text-white break-words">
             {i18n.language === "en" ? ctaHeadline : ctaHeadlineDe}
           </h2>
           <p
-            className="text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
-            style={{ color: "#AAAAAA" }}
+            className="mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-left md:text-center"
+            style={{ color: "#999999" }}
           >
             {i18n.language === "en" ? ctaDescription : ctaDescriptionDe}
           </p>
@@ -657,6 +648,7 @@ export default function CaseStudySolutionPage({
             href="https://calendar.app.google/mz1GZTzKW9rmSCY26"
             target="_blank"
             rel="noopener noreferrer"
+            className="block w-full sm:w-auto"
           >
             <motion.button
               whileHover={{
@@ -664,7 +656,7 @@ export default function CaseStudySolutionPage({
                 boxShadow: "0 0 50px rgba(0, 204, 102, 0.6)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 mx-auto transition-all relative overflow-hidden"
+              className="group w-full sm:w-auto px-6 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-sm sm:text-base md:text-lg flex items-center justify-center gap-3 mx-auto transition-all relative overflow-hidden break-words text-center"
               style={{
                 backgroundColor: "#00CC66",
                 color: "#050505",
