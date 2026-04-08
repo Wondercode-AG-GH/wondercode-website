@@ -134,7 +134,7 @@ export default function IndustryExpertise() {
                               hoveredIndex === index ? "#FFFFFF" : "#666666",
                           }}
                         >
-                          {i18n.language === "de"
+                          {isGerman
                             ? industry.titleDe || industry.title
                             : industry.title}
                         </motion.h3>
@@ -167,7 +167,7 @@ export default function IndustryExpertise() {
                         transition={{ duration: 0.3 }}
                         style={{ position: "relative" }}
                       >
-                        {i18n.language === "de"
+                        {isGerman
                           ? industry.heroSublineDe || industry.heroSubline
                           : industry.heroSubline}
                       </motion.div>
@@ -250,7 +250,9 @@ export default function IndustryExpertise() {
                           color: isExpanded ? "#00CC66" : "#FFFFFF",
                         }}
                       >
-                        {industry.titleDe}
+                        {isGerman
+                          ? industry.titleDe || industry.title
+                          : industry.title}
                       </h3>
 
                       <motion.div
@@ -282,7 +284,9 @@ export default function IndustryExpertise() {
                             style={{ color: "#00CC66" }}
                           />
                           <p className="text-base text-gray-400 leading-relaxed">
-                            {industry.heroSublineDe}
+                            {isGerman
+                              ? industry.heroSublineDe || industry.heroSubline
+                              : industry.heroSubline}
                           </p>
                         </div>
                       </div>
