@@ -11,9 +11,13 @@ interface CaseStudy {
   titleDe: string;
   slug: string;
   problem: string;
+  problemDe?: string;
   solution: string;
+  solutionDe?: string;
   metric: string;
+  metricDe?: string;
   metricLabel: string;
+  metricLabelDe?: string;
   industry: string;
   color: string;
 }
@@ -168,7 +172,9 @@ export default function CaseStudiesGallery() {
                               {t("caseStudiesSection.challenge")}
                             </div>
                             <p className="text-gray-300 text-lg">
-                              {study.problem}
+                              {isGerman
+                                ? study.problemDe || study.problem
+                                : study.problem}
                             </p>
                           </div>
 
@@ -176,7 +182,11 @@ export default function CaseStudiesGallery() {
                             <div className="text-sm text-[#00CC66] font-semibold mb-2">
                               {t("caseStudiesSection.solution")}
                             </div>
-                            <p className="text-gray-400">{study.solution}</p>
+                            <p className="text-gray-400">
+                              {isGerman
+                                ? study.solutionDe || study.solution
+                                : study.solution}
+                            </p>
                           </div>
                         </div>
 
@@ -202,10 +212,14 @@ export default function CaseStudiesGallery() {
                               transition={{ type: "spring", duration: 0.8 }}
                               style={{ position: "relative" }}
                             >
-                              {study.metric}
+                              {isGerman
+                                ? study.metricDe || study.metric
+                                : study.metric}
                             </motion.div>
                             <div className="text-xl text-gray-300 font-semibold">
-                              {study.metricLabel}
+                              {isGerman
+                                ? study.metricLabelDe || study.metricLabel
+                                : study.metricLabel}
                             </div>
                           </div>
                         </div>
@@ -290,7 +304,9 @@ export default function CaseStudiesGallery() {
                             {t("caseStudiesSection.challenge")}
                           </div>
                           <p className="text-gray-300 text-base leading-relaxed">
-                            {study.problem}
+                            {isGerman
+                              ? study.problemDe || study.problem
+                              : study.problem}
                           </p>
                         </div>
 
@@ -299,7 +315,9 @@ export default function CaseStudiesGallery() {
                             {t("caseStudiesSection.solution")}
                           </div>
                           <p className="text-gray-400 text-sm leading-relaxed">
-                            {study.solution}
+                            {isGerman
+                              ? study.solutionDe || study.solution
+                              : study.solution}
                           </p>
                         </div>
                       </div>
@@ -325,10 +343,14 @@ export default function CaseStudiesGallery() {
                             viewport={{ once: true }}
                             transition={{ type: "spring", duration: 0.8 }}
                           >
-                            {study.metric}
+                            {isGerman
+                              ? study.metricDe || study.metric
+                              : study.metric}
                           </motion.div>
                           <div className="text-lg text-gray-300 font-semibold">
-                            {study.metricLabel}
+                            {isGerman
+                              ? study.metricLabelDe || study.metricLabel
+                              : study.metricLabel}
                           </div>
                         </div>
                       </div>
