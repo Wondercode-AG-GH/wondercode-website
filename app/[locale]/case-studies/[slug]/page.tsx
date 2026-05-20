@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import {
   caseStudyBySlugQuery,
   allCaseStudySlugsQuery,
 } from "@/sanity/lib/sanity.queries";
-import CaseStudySolutionPage from "@/app/[locale]/components/CaseStudySolutionPage";
 import { notFound } from "next/navigation";
+import CaseStudyDetailLive from "./CaseStudyDetailLive";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -13,10 +14,17 @@ type Props = {
 
 /* =========================
    Fetch Case Study
+   Uses sanityFetch so the result is tagged for the Live Content API —
+   draft edits trigger <SanityLive /> revalidation and the iframe
+   re-renders with the new content.
 ========================= */
 async function getCaseStudy(slug: string): Promise<any | null> {
   if (!slug) return null;
-  return client.fetch(caseStudyBySlugQuery, { slug });
+  const { data } = await sanityFetch({
+    query: caseStudyBySlugQuery,
+    params: { slug },
+  });
+  return data;
 }
 
 /* =========================
@@ -88,64 +96,9 @@ export async function generateMetadata({
 ========================= */
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
-
   const caseStudy = await getCaseStudy(slug);
-
   if (!caseStudy) return notFound();
-
-  return (
-    <CaseStudySolutionPage
-      // Hero Section
-      heroHeadline={caseStudy.heroHeadline || ""}
-      heroHeadlineDe={caseStudy.heroHeadlineDe || ""}
-      heroSubline={caseStudy.heroSubline || ""}
-      heroSublineDe={caseStudy.heroSublineDe || ""}
-      timelineMetric={caseStudy.timelineMetric || ""}
-      timelineLabel={caseStudy.timelineLabel || "Timeline"}
-      timelineLabelDe={caseStudy.timelineLabelDe || "Zeitrahmen"}
-      // Executive Summary
-      executiveSummary={caseStudy.executiveSummary || []}
-      executiveSummaryDe={caseStudy.executiveSummaryDe || []}
-      // Customer
-      customerName={caseStudy.customer?.name || ""}
-      customerHeadline={caseStudy.customer?.headline || "The Customer"}
-      customerHeadlineDe={caseStudy.customer?.headlineDe || "Der Kunde"}
-      customerDescription={caseStudy.customer?.description || ""}
-      customerDescriptionDe={caseStudy.customer?.descriptionDe || ""}
-      customerHighlights={caseStudy.customer?.highlights || []}
-      // Challenge
-      challengeHeadline={caseStudy.challenge?.headline || "The Challenge"}
-      challengeHeadlineDe={
-        caseStudy.challenge?.headlineDe || "Die Herausforderung"
-      }
-      challengeIntro={caseStudy.challenge?.intro || ""}
-      challengeIntroDe={caseStudy.challenge?.introDe || ""}
-      challengeIssues={caseStudy.challenge?.issues || []}
-      // Solution
-      solutionHeadline={caseStudy.solution?.headline || "The Solution"}
-      solutionHeadlineDe={caseStudy.solution?.headlineDe || "Die Lösung"}
-      solutionIntro={caseStudy.solution?.intro || ""}
-      solutionIntroDe={caseStudy.solution?.introDe || ""}
-      techStacks={caseStudy.solution?.techStacks || []}
-      // Results
-      resultsHeadline={caseStudy.results?.headline || "Results & Value"}
-      resultsHeadlineDe={
-        caseStudy.results?.headlineDe || "Ergebnisse & Mehrwert"
-      }
-      resultsPillars={caseStudy.results?.pillars || []}
-      // Testimonial
-      testimonialQuote={caseStudy.testimonial?.quote || ""}
-      testimonialQuoteDe={caseStudy.testimonial?.quoteDe || ""}
-      testimonialAuthor={caseStudy.testimonial?.author || ""}
-      testimonialRole={caseStudy.testimonial?.role || ""}
-      testimonialRoleDe={caseStudy.testimonial?.roleDe || ""}
-      // CTA
-      ctaHeadline={caseStudy.cta?.headline || ""}
-      ctaHeadlineDe={caseStudy.cta?.headlineDe || ""}
-      ctaDescription={caseStudy.cta?.description || ""}
-      ctaDescriptionDe={caseStudy.cta?.descriptionDe || ""}
-      ctaButtonText={caseStudy.cta?.buttonText || "Book Consultation"}
-      ctaButtonTextDe={caseStudy.cta?.buttonTextDe || "Beratung buchen"}
-    />
-  );
+  // Hand the raw doc to a client wrapper that runs useOptimistic and
+  // re-renders without a router refresh on Studio edits.
+  return <CaseStudyDetailLive caseStudy={caseStudy} />;
 }

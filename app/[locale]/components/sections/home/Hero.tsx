@@ -1,10 +1,11 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useOptimistic } from "@sanity/visual-editing/react";
 import { AuroraBackground } from "../../AuroraBackground";
 import { LogoMarquee } from "../../LogoMarquee";
 
@@ -29,24 +30,23 @@ interface HeroData {
   ctaSecondaryDe?: string;
 }
 
-export function HeroSection() {
+export function HeroSection({
+  data: serverData,
+}: { data?: HeroData | null } = {}) {
   const { t, i18n } = useTranslation("common");
-  const [heroData, setHeroData] = useState<HeroData | null>(null);
-
-  useEffect(() => {
-    async function fetchHero() {
-      try {
-        const res = await fetch("/api/hero");
-        if (res.ok) {
-          const data = await res.json();
-          setHeroData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching hero:", error);
-      }
-    }
-    fetchHero();
-  }, []);
+  // Inside the Presentation iframe, Studio edits stream in over
+  // postMessage and patch the rendered data instantly — no router
+  // refresh, no flash. Outside Presentation the reducer never fires
+  // and `heroData` is the server-fetched value, identical to before.
+  const heroData = useOptimistic<HeroData | null>(
+    serverData ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as { _type?: string } & HeroData;
+      if (doc._type !== "hero") return current;
+      return { ...(current ?? {}), ...doc };
+    },
+  );
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -182,7 +182,11 @@ export function HeroSection() {
           >
             {subtaglineText} <br />
             <br />
-            <div>{taglineText} </div>
+            {/* `<span className="block">` keeps the block layout that
+                `<div>` provided but stays valid inside `<p>`/`<motion.p>`
+                — a `<div>` descendant of `<p>` triggers React's
+                hydration error in dev. Same visual output. */}
+            <span className="block">{taglineText} </span>
             <span style={{ color: "#00CC66" }}>{taglineHighlightText}</span>
           </motion.p>
 

@@ -1,8 +1,8 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Code, Database, Cloud, Layers, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useOptimistic } from "@sanity/visual-editing/react";
 
 interface CustomEngineeringData {
   badge?: string;
@@ -33,24 +33,20 @@ interface CustomEngineeringData {
   codeSnippet?: string;
 }
 
-export default function CustomEngineering() {
+export default function CustomEngineering({
+  data: serverData,
+}: { data?: CustomEngineeringData | null } = {}) {
   const { t, i18n } = useTranslation("common");
-  const [data, setData] = useState<CustomEngineeringData | null>(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("/api/custom-engineering");
-        if (res.ok) {
-          const fetchedData = await res.json();
-          setData(fetchedData);
-        }
-      } catch (error) {
-        console.error("Error fetching custom engineering data:", error);
-      }
-    }
-    fetchData();
-  }, []);
+  // Studio edits patch this in place via postMessage (no router refresh).
+  const data = useOptimistic<CustomEngineeringData | null>(
+    serverData ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as { _type?: string } & CustomEngineeringData;
+      if (doc._type !== "customEngineering") return current;
+      return { ...(current ?? {}), ...doc };
+    },
+  );
 
   const isGerman = i18n.language === "de";
 

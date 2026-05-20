@@ -1,12 +1,13 @@
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import {
   serviceBySlugQuery,
   allServiceSlugsQuery,
 } from "@/sanity/lib/sanity.queries";
 import { Service } from "@/sanity/lib/types";
-import ServiceDetailPage from "@/app/[locale]/components/ServiceDetailPage";
 import { notFound } from "next/navigation";
+import ServiceDetailLive from "./ServiceDetailLive";
 
 export const revalidate = 0;
 
@@ -16,10 +17,18 @@ type Props = {
 
 /* =========================
    Fetch Service
+   Uses sanityFetch (not client.fetch) so the result is tagged for the
+   Live Content API — when an editor changes any field on this service
+   in the Studio, <SanityLive /> revalidates this page and the iframe
+   re-renders with the updated content.
 ========================= */
 async function getService(slug: string): Promise<any | null> {
   if (!slug) return null;
-  return client.fetch(serviceBySlugQuery, { slug });
+  const { data } = await sanityFetch({
+    query: serviceBySlugQuery,
+    params: { slug },
+  });
+  return data;
 }
 
 /* =========================
@@ -88,61 +97,9 @@ export async function generateMetadata({
 ========================= */
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
-
   const service = await getService(slug);
-
   if (!service) return notFound();
-
-  // Pass icon names as strings — the Client Component resolves them internally
-  const scopeCardsWithIcons =
-    service.scopeCards?.map((card: any) => ({
-      ...card,
-      icon: card.icon ?? "Settings", // keep as string
-    })) || [];
-
-  return (
-    <ServiceDetailPage
-      icon="Headphones"
-      serviceName={service.title}
-      serviceNameDe={service.titleDe}
-      heroSubline={service.heroSubline}
-      heroSublineDe={service.heroSublineDe}
-      definitionText={service.definitionText}
-      definitionTextDe={service.definitionTextDe}
-      scopeCards={scopeCardsWithIcons}
-      scopeHeadlineWhite={service.scopeHeadlineWhite}
-      scopeHeadlineAccent={service.scopeHeadlineAccent}
-      scopeHeadlineWhiteDe={service.scopeHeadlineWhiteDe}
-      scopeHeadlineAccentDe={service.scopeHeadlineAccentDe}
-      benefitList={service.benefitList || []}
-      heroCta={service.heroCta}
-      heroCtaDe={service.heroCtaDe}
-      targetAudience={service.targetAudience || []}
-      faqItems={service.faqItems || []}
-      heroImage={service.heroImage}
-      caseStudyMetrics={service.caseStudyMetrics || {}}
-      caseStudyEyebrow={service.caseStudyEyebrow}
-      caseStudyEyebrowDe={service.caseStudyEyebrowDe}
-      caseStudyHeadline={service.caseStudyHeadline}
-      caseStudyHeadlineDe={service.caseStudyHeadlineDe}
-      caseStudySubline={service.caseStudySubline}
-      caseStudySublineDe={service.caseStudySublineDe}
-      caseStudyProblem={service.caseStudyProblem}
-      caseStudyProblemDe={service.caseStudyProblemDe}
-      caseStudySolution={service.caseStudySolution}
-      caseStudySolutionDe={service.caseStudySolutionDe}
-      caseStudyResult={service.caseStudyResult}
-      caseStudyResultDe={service.caseStudyResultDe}
-      caseStudyQuoteText={service.caseStudyQuoteText}
-      caseStudyQuoteTextDe={service.caseStudyQuoteTextDe}
-      caseStudyQuoteAuthor={service.caseStudyQuoteAuthor}
-      caseStudyQuoteAuthorDe={service.caseStudyQuoteAuthorDe}
-      ctaHeadline={service.ctaHeadline}
-      ctaHeadlineDe={service.ctaHeadlineDe}
-      ctaDescription={service.ctaDescription}
-      ctaDescriptionDe={service.ctaDescriptionDe}
-      ctaButtonText={service.ctaButtonText}
-      ctaButtonTextDe={service.ctaButtonTextDe}
-    />
-  );
+  // Hand the raw doc to a client wrapper that runs useOptimistic and
+  // re-renders without a router refresh on Studio edits.
+  return <ServiceDetailLive service={service} />;
 }

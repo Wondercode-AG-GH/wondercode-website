@@ -13,6 +13,7 @@ import coreExpertiseHeaderType from "./coreExpertiseHeader";
 import industryExpertiseHeaderType from "./industryExpertiseHeader";
 import caseStudiesGalleryHeaderType from "./caseStudiesGalleryHeader";
 import faqHeaderType from "./faqHeader";
+import homePageType from "./homePage";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -30,5 +31,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     industryExpertiseHeaderType,
     caseStudiesGalleryHeaderType,
     faqHeaderType,
+    homePageType,
   ],
 };

@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import {
   industryBySlugQuery,
   allIndustrySlugsQuery,
 } from "@/sanity/lib/sanity.queries";
-import IndustrySolutionPage from "@/app/[locale]/components/IndustrySolutionPage";
 import { notFound } from "next/navigation";
+import IndustryDetailLive from "./IndustryDetailLive";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -13,10 +14,17 @@ type Props = {
 
 /* =========================
    Fetch Industry
+   Uses sanityFetch so the result is tagged for the Live Content API —
+   draft edits trigger <SanityLive /> revalidation and the iframe
+   re-renders with the new content.
 ========================= */
 async function getIndustry(slug: string): Promise<any | null> {
   if (!slug) return null;
-  return client.fetch(industryBySlugQuery, { slug });
+  const { data } = await sanityFetch({
+    query: industryBySlugQuery,
+    params: { slug },
+  });
+  return data;
 }
 
 /* =========================
@@ -88,69 +96,9 @@ export async function generateMetadata({
 ========================= */
 export default async function IndustryPage({ params }: Props) {
   const { slug } = await params;
-
   const industry = await getIndustry(slug);
-
   if (!industry) return notFound();
-
-  // Parse icon names from strings to ensure they're passed correctly
-  const challengesWithIcons =
-    industry.challenges?.map((challenge: any) => ({
-      ...challenge,
-      icon: challenge.icon ?? "Settings",
-    })) || [];
-
-  const capabilityCardsWithIcons =
-    industry.capabilityCards?.map((card: any) => ({
-      ...card,
-      icon: card.icon ?? "Settings",
-    })) || [];
-
-  return (
-    <IndustrySolutionPage
-      industryName={industry.title}
-      industryNameDe={industry.titleDe}
-      heroSubline={industry.heroSubline}
-      heroSublineDe={industry.heroSublineDe}
-      heroIcon={industry.heroIcon || "Shield"}
-      contextHeadline={industry.contextHeadline}
-      contextHeadlineDe={industry.contextHeadlineDe}
-      contextParagraph1={industry.contextParagraph1}
-      contextParagraph1De={industry.contextParagraph1De}
-      contextParagraph2={industry.contextParagraph2}
-      contextParagraph2De={industry.contextParagraph2De}
-      heroImage={industry.heroImage}
-      exploreArchitecture={industry.exploreArchitecture}
-      exploreArchitectureDe={industry.exploreArchitectureDe}
-      challenges={challengesWithIcons}
-      challengesHeadlineWhite={industry.challengesHeadlineWhite}
-      challengesHeadlineAccent={industry.challengesHeadlineAccent}
-      challengesHeadlineWhiteDe={industry.challengesHeadlineWhiteDe}
-      challengesHeadlineAccentDe={industry.challengesHeadlineAccentDe}
-      capabilityCards={capabilityCardsWithIcons}
-      capabilityHeadlineWhite={industry.capabilityHeadlineWhite}
-      capabilityHeadlineAccent={industry.capabilityHeadlineAccent}
-      capabilityHeadlineWhiteDe={industry.capabilityHeadlineWhiteDe}
-      capabilityHeadlineAccentDe={industry.capabilityHeadlineAccentDe}
-      useCaseTitle={industry.useCaseTitle}
-      useCaseTitleDe={industry.useCaseTitleDe}
-      applicationHeadlineWhite={industry.applicationHeadlineWhite}
-      applicationHeadlineAccent={industry.applicationHeadlineAccent}
-      applicationHeadlineWhiteDe={industry.applicationHeadlineWhiteDe}
-      applicationHeadlineAccentDe={industry.applicationHeadlineAccentDe}
-      workflowSteps={industry.workflowSteps || []}
-      faqItems={industry.faqItems || []}
-      faqHeadlineWhite={industry.faqHeadlineWhite}
-      faqHeadlineAccent={industry.faqHeadlineAccent}
-      faqHeadlineWhiteDe={industry.faqHeadlineWhiteDe}
-      faqHeadlineAccentDe={industry.faqHeadlineAccentDe}
-      ctaHeadline={industry.ctaHeadline}
-      ctaHeadlineDe={industry.ctaHeadlineDe}
-      ctaSubtext={industry.ctaSubtext}
-      ctaSubtextDe={industry.ctaSubtextDe}
-      ctaButtonText={industry.ctaButtonText}
-      ctaButtonTextDe={industry.ctaButtonTextDe}
-      accentColor="#00CC66"
-    />
-  );
+  // Hand the raw doc to a client wrapper that runs useOptimistic and
+  // re-renders without a router refresh on Studio edits.
+  return <IndustryDetailLive industry={industry} />;
 }

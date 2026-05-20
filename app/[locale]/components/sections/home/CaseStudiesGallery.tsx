@@ -1,12 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { stegaClean } from "next-sanity";
+import { useOptimistic } from "@sanity/visual-editing/react";
 
 interface CaseStudy {
   _id: string;
+  _type?: string;
   title: string;
   titleDe: string;
   slug: string;
@@ -27,38 +30,87 @@ interface CaseStudiesGalleryHeader {
   descriptionDe?: string;
 }
 
-export default function CaseStudiesGallery() {
+export default function CaseStudiesGallery({
+  headerData: serverHeader,
+  caseStudies: serverCaseStudies,
+}: {
+  headerData?: CaseStudiesGalleryHeader | null;
+  caseStudies?: CaseStudy[] | null;
+} = {}) {
   const { t, i18n } = useTranslation("common");
-  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
-  const [headerData, setHeaderData] = useState<CaseStudiesGalleryHeader | null>(
-    null,
+
+  // Studio edits patch in place via postMessage (no router refresh).
+  const headerData = useOptimistic<CaseStudiesGalleryHeader | null>(
+    serverHeader ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as {
+        _type?: string;
+      } & CaseStudiesGalleryHeader;
+      if (doc._type !== "caseStudiesGalleryHeader") return current;
+      return { ...(current ?? {}), ...doc };
+    },
   );
-  const [loading, setLoading] = useState(true);
+  // Raw `caseStudy` mutation events have nested `challenge.intro` /
+  // `solution.intro` shape and use `galleryMetric*` field names. The
+  // rendered data is the flat shape produced by page.tsx's transform,
+  // so the reducer applies the same transform to incoming events.
+  const caseStudyColorMap: Record<string, string> = {
+    Healthcare: "#00CC66",
+    Finance: "#00ff88",
+    Retail: "#00aa55",
+    Manufacturing: "#33dd77",
+    Technology: "#00CC66",
+    "Non-profit": "#00ff88",
+    Education: "#00aa55",
+  };
+  const caseStudies = useOptimistic<CaseStudy[]>(
+    serverCaseStudies ?? [],
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const raw = action.document as unknown as {
+        _type?: string;
+        _id?: string;
+        title?: string;
+        titleDe?: string;
+        industry?: string;
+        challenge?: { intro?: string; introDe?: string };
+        solution?: { intro?: string; introDe?: string };
+        galleryMetric?: string;
+        galleryMetricDe?: string;
+        galleryMetricLabel?: string;
+        galleryMetricLabelDe?: string;
+      };
+      if (raw._type !== "caseStudy") return current;
+      const stripDraft = (id: string) =>
+        id.startsWith("drafts.") ? id.slice(7) : id;
+      const docId = stripDraft(raw._id ?? action.id ?? "");
+      const idx = current.findIndex((item) => stripDraft(item._id) === docId);
+      if (idx === -1) return current;
+      const cur = current[idx];
+      const industry = raw.industry ?? cur.industry;
+      const next = current.slice();
+      next[idx] = {
+        ...cur,
+        title: raw.title ?? cur.title,
+        titleDe: raw.titleDe ?? cur.titleDe,
+        industry,
+        problem: raw.challenge?.intro ?? cur.problem,
+        // problemDe / solutionDe / etc aren't in the typed CaseStudy
+        // interface (only the EN versions are rendered there), but we
+        // keep the spread above so any extras carried by `cur` survive.
+        solution: raw.solution?.intro ?? cur.solution,
+        metric: raw.galleryMetric ?? cur.metric,
+        metricLabel: raw.galleryMetricLabel ?? cur.metricLabel,
+        color: caseStudyColorMap[industry] ?? cur.color,
+      };
+      return next;
+    },
+  );
+  const loading = false;
   const [activeCase, setActiveCase] = useState(0);
 
   const lang = i18n.language?.split("-")[0] ?? "en";
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        // Fetch header data
-        const headerResponse = await fetch("/api/case-studies-gallery-header");
-        if (headerResponse.ok) {
-          const hData = await headerResponse.json();
-          setHeaderData(hData);
-        }
-
-        const response = await fetch("/api/case-studies");
-        const data = await response.json();
-        setCaseStudies(data);
-      } catch (error) {
-        console.error("Failed to load case studies gallery data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, []);
 
   const isGerman = i18n.language === "de";
 
@@ -121,7 +173,7 @@ export default function CaseStudiesGallery() {
               {caseStudies.map((study, index) => (
                 <Link
                   key={study._id}
-                  href={`/${lang}/case-studies/${study.slug}`}
+                  href={`/${lang}/case-studies/${stegaClean(study.slug)}`}
                 >
                   <motion.div
                     initial={{ opacity: 0, x: 100 }}
@@ -247,7 +299,7 @@ export default function CaseStudiesGallery() {
             {caseStudies.slice(0, 1).map((study) => (
               <Link
                 key={study._id}
-                href={`/${lang}/case-studies/${study.slug}`}
+                href={`/${lang}/case-studies/${stegaClean(study.slug)}`}
               >
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}

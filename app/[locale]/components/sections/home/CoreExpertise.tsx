@@ -3,12 +3,15 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { stegaClean } from "next-sanity";
+import { useOptimistic } from "@sanity/visual-editing/react";
 import { iconMap } from "@/sanity/lib/iconMap";
 
 interface Service {
   _id: string;
+  _type?: string;
   title: string;
   titleDe: string;
   listTitle?: string;
@@ -40,78 +43,77 @@ interface CoreExpertiseHeader {
   description2De?: string;
 }
 
-export default function CoreExpertise() {
+export default function CoreExpertise({
+  headerData: serverHeader,
+  services: serverServices,
+}: {
+  headerData?: CoreExpertiseHeader | null;
+  services?: Service[] | null;
+} = {}) {
   const { t, i18n } = useTranslation("common");
-  const [capabilities, setCapabilities] = useState<Capability[]>([]);
-  const [headerData, setHeaderData] = useState<CoreExpertiseHeader | null>(
-    null,
+
+  // Studio edits to the header singleton patch in place via postMessage.
+  const headerData = useOptimistic<CoreExpertiseHeader | null>(
+    serverHeader ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as { _type?: string } & CoreExpertiseHeader;
+      if (doc._type !== "coreExpertiseHeader") return current;
+      return { ...(current ?? {}), ...doc };
+    },
   );
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        // Fetch header data
-        const headerResponse = await fetch("/api/core-expertise-header");
-        if (headerResponse.ok) {
-          const hData = await headerResponse.json();
-          setHeaderData(hData);
-        }
+  // Studio edits to individual services patch the matching item in
+  // place (matched by published-id, stripping `drafts.` prefix).
+  const services = useOptimistic<Service[]>(
+    serverServices ?? [],
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as unknown as {
+        _type?: string;
+        _id?: string;
+      } & Service;
+      if (doc._type !== "salesforceEcosystem") return current;
+      const stripDraft = (id: string) =>
+        id.startsWith("drafts.") ? id.slice(7) : id;
+      const docId = stripDraft(doc._id ?? action.id ?? "");
+      const idx = current.findIndex((item) => stripDraft(item._id) === docId);
+      if (idx === -1) return current;
+      const next = current.slice();
+      next[idx] = { ...next[idx], ...doc };
+      return next;
+    },
+  );
 
-        const response = await fetch("/api/services");
-        if (!response.ok) throw new Error("Failed to fetch services");
-        const services: Service[] = await response.json();
+  const isLoading = !serverServices;
 
-        // Transform services to capability format
-        const transformed = services.map((service) => {
-          const IconComponent = service.icon
-            ? (iconMap[service.icon] ?? Sparkles)
-            : Sparkles;
-
-          // Select title and description based on current language
-          const isGerman = i18n.language === "de";
-          const title = isGerman
-            ? service.listTitleDe || service.titleDe || service.title
-            : service.listTitle || service.title;
-          const description = isGerman
-            ? service.listDescriptionDe ||
-              service.heroSublineDe ||
-              service.heroSubline
-            : service.listDescription || service.heroSubline;
-
-          const lang = i18n.language?.split("-")[0] ?? "en";
-
-          return {
-            icon: IconComponent,
-            title,
-            description,
-            link: `/${lang}/services/${service.slug}`,
-          };
-        });
-
-        // Add Agentforce as special highlighted item
-        // const agentforceIcon = iconMap['Sparkles'] ?? Sparkles;
-        const allCapabilities = [
-          ...transformed,
-          // {
-          //   icon: agentforceIcon,
-          //   title: 'Agentforce',
-          //   description: 'Die Zukunft der Arbeit. Wir konfigurieren autonome AI-Agenten, die Aufgaben in allen oben genannten Clouds selbstständig planen und ausführen.',
-          //   link: '/services/agentforce',
-          //   isHighlighted: true
-          // }
-        ];
-
-        setCapabilities(allCapabilities);
-      } catch (error) {
-        console.error("Failed to load services:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    loadData();
-  }, [i18n.language]);
+  // Transform services into the rendered capability cards. Slugs come
+  // from Sanity with invisible stega markers when in draft mode, which
+  // would break the URL — `stegaClean` strips them.
+  const capabilities: Capability[] = useMemo(() => {
+    if (!services) return [];
+    const isGerman = i18n.language === "de";
+    const lang = i18n.language?.split("-")[0] ?? "en";
+    return services.map((service) => {
+      const IconComponent = service.icon
+        ? (iconMap[service.icon] ?? Sparkles)
+        : Sparkles;
+      const title = isGerman
+        ? service.listTitleDe || service.titleDe || service.title
+        : service.listTitle || service.title;
+      const description = isGerman
+        ? service.listDescriptionDe ||
+          service.heroSublineDe ||
+          service.heroSubline
+        : service.listDescription || service.heroSubline;
+      return {
+        icon: IconComponent,
+        title,
+        description,
+        link: `/${lang}/services/${stegaClean(service.slug)}`,
+      };
+    });
+  }, [services, i18n.language]);
 
   const isGerman = i18n.language === "de";
 

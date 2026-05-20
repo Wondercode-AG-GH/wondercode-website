@@ -1,12 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus, Minus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { useOptimistic } from "@sanity/visual-editing/react";
 
 interface FAQItem {
   _id: string;
+  _type?: string;
   question: {
     en: string;
     de: string;
@@ -28,35 +30,64 @@ interface FAQHeader {
   buttonTextDe?: string;
 }
 
-export default function FAQSection() {
+export default function FAQSection({
+  headerData: serverHeader,
+  faqs: serverFaqs,
+}: {
+  headerData?: FAQHeader | null;
+  faqs?: FAQItem[] | null;
+} = {}) {
   const { i18n } = useTranslation("common");
-  const [faqItems, setFaqItems] = useState<FAQItem[]>([]);
-  const [headerData, setHeaderData] = useState<FAQHeader | null>(null);
-  const [loading, setLoading] = useState(true);
   const [openItems, setOpenItems] = useState<Set<number>>(new Set());
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch header data
-        const headerResponse = await fetch("/api/faqs-header");
-        if (headerResponse.ok) {
-          const hData = await headerResponse.json();
-          setHeaderData(hData);
-        }
-
-        const response = await fetch("/api/faqs");
-        const data = await response.json();
-        setFaqItems(data);
-      } catch (error) {
-        console.error("Failed to load FAQs data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  // Studio edits patch in place via postMessage (no router refresh).
+  const headerData = useOptimistic<FAQHeader | null>(
+    serverHeader ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as { _type?: string } & FAQHeader;
+      if (doc._type !== "faqHeader") return current;
+      return { ...(current ?? {}), ...doc };
+    },
+  );
+  // Raw `faq` documents have flat `question`/`questionDe`/`answer`/
+  // `answerDe` fields, but the component renders the nested
+  // `{ en, de }` shape produced by page.tsx's transform. So the
+  // reducer applies the same transform to incoming mutation events.
+  const faqItems = useOptimistic<FAQItem[]>(
+    serverFaqs ?? [],
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const raw = action.document as unknown as {
+        _type?: string;
+        _id?: string;
+        question?: string;
+        questionDe?: string;
+        answer?: string;
+        answerDe?: string;
+      };
+      if (raw._type !== "faq") return current;
+      const stripDraft = (id: string) =>
+        id.startsWith("drafts.") ? id.slice(7) : id;
+      const docId = stripDraft(raw._id ?? action.id ?? "");
+      const idx = current.findIndex((item) => stripDraft(item._id) === docId);
+      if (idx === -1) return current;
+      const next = current.slice();
+      next[idx] = {
+        ...next[idx],
+        question: {
+          en: raw.question ?? next[idx].question.en,
+          de: raw.questionDe ?? next[idx].question.de,
+        },
+        answer: {
+          en: raw.answer ?? next[idx].answer.en,
+          de: raw.answerDe ?? next[idx].answer.de,
+        },
+      };
+      return next;
+    },
+  );
+  const loading = false;
 
   const isGerman = i18n.language === "de";
 

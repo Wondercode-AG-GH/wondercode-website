@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Search,
@@ -12,6 +12,7 @@ import {
   Settings,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useOptimistic } from "@sanity/visual-editing/react";
 import { iconMap } from "@/sanity/lib/iconMap";
 
 interface AgenticExpertiseData {
@@ -35,25 +36,21 @@ interface AgenticExpertiseData {
   features?: any[];
 }
 
-export default function AgentforceSplitScreen() {
+export default function AgentforceSplitScreen({
+  data: serverData,
+}: { data?: AgenticExpertiseData | null } = {}) {
   const { t, i18n } = useTranslation("common");
   const [activeFeature, setActiveFeature] = useState(0);
-  const [data, setData] = useState<AgenticExpertiseData | null>(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("/api/agentic-expertise");
-        if (res.ok) {
-          const fetchedData = await res.json();
-          setData(fetchedData);
-        }
-      } catch (error) {
-        console.error("Error fetching agentic expertise data:", error);
-      }
-    }
-    fetchData();
-  }, []);
+  // Studio edits patch this in place via postMessage (no router refresh).
+  const data = useOptimistic<AgenticExpertiseData | null>(
+    serverData ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as { _type?: string } & AgenticExpertiseData;
+      if (doc._type !== "agenticExpertise") return current;
+      return { ...(current ?? {}), ...doc };
+    },
+  );
 
   const isGerman = i18n.language === "de";
 
