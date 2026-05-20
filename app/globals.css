@@ -5,9 +5,43 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (min-width: 768px) {
+/* Restore the original site behavior for tablets and laptops (up to ~FHD) so
+   nothing about their layout changes from the previously-working state. */
+@media (min-width: 768px) and (max-width: 1919px) {
   html {
     zoom: 0.75;
+  }
+}
+
+/* On 24"+ desktop LCDs and bigger monitors only: drop the legacy `zoom: 0.75`
+   trick and let content scale fluidly with the viewport so the left/right
+   gutters don't dominate the screen. Below 1920px the original styles apply
+   unchanged. Narrow text containers (max-w-[800/900/1000px]) are intentionally
+   left alone to preserve readable line lengths. */
+@media (min-width: 1920px) {
+  [class*="max-w-[1200px]"] {
+    max-width: max(1200px, 92vw) !important;
+  }
+  [class*="max-w-[1400px]"] {
+    max-width: max(1400px, 94vw) !important;
+  }
+  [class*="max-w-[1600px]"] {
+    max-width: max(1600px, 95vw) !important;
+  }
+  [class*="max-w-[1700px]"] {
+    max-width: max(1700px, 96vw) !important;
+  }
+  [class*="max-w-[1800px]"] {
+    max-width: max(1800px, 96vw) !important;
+  }
+
+  [class~="md:px-8"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  [class~="md:px-10"] {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
 }
 

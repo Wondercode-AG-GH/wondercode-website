@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -221,7 +221,7 @@ export default function CoreExpertise() {
                   whileHover={{
                     y: -4,
                   }}
-                  className="group relative h-full min-h-[200px] md:min-h-[240px] p-4 md:p-6 rounded-xl overflow-hidden cursor-pointer flex flex-col"
+                  className="group relative h-full min-h-[180px] md:min-h-[220px] p-4 md:p-6 rounded-xl overflow-hidden cursor-pointer flex flex-col"
                   style={{
                     background: "#111111",
                     border: capability.isHighlighted
@@ -256,39 +256,66 @@ export default function CoreExpertise() {
                     className="relative z-10 flex flex-col h-full"
                     style={{ position: "relative" }}
                   >
-                    {/* Icon - Top */}
-                    <motion.div
-                      className={`mb-6 w-12 h-12 rounded-lg ${
-                        capability.isHighlighted
-                          ? "bg-[#00CC66]/10 border border-[#00CC66]/30"
-                          : "bg-white/5 border border-white/10"
-                      } flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
-                      whileHover={{ rotate: capability.isHighlighted ? 0 : 5 }}
-                    >
-                      <capability.icon
-                        className={`w-6 h-6 ${
+                    {/* Top row: Icon (left) + Arrow indicator (right) */}
+                    <div className="flex items-start justify-between">
+                      <motion.div
+                        className={`w-12 h-12 rounded-lg ${
+                          capability.isHighlighted
+                            ? "bg-[#00CC66]/10 border border-[#00CC66]/30"
+                            : "bg-white/5 border border-white/10 group-hover:bg-[#00CC66]/10 group-hover:border-[#00CC66]/30"
+                        } flex items-center justify-center group-hover:scale-110 transition-all duration-300`}
+                        whileHover={{
+                          rotate: capability.isHighlighted ? 0 : 5,
+                        }}
+                      >
+                        <capability.icon
+                          className={`w-6 h-6 ${
+                            capability.isHighlighted
+                              ? "text-[#00CC66]"
+                              : "text-white group-hover:text-[#00CC66]"
+                          } transition-colors duration-300`}
+                        />
+                      </motion.div>
+
+                      <div
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center border transition-all duration-300 ${
+                          capability.isHighlighted
+                            ? "border-[#00CC66]/30 bg-[#00CC66]/5"
+                            : "border-transparent group-hover:border-[#00CC66]/30 group-hover:bg-[#00CC66]/5"
+                        }`}
+                      >
+                        <ArrowUpRight
+                          className={`w-4 h-4 transition-all duration-300 ${
+                            capability.isHighlighted
+                              ? "text-[#00CC66]"
+                              : "text-gray-500 group-hover:text-[#00CC66]"
+                          } group-hover:translate-x-0.5 group-hover:-translate-y-0.5`}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Title — anchored to the bottom of the card with an
+                        animated accent underline. Pushing the title to the
+                        bottom (mt-auto) creates a balanced layout now that
+                        the description is no longer present. */}
+                    <div className="mt-auto pt-6">
+                      <h3
+                        className={`text-lg md:text-xl font-bold leading-tight ${
                           capability.isHighlighted
                             ? "text-[#00CC66]"
-                            : "text-white"
+                            : "text-white group-hover:text-[#00CC66]"
+                        } transition-colors duration-300`}
+                      >
+                        {capability.title}
+                      </h3>
+                      <div
+                        className={`mt-3 h-[2px] rounded-full transition-all duration-300 ${
+                          capability.isHighlighted
+                            ? "w-12 bg-[#00CC66]"
+                            : "w-8 bg-[#00CC66]/40 group-hover:w-14 group-hover:bg-[#00CC66]"
                         }`}
                       />
-                    </motion.div>
-
-                    {/* Title - Middle */}
-                    <h3
-                      className={`text-xl font-bold mb-3 leading-tight ${
-                        capability.isHighlighted
-                          ? "text-[#00CC66]"
-                          : "text-white group-hover:text-[#00CC66]"
-                      } transition-colors duration-300`}
-                    >
-                      {capability.title}
-                    </h3>
-
-                    {/* Description - Bottom */}
-                    <p className="hidden md:block text-sm text-gray-400 leading-relaxed mt-auto">
-                      {capability.description}
-                    </p>
+                    </div>
                   </div>
 
                   {/* Corner accent for Agentforce */}

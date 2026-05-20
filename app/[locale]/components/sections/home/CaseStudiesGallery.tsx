@@ -92,7 +92,7 @@ export default function CaseStudiesGallery() {
             {title} <span className="text-[#00CC66]">{titleHighlight}</span>
           </h2>
           <p
-            className="mb-4 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-left md:text-center"
+            className="mb-4 max-w-3xl mx-auto leading-relaxed text-sm md:text-base lg:text-lg shrink-0 text-center md:text-center"
             style={{ color: "#999999" }}
           >
             {description}
