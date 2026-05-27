@@ -1,8 +1,9 @@
 "use client";
 import { motion, useInView } from "motion/react";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Shield, Rocket, Handshake } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useOptimistic } from "@sanity/visual-editing/react";
 import { ImageWithFallback } from "../../figma/ImageWithFallback";
 import { iconMap } from "@/sanity/lib/iconMap";
 
@@ -37,27 +38,23 @@ interface AboutUsData {
   coreValues?: any[];
 }
 
-export default function AboutUs() {
+export default function AboutUs({
+  data: serverData,
+}: { data?: AboutUsData | null } = {}) {
   const { t, i18n } = useTranslation("common");
   const impactRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(impactRef, { once: true });
   const [count, setCount] = useState(0);
-  const [data, setData] = useState<AboutUsData | null>(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch("/api/about-us");
-        if (res.ok) {
-          const fetchedData = await res.json();
-          setData(fetchedData);
-        }
-      } catch (error) {
-        console.error("Error fetching about us data:", error);
-      }
-    }
-    fetchData();
-  }, []);
+  // Studio edits patch this in place via postMessage (no router refresh).
+  const data = useOptimistic<AboutUsData | null>(
+    serverData ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as { _type?: string } & AboutUsData;
+      if (doc._type !== "aboutUs") return current;
+      return { ...(current ?? {}), ...doc };
+    },
+  );
 
   const isGerman = i18n.language === "de";
 

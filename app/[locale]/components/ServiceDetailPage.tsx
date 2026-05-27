@@ -1139,7 +1139,7 @@ export default function ServiceDetailPage({
                         </p>
                       </div>
                       <div
-                        className="text-6xl font-black tracking-tight mb-2"
+                        className="text-5xl font-black tracking-tight mb-2"
                         style={{ color: "#0077FF" }}
                       >
                         {caseStudyMetrics?.userAdoption}
@@ -1223,7 +1223,7 @@ export default function ServiceDetailPage({
                         </p>
                       </div>
                       <div
-                        className="text-6xl font-black tracking-tight mb-2"
+                        className="text-5xl font-black tracking-tight mb-2"
                         style={{ color: "#70FFB5" }}
                       >
                         {caseStudyMetrics?.efficiency}

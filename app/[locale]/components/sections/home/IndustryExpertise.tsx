@@ -1,12 +1,15 @@
 "use client";
 import { motion } from "motion/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { stegaClean } from "next-sanity";
+import { useOptimistic } from "@sanity/visual-editing/react";
 
 interface Industry {
   _id: string;
+  _type?: string;
   title: string;
   titleDe: string;
   slug: string;
@@ -23,39 +26,52 @@ interface IndustryExpertiseHeader {
   descriptionDe?: string;
 }
 
-export default function IndustryExpertise() {
+export default function IndustryExpertise({
+  headerData: serverHeader,
+  industries: serverIndustries,
+}: {
+  headerData?: IndustryExpertiseHeader | null;
+  industries?: Industry[] | null;
+} = {}) {
   const { t, i18n } = useTranslation("common");
-  const [industries, setIndustries] = useState<Industry[]>([]);
-  const [headerData, setHeaderData] = useState<IndustryExpertiseHeader | null>(
-    null,
+
+  // Studio edits patch in place via postMessage (no router refresh).
+  const headerData = useOptimistic<IndustryExpertiseHeader | null>(
+    serverHeader ?? null,
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as {
+        _type?: string;
+      } & IndustryExpertiseHeader;
+      if (doc._type !== "industryExpertiseHeader") return current;
+      return { ...(current ?? {}), ...doc };
+    },
   );
-  const [loading, setLoading] = useState(true);
+  const industries = useOptimistic<Industry[]>(
+    serverIndustries ?? [],
+    (current, action) => {
+      if (action.type !== "mutate") return current;
+      const doc = action.document as unknown as {
+        _type?: string;
+        _id?: string;
+      } & Industry;
+      if (doc._type !== "industry") return current;
+      const stripDraft = (id: string) =>
+        id.startsWith("drafts.") ? id.slice(7) : id;
+      const docId = stripDraft(doc._id ?? action.id ?? "");
+      const idx = current.findIndex((item) => stripDraft(item._id) === docId);
+      if (idx === -1) return current;
+      const next = current.slice();
+      next[idx] = { ...next[idx], ...doc };
+      return next;
+    },
+  );
+
+  const loading = false;
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [expandedIndex, setExpandedIndex] = useState<number>(0); // First item expanded on mobile
 
   const lang = i18n.language?.split("-")[0] ?? "en";
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        // Fetch header data
-        const headerResponse = await fetch("/api/industry-expertise-header");
-        if (headerResponse.ok) {
-          const hData = await headerResponse.json();
-          setHeaderData(hData);
-        }
-
-        const response = await fetch("/api/industries");
-        const data = await response.json();
-        setIndustries(data);
-      } catch (error) {
-        console.error("Failed to load industry expertise data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, []);
 
   const isGerman = i18n.language === "de";
 
@@ -106,7 +122,7 @@ export default function IndustryExpertise() {
           >
             {industries.map((industry, index) => (
               <div key={industry._id}>
-                <Link href={`/${lang}/industries/${industry.slug}`}>
+                <Link href={`/${lang}/industries/${stegaClean(industry.slug)}`}>
                   <motion.div
                     className="relative py-8 cursor-pointer group"
                     style={{ position: "relative" }}
@@ -217,7 +233,7 @@ export default function IndustryExpertise() {
               return (
                 <Link
                   key={industry._id}
-                  href={`/${lang}/industries/${industry.slug}`}
+                  href={`/${lang}/industries/${stegaClean(industry.slug)}`}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
