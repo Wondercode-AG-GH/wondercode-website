@@ -41,12 +41,23 @@ const HOME_PAGE_SECTION_TYPES = new Set([
 
 /**
  * Origin the Presentation Tool will use to render the preview iframe.
- * Falls back to localhost so editors can use the tool out-of-the-box in
- * local dev; in deployed environments set NEXT_PUBLIC_BASE_URL to the
- * canonical site URL (e.g. https://wondercode.agency).
+ *
+ * The Studio is mounted on `/studio` inside this same Next.js app, so the
+ * preview front-end always lives on the same origin the Studio is served
+ * from. Deriving the origin from `window.location` at runtime keeps it in
+ * sync everywhere — local dev, Vercel preview deployments (each on a unique
+ * `*.vercel.app` URL), and production — without depending on a build-time
+ * `NEXT_PUBLIC_BASE_URL` value being inlined into the client bundle.
+ *
+ * Note: this file is a client component (`"use client"`), but the config is
+ * also imported during SSR/build of the Studio page, hence the `typeof`
+ * guard. The SSR fallback is never actually used by the iframe (Presentation
+ * resolves the origin in the browser); it only needs to be a valid string.
  */
 const previewOrigin =
-  process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  typeof window !== "undefined"
+    ? window.location.origin
+    : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 /**
  * Helper for singleton document types that are all rendered on the home
